@@ -1,0 +1,53 @@
+image: node:20
+
+stages:
+  - install
+  - lint
+  - build
+  - coolify_deploy_prod
+  - coolify_deploy_staging
+
+cache:
+  paths:
+    - node_modules/
+
+install:
+  stage: install
+  script:
+    - npm ci
+
+lint:
+  stage: lint
+  script:
+    - npm run lint
+
+build:
+  stage: build
+  script:
+    - npm run build
+  artifacts:
+    paths:
+      - dist   # bei Vite
+      # - build  # bei Create React App
+
+    # 4. Notify Coolify webhook for redeploy
+coolify_deploy_staging:
+  stage: deploy
+  image: curlimages/curl:latest
+  variables:
+    AUTH_HEADER: "Authorization: Bearer $COOLIFY_TOK"
+  script:
+    - curl -X GET "$COOLIFY_STAGING_URL" -H "$AUTH_HEADER"
+  only:
+    - main
+
+# 4. Notify Coolify webhook for redeploy
+coolify_deploy_prod:
+  stage: deploy_prod
+  image: curlimages/curl:latest
+  variables:
+    AUTH_HEADER: "Authorization: Bearer $COOLIFY_TOK"
+  script:
+    - curl -X GET "$COOLIFY_PRODUCTION_URL" -H "$AUTH_HEADER"
+  only:
+    - production
