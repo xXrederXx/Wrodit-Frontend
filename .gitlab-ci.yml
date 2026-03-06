@@ -29,12 +29,26 @@ build:
       - dist   # bei Vite
       # - build  # bei Create React App
 
-coolify_deploy:
+
+
+    # 4. Notify Coolify webhook for redeploy
+coolify_deploy_staging:
   stage: deploy
   image: curlimages/curl:latest
   variables:
-    AUTH_HEADER: "Authorization: Bearer $COOLIFY_PRODUCTION_TOK"
+    AUTH_HEADER: "Authorization: Bearer $COOLIFY_TOK"
   script:
-    - curl -X POST "$COOLIFY_PRODUCTION_URL" -H "$AUTH_HEADER"
+    - curl -X GET "$COOLIFY_STAGING_URL" -H "$AUTH_HEADER"
+  only:
+    - main
+
+# 4. Notify Coolify webhook for redeploy
+coolify_deploy_prod:
+  stage: deploy_prod
+  image: curlimages/curl:latest
+  variables:
+    AUTH_HEADER: "Authorization: Bearer $COOLIFY_TOK"
+  script:
+    - curl -X GET "$COOLIFY_PRODUCTION_URL" -H "$AUTH_HEADER"
   only:
     - production
