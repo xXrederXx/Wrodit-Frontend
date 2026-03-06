@@ -32,7 +32,7 @@ build:
 
     # 4. Notify Coolify webhook for redeploy
 coolify_deploy_staging:
-  stage: deploy
+  stage: coolify_deploy_staging
   image: curlimages/curl:latest
   variables:
     AUTH_HEADER: "Authorization: Bearer $COOLIFY_TOK"
@@ -43,7 +43,7 @@ coolify_deploy_staging:
 
 # 4. Notify Coolify webhook for redeploy
 coolify_deploy_prod:
-  stage: deploy_prod
+  stage: coolify_deploy_prod
   image: curlimages/curl:latest
   variables:
     AUTH_HEADER: "Authorization: Bearer $COOLIFY_TOK"
