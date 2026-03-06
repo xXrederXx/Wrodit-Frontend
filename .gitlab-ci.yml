@@ -4,8 +4,8 @@ stages:
   - install
   - lint
   - build
-  - coolify_deploy_prod
   - coolify_deploy_staging
+  - coolify_deploy_prod
 
 cache:
   paths:
@@ -27,12 +27,12 @@ build:
     - npm run build
   artifacts:
     paths:
-      - dist   # bei Vite
+      - dist # bei Vite
       # - build  # bei Create React App
 
     # 4. Notify Coolify webhook for redeploy
 coolify_deploy_staging:
-  stage: deploy
+  stage: coolify_deploy_staging
   image: curlimages/curl:latest
   variables:
     AUTH_HEADER: "Authorization: Bearer $COOLIFY_TOK"
@@ -43,7 +43,7 @@ coolify_deploy_staging:
 
 # 4. Notify Coolify webhook for redeploy
 coolify_deploy_prod:
-  stage: deploy_prod
+  stage: coolify_deploy_prod
   image: curlimages/curl:latest
   variables:
     AUTH_HEADER: "Authorization: Bearer $COOLIFY_TOK"
