@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 
 export default function RegisterRoute() {
   return (
-    <>
-      <h1>RegisterRoute</h1>
+    <div className="signup">
+      <h1>Registrieren</h1>
       <SignUpForm />
-      <Link to="/wrodit/login">Schon Wroditor*in? Anmelden</Link>
-    </>
+      <p>Schon Wroditor*in? <Link to="/wrodit/login">Anmelden</Link></p>
+    </div>
   );
 }

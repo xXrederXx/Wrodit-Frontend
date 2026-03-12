@@ -1,32 +1,31 @@
 import { Form } from "react-router";
 import Button from "./Button";
 import Input from "./Input";
+import styles from "./SignUpForm.module.css"
+
 
 export default function SignUpForm({ onCancel }) {
   return (
-    <Form method="post">
+    <Form className={styles.form} method="post">
+      <Button type="button" onClick={onCancel}>
+        Abbrechen
+      </Button>
       <Input
-        label="E-Mail: *"
         type="email"
         name="email"
-        placeholder="Gib deine E-Mail ein"
+        placeholder="E-Mail *"
       />
       <Input
-        label="Benutzername: *"
         type="text"
         name="username"
-        placeholder="Gib dein Benutzernamen ein"
+        placeholder="Benutzernamen *"
       />
       <Input
-        label="Passwort: *"
         type="password"
         name="password"
-        placeholder="Gib dein Passwort ein"
+        placeholder="Passwort *"
       />
-        <Button type="submit">Speichern</Button>
-        <Button type="button" secondary onClick={onCancel}>
-          Abbrechen
-        </Button>
+      <Button type="submit">Registrieren</Button>
     </Form>
   );
 }
