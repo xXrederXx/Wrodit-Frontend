@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router";
 
 import "./index.css";
 import App from "./App.jsx";
-import HomeRoute from "./routes/homeRoute.jsx";
+import HomeRoute from "./routes/WroditHomeRoute.jsx";
 import PostRoute from "./routes/PostRoute.jsx";
 import ThreadRoute from "./routes/ThreadRoute.jsx";
 import UserRoute from "./routes/UserRoute.jsx";
