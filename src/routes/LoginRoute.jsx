@@ -1,14 +1,16 @@
 import LogInForm from "../components/LogInForm";
 import { Link, redirect, useActionData, useNavigate } from "react-router";
 import { userValidate } from "../lib/auth/";
-import { saveSession } from "../lib/session";
+import { saveId } from "../lib/session";
 
 async function clientAction({ request }) {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
   try {
     const res = await userValidate(data);
-    saveSession(res);
+    const result = await res.json();
+
+    saveId(result.id, result.valid);
   } catch (error) {
     try {
       const response = await error.response.json();
@@ -44,6 +46,5 @@ export default function LoginRoute() {
   );
 }
 LoginRoute.action = clientAction;
-
 
 // validate user gives back true or false, save data in localstorage and send back when neededys
