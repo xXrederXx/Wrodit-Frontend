@@ -1,11 +1,12 @@
-import styles from "./Input.module.css"
+import styles from "./Input.module.css";
 
-export default function Input({ ...props }) {
-    return (
-        <div className={styles.wrapper}>
-            <label>
-                <input className={styles.input} {...props} />
-            </label>
-        </div>
-    )
+export default function Input({ error, ...props }) {
+  return (
+    <div className={styles.wrapper}>
+      <label>
+        <input className={styles.input} {...props} />
+        {error && <p className={styles.error}>{error}</p>}
+      </label>
+    </div>
+  );
 }
