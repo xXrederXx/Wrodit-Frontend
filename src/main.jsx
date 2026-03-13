@@ -34,6 +34,7 @@ const router = createBrowserRouter([
       {
         path: "wrodit/register",
         element: <RegisterRoute />,
+        action: RegisterRoute.action,
       },
       {
         path: "wrodit/login",
