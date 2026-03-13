@@ -15,6 +15,8 @@ async function clientAction({ request }) {
 
   try {
     const res = await signUp(data);
+    console.log(res);
+    
   } catch (error) {
     try {
       const response = await error.response.json();
