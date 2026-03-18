@@ -1,25 +1,28 @@
 import LogInForm from "../components/LogInForm";
 import { Link, redirect, useActionData, useNavigate } from "react-router";
 import { userValidate } from "../lib/auth/";
-import { saveId } from "../lib/session";
+import { saveSession } from "../lib/session";
 
 async function clientAction({ request }) {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
+
   try {
     const res = await userValidate(data);
-    const result = await res.json();
 
-    saveId(result.id, result.valid);
+    if (!res.valid) {
+      return { error: "Login ungültig: Passwort oder Bennutzer falsch " };
+    }
+
+    saveSession(res.id, res.valid, data.password);
   } catch (error) {
     try {
       const response = await error.response.json();
       return response;
-    } catch (convertError) {
-      //convertError can be ignored as it only throws when there is an unexpected different original error
-      console.error("Convert Error", convertError);
-      throw error;
-    }
+    } catch (error) {
+    console.error("Login Error:", error);
+    return { error: error.message || "Unbekannter Fehler beim Login" };
+  }
   }
 
   return redirect("/");

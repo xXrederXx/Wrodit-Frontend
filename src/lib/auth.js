@@ -1,9 +1,8 @@
 const URL =
-  import.meta.env.MODE == "staging"
+  import.meta.env.MODE === "development" || import.meta.env.MODE === "staging"
     ? "http://xcwkwswkso04gs40k8g48k8w.207.180.221.9.sslip.io"
     : "http://vcg00wk8ws8o0gcc4c8ckkgw.207.180.221.9.sslip.io";
 
-const TURL = "http://xcwkwswkso04gs40k8g48k8w.207.180.221.9.sslip.io";
 
 console.log(import.meta.env);
 console.log(`Api Url: ${URL}`);
@@ -17,7 +16,7 @@ export async function signUp(data) {
 }
 
 export async function userValidate(data) {
-  return await fetch(`${TURL}/users/validate`, {
+  return await fetch(`${URL}/users/validate`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
