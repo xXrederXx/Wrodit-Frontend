@@ -47,3 +47,11 @@
   right: 35px;
   }
 }
+
+span {
+    font-size: 2rem;
+}
+
+.icon {
+    font-size: 3rem;
+}

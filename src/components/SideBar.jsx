@@ -1,6 +1,7 @@
 import styles from "./SideBar.module.css";
 import { useState } from "react";
 import SideBarElement from "./SideBarElement";
+import { IoMenuSharp } from "react-icons/io5";
 
 export default function SideBar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,11 +24,23 @@ export default function SideBar() {
           &times;
         </button>
         <div className={styles.overlayContent}>
-          <SideBarElement to={"wrodit/register"} name={"Registrieren"} onClick={closeNav} />
-          <SideBarElement to={"wrodit/login"} name={"Anmelden"} onClick={closeNav}/>
+          <SideBarElement to={"/"} name={"Home"} onClick={closeNav} />
+
+          <SideBarElement
+            to={"wrodit/create/post"}
+            name={"Post erstellen"}
+            onClick={closeNav}
+          />
+          <SideBarElement
+            to={"wrodit/create/thread"}
+            name={"Thread Erstellen"}
+            onClick={closeNav}
+          />
         </div>
       </div>
-      <span onClick={openNav}>&#9776; open</span>
+      <span onClick={openNav}>
+        <IoMenuSharp className={styles.icon}/>
+      </span>
     </>
   );
 }
