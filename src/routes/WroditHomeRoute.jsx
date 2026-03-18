@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
 import { fetchhome } from "../lib/auth";
+
 import { useState, useEffect } from "react";
 
 export default function HomeRoute() {
@@ -17,8 +17,7 @@ export default function HomeRoute() {
 
   return (
     <>
-      <h1>Home Route</h1>
-      <Link to="wrodit/register">Register</Link>
+      <h1>Home</h1>
       <p>{home}</p>
     </>
   );
