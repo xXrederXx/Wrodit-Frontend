@@ -39,6 +39,7 @@ const router = createBrowserRouter([
       {
         path: "wrodit/login",
         element: <LoginRoute />,
+        action: LoginRoute.action,
       },
       {
         path: "wrodit/user/:id",

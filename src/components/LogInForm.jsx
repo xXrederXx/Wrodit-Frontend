@@ -1,0 +1,28 @@
+import { Form } from "react-router";
+import Button from "./Button";
+import Input from "./Input";
+import styles from "./SignUpForm.module.css";
+
+export default function LogInForm({ onCancel, errors = {} }) {
+  return (
+    <Form className={styles.form} method="post">
+      <Button type="button" onClick={onCancel}>
+        Abbrechen
+      </Button>
+      <Input
+        {...(errors.username && { error: errors.username })}
+        type="text"
+        name="username"
+        placeholder="Benutzername *"
+      />
+      <Input
+        {...(errors.password && { error: errors.password })}
+        type="password"
+        name="password"
+        placeholder="Passwort *"
+      />
+      {errors?.error && <p className="error">{errors.error}</p>}
+      <Button type="submit">Anmelden</Button>
+    </Form>
+  );
+}
