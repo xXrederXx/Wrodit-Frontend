@@ -8,6 +8,8 @@ async function clientLoader() {
 export default function WroditHomeRoute() {
   const data = useLoaderData();
   const posts = data.content;
+  console.log(data);
+  
 
   return (
     <>
@@ -15,6 +17,9 @@ export default function WroditHomeRoute() {
       {posts.map((post, index) => (
         <PostBox
           key={index}
+          userId={post.userId}
+          threadId={post.threadId}
+          createdAt={post.createdAt}
           title={post.title}
           text={post.content}
           vote={post.vote}
