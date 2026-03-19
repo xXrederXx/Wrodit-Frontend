@@ -1,24 +1,26 @@
-import { fetchhome } from "../lib/auth";
+import PostBox from "../components/PostBox";
+import { fetchPosts } from "../lib/wrodit";
+import { useLoaderData } from "react-router";
 
-import { useState, useEffect } from "react";
-
-export default function HomeRoute() {
-  const [home, setHome] = useState("");
-
-  useEffect(() => {
-    async function load() {
-      const res = await fetchhome();
-      const data = await res.text();
-      setHome(data);
-    }
-
-    load();
-  }, []);
+async function clientLoader() {
+  return await fetchPosts();
+}
+export default function WroditHomeRoute() {
+  const data = useLoaderData();
+  const posts = data.content;
 
   return (
     <>
-      <h1>Home</h1>
-      <p>{home}</p>
+      <h1>posts</h1>
+      {posts.map((post, index) => (
+        <PostBox
+          key={index}
+          title={post.title}
+          text={post.content}
+          vote={post.vote}
+        />
+      ))}
     </>
   );
 }
+WroditHomeRoute.loader = clientLoader;

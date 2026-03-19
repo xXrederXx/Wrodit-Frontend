@@ -1,10 +1,10 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import "./index.css";
 import App from "./App.jsx";
-import HomeRoute from "./routes/WroditHomeRoute.jsx";
+import WroditHomeRoute from "./routes/WroditHomeRoute.jsx";
 import PostRoute from "./routes/PostRoute.jsx";
 import ThreadRoute from "./routes/ThreadRoute.jsx";
 import UserRoute from "./routes/UserRoute.jsx";
@@ -21,7 +21,8 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <HomeRoute />,
+        element: <WroditHomeRoute />,
+        loader: WroditHomeRoute.loader,
       },
       {
         path: "wrodit/post/:id",
