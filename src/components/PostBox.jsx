@@ -8,13 +8,13 @@ export default function PostBox({
   title,
   text,
   vote,
-  threadId,
   createdAt,
-  name
+  name,
+  threadName
 }) {
   return (
     <article>
-      <PostInformation name={name} threadId={threadId} createdAt={createdAt}/>
+      <PostInformation name={name} threadName={threadName} createdAt={createdAt}/>
       <PostTitle title={title} />
       <PostText text={text} />
       <PostFooter vote={vote}/>

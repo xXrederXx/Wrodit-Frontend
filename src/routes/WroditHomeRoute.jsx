@@ -1,5 +1,5 @@
 import PostBox from "../components/PostBox";
-import { fetchPosts, fetchUser } from "../lib/wrodit";
+import { fetchPosts, fetchUser, fetchThread} from "../lib/wrodit";
 import { useLoaderData } from "react-router-dom";
 
 export default function WroditHomeRoute() {
@@ -13,12 +13,16 @@ export default function WroditHomeRoute() {
         <PostBox
           key={index}
           userLoaderData={post.userLoaderData}
-          threadId={post.threadId}
           createdAt={post.createdAt}
           title={post.title}
           text={post.content}
           vote={post.vote}
-          name={post.userLoaderData ? post.userLoaderData.username : "Loading..."}
+          name={
+            post.userLoaderData ? post.userLoaderData.username : "Loading..."
+          }
+          threadName={
+            post.threadLoaderData ? post.threadLoaderData.name : "Loading..."
+          }
         />
       ))}
     </>
@@ -28,17 +32,20 @@ export default function WroditHomeRoute() {
 WroditHomeRoute.loader = async function clientLoader() {
   const postsData = await fetchPosts();
 
-  const postsWithUser = await Promise.all(
+  const postsWithData = await Promise.all(
     postsData.content.map(async (post) => {
-      const userData = await fetchUser(post.userId);
-      console.log("data::",userData);
-      
+      const [userData, threadData] = await Promise.all([
+        fetchUser(post.userId),
+        fetchThread(post.threadId),
+      ]);
+
       return {
         ...post,
         userLoaderData: userData,
+        threadLoaderData: threadData,
       };
     }),
   );
 
-  return { ...postsData, content: postsWithUser };
+  return { ...postsData, content: postsWithData };
 };

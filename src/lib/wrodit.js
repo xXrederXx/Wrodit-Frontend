@@ -13,11 +13,21 @@ export async function fetchPosts() {
   return await res.json();
 }
 
+export async function fetchThread(id) {
+  const res = await fetch(`${URL}/threads/${id}`);
+
+  if (!res.ok) {
+    throw new Error("Fehler beim Laden des Threads");
+  }
+
+  return await res.json();
+}
+
 export async function fetchUser(id) {
   const res = await fetch(`${URL}/users/${id}`);
 
   if (!res.ok) {
-    throw new Error("Fehler beim Laden der Posts");
+    throw new Error("Fehler beim Laden der User");
   }
 
   return await res.json();

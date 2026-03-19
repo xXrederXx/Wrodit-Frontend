@@ -1,7 +1,7 @@
 export default function PostText({text}) {
     return(
         <>
-        <p>{text} Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum dolor perferendis itaque numquam quibusdam corporis a iste et, quo deleniti eligendi aliquam voluptas! Voluptates optio unde praesentium odio harum mollitia!</p>
+        <p>{text} Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam pariatur ipsam sequi ullam accusamus, fugit nisi excepturi assumenda, error sint possimus totam minima quas ut alias nesciunt veritatis molestias neque!</p>
         </>
     )
 }
