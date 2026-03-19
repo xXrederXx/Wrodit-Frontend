@@ -13,7 +13,7 @@ export default function PostBox({
   threadName
 }) {
   return (
-    <article>
+    <article className={styles.article}>
       <PostInformation name={name} threadName={threadName} createdAt={createdAt}/>
       <PostTitle title={title} />
       <PostText text={text} />
