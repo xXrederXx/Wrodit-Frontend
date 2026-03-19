@@ -19,9 +19,9 @@ function timeAgo(createdAt) {
 export default function PostInformation({name, threadName, createdAt}) {
     return(
         <header className={styles.header}>
-        <p>{name}</p>
-        <p>{threadName}</p>
-        <p>vohr {timeAgo(createdAt)}</p>
+        <p>Von: {name}</p>
+        <p>Aus: {threadName}</p>
+        <p>Vohr {timeAgo(createdAt)}</p>
         </header>
     )
 }
