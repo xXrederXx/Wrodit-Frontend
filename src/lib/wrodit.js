@@ -6,7 +6,17 @@ const URL =
 export async function fetchPosts() {
   const res = await fetch(`${URL}/posts/`);
   console.log("res", res);
-  
+
+  if (!res.ok) {
+    throw new Error("Fehler beim Laden der Posts");
+  }
+
+  return await res.json();
+}
+
+export async function fetchUser(id) {
+  const res = await fetch(`${URL}/user/${id}`);
+  console.log("res", res);
 
   if (!res.ok) {
     throw new Error("Fehler beim Laden der Posts");
