@@ -8,7 +8,6 @@ export default function WroditHomeRoute() {
 
   return (
     <>
-      <h1>Posts</h1>
       {posts.map((post, index) => (
         <PostBox
           key={index}

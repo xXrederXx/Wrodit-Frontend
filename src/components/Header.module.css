@@ -2,9 +2,5 @@ header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  font-size: 3rem;
 }
-
-.icon {
-    font-size: 3rem;
-}
-
