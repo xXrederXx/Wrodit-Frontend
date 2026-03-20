@@ -15,8 +15,8 @@ export async function signUp(data) {
   }).then((res) => res.json());
 }
 
-export async function userValidate(data) {
-  return await fetch(`${URL}/users/validate`, {
+export async function signIn(data) {
+  return await fetch(`${URL}/auth/signin`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
