@@ -1,12 +1,12 @@
 import SideBar from "./SideBar";
-import { CgProfile } from "react-icons/cg";
-import styles from "./Header.module.css"
+import styles from "./Header.module.css";
+import Dropdown from "./Dropdown";
 
 export default function Header() {
   return (
-    <header>
+    <header className={styles.header}>
       <SideBar />
-      <CgProfile className={styles.icon} />
+      <Dropdown/>
     </header>
   );
 }
