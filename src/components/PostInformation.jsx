@@ -21,7 +21,7 @@ export default function PostInformation({name, threadName, createdAt}) {
         <header className={styles.header}>
         <p>Von: {name}</p>
         <p>Aus: {threadName}</p>
-        <p>Vohr {timeAgo(createdAt)}</p>
+        <p>Vor {timeAgo(createdAt)}</p>
         </header>
     )
 }
