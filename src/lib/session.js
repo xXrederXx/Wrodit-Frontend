@@ -7,12 +7,20 @@ const sessionAtom = atom(getSession())
 
 export function getJWTToken() {
     const session = getSession()
-    return session?.token
+    
+    return session
 }
 
 export function getSession() {
-    const session = localStorage.getItem(STORAGE_KEY)
-    return session ? JSON.parse(session) : ""
+  const session = localStorage.getItem(STORAGE_KEY);
+
+  if (!session) return null;
+
+  try {
+    return JSON.parse(session);
+  } catch {
+    return null;
+  }
 }
 
 export function saveSession(session) {

@@ -1,10 +1,16 @@
+import { getJWTToken } from "./session";
+
 const URL =
   import.meta.env.MODE === "development" || import.meta.env.MODE === "staging"
     ? "http://xcwkwswkso04gs40k8g48k8w.207.180.221.9.sslip.io"
     : "http://vcg00wk8ws8o0gcc4c8ckkgw.207.180.221.9.sslip.io";
 
 export async function fetchPosts() {
-  const res = await fetch(`${URL}/posts/`);
+  const session = getJWTToken();
+
+  const headers = session ? { Authorization: `Bearer ${session}` } : {};
+
+  const res = await fetch(`${URL}/posts/`, { headers });
 
   if (!res.ok) {
     throw new Error("Fehler beim Laden der Posts");
@@ -14,7 +20,11 @@ export async function fetchPosts() {
 }
 
 export async function fetchThread(id) {
-  const res = await fetch(`${URL}/threads/${id}`);
+  const session = getJWTToken();
+
+  const headers = session ? { Authorization: `Bearer ${session}` } : {};
+
+  const res = await fetch(`${URL}/threads/${id}`, { headers });
 
   if (!res.ok) {
     throw new Error("Fehler beim Laden des Threads");
@@ -24,7 +34,11 @@ export async function fetchThread(id) {
 }
 
 export async function fetchUser(id) {
-  const res = await fetch(`${URL}/users/${id}`);
+  const session = getJWTToken();
+
+  const headers = session ? { Authorization: `Bearer ${session}` } : {};
+
+  const res = await fetch(`${URL}/users/${id}`, { headers });
 
   if (!res.ok) {
     throw new Error("Fehler beim Laden der User");
