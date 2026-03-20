@@ -28,7 +28,7 @@ async function clientAction({ request }) {
     }
   }
 
-  return redirect("/");
+  return redirect("/wrodit/login");
 }
 
 export default function RegisterRoute() {
