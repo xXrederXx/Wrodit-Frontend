@@ -4,7 +4,7 @@ import Dropdown from "./Dropdown";
 
 export default function Header() {
   return (
-    <header>
+    <header className={styles.header}>
       <SideBar />
       <Dropdown/>
     </header>
