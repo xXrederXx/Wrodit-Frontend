@@ -28,7 +28,7 @@ export default function PostInformation({
       <p>Von: {name}</p>
       <Link to={`wrodit/thread/${threadId}`}>
         {" "}
-        <p>Aus: {threadName}</p>
+        <p>{threadName}</p>
       </Link>
       <p>Vor {timeAgo(createdAt)}</p>
     </header>

@@ -1,22 +1,46 @@
 import { useParams, useLoaderData } from "react-router-dom";
-import { fetchThreadsById } from "../lib/wrodit";
+import { fetchThreadsById, fetchPostsByThread, fetchUser } from "../lib/wrodit";
+import PostBox from "../components/PostBox";
+import ThreadInformation from "../components/ThreatInformation";
+
+const PAGE = 1;
+const SIZE = 10;
 
 async function clientLoader({ params }) {
-  return await fetchThreadsById(params.id);
+  const threadId = params.id;
+  const thread = await fetchThreadsById(threadId);
+
+  const postsData = await fetchPostsByThread(threadId, PAGE, SIZE);
+  const postsArray = postsData.content || [];
+
+  const postsWithUsers = await Promise.all(
+    postsArray.map(async (post) => {
+      const user = await fetchUser(post.userId);
+      return { ...post, username: user.username || "Unbekannt" };
+    }),
+  );
+
+  return { thread, posts : postsWithUsers};
 }
 
 export default function ThreadRoute() {
-  const { id } = useParams();
-  console.log(id);
-  const thread = useLoaderData();
-  console.log("thread", thread);
-  
+  const { thread, posts } = useLoaderData();
 
   return (
     <>
-      <div>Post ID: {id}</div>
-      <h1>{thread.name}</h1>
-      <p>{thread.description}</p>
+    <ThreadInformation name={thread.name} description={thread.description}/>
+
+      {posts.map((post, index) => (
+        <PostBox
+          key={index}
+          createdAt={post.createdAt}
+          title={post.title}
+          text={post.content}
+          vote={post.vote}
+          name={post.username}
+          threadId={post.threadId}
+        />
+      ))}
     </>
   );
 }

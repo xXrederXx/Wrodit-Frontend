@@ -5,7 +5,6 @@ const URL =
 
 
 console.log(import.meta.env);
-console.log(`Api Url: ${URL}`);
 
 export async function signUp(data) {
   return await fetch(`${URL}/auth/signup`, {
