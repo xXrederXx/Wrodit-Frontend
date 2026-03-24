@@ -1,4 +1,4 @@
-import { isBlankOrNull } from "./util";
+import { isBlankOrNull, isValidEmail } from "./util";
 
 export function validateSignIn(data) {
   const errors = {};
@@ -7,6 +7,10 @@ export function validateSignIn(data) {
   if (isBlankOrNull(data.email)) {
     isValid = false;
     errors.email = "Email darf nicht leer sein";
+  }
+  if (isValidEmail(data.email)) {
+    isValid = false;
+    errors.email = "Email muss dem Email format entsprechen";
   }
   if (isBlankOrNull(data.username)) {
     isValid = false;
@@ -18,22 +22,32 @@ export function validateSignIn(data) {
   } else if (data.password.length < 8) {
     isValid = false;
     errors.password = "Passwort muss mehr als 8 Zeichen haben";
-  } else if (!(/[A-Z]/.test(data.password))) {
+  } else if (!/[A-Z]/.test(data.password)) {
     isValid = false;
     errors.password =
       "Passwort muss Mindestens einen Grossbuchstaben beinhalten";
-  } else if (!(/[a-z]/.test(data.password))) {
+  } else if (!/[a-z]/.test(data.password)) {
     isValid = false;
     errors.password =
       "Passwort muss Mindestens einen Kleinbuchstaben beinhalten";
-  } else if (!(/[0-9]/.test(data.password))) {
+  } else if (!/[0-9]/.test(data.password)) {
     isValid = false;
     errors.password = "Passwort muss Mindestens eine Zahl beinhalten";
-  } else if (!(/[^a-zA-Z0-9]/.test(data.password))) {
+  } else if (!/[^a-zA-Z0-9]/.test(data.password)) {
     isValid = false;
-    errors.password =
-      "Passwort muss Sonderzeichen beinhalten";
+    errors.password = "Passwort muss Sonderzeichen beinhalten";
   }
 
+  return { isValid: isValid, errors };
+}
+
+export function validateThread(data) {
+  const errors = {};
+  let isValid = true;
+
+  if (isBlankOrNull(data.name)) {
+    isValid = false;
+    errors.name = "Name des Threads dasf nicht leer sein";
+  }
   return { isValid: isValid, errors };
 }

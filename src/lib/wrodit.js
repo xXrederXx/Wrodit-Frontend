@@ -21,9 +21,7 @@ export async function fetchPosts() {
 
 export async function fetchThread(id) {
   const session = getJWTToken();
-
   const headers = session ? { Authorization: `Bearer ${session}` } : {};
-
   const res = await fetch(`${URL}/threads/${id}`, { headers });
 
   if (!res.ok) {
@@ -35,13 +33,31 @@ export async function fetchThread(id) {
 
 export async function fetchUser(id) {
   const session = getJWTToken();
-
   const headers = session ? { Authorization: `Bearer ${session}` } : {};
-
   const res = await fetch(`${URL}/users/${id}`, { headers });
 
   if (!res.ok) {
     throw new Error("Fehler beim Laden der User");
+  }
+
+  return await res.json();
+}
+
+export async function createPost(data) {
+  const session = getJWTToken();
+  const headers = {
+    "Content-Type": "application/json",
+    ...(session && { Authorization: `Bearer ${session}` }),
+  };
+
+  const res = await fetch(`${URL}/threads/`, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(data),
+  });
+
+  if (!res.ok) {
+    throw await res.json();
   }
 
   return await res.json();

@@ -7,6 +7,6 @@ body {
 *,*::before,*::after {
     box-sizing: border-box;
 }
-.signup {
+.signup, .createThread {
     text-align: center;
 }
