@@ -45,14 +45,20 @@ export async function fetchUser(id) {
 
 export async function createPost(data) {
   const session = getJWTToken();
-  const headers = session ? { Authorization: `Bearer ${session}` } : {};
-  return await fetch(
-    `${URL}/threads/`,
-    { headers },
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    },
-  ).then((res) => res.json());
+  const headers = {
+    "Content-Type": "application/json",
+    ...(session && { Authorization: `Bearer ${session}` }),
+  };
+
+  const res = await fetch(`${URL}/threads/`, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(data),
+  });
+
+  if (!res.ok) {
+    throw new Error("Fehler beim Erstellen des Posts");
+  }
+
+  return await res.json();
 }
