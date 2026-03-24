@@ -11,15 +11,15 @@ export default function PostForm({ onCancel, errors = {} }) {
         Abbrechen
       </Button>
       <Input
-        {...(errors.username && { error: errors.username })}
+        {...(errors.username && { error: errors.title  })}
         type="text"
         name="title"
         placeholder="Stelle deine Frage *"
       />
       <Text
-        {...(errors.password && { error: errors.password })}
+        {...(errors.password && { error: errors.content  })}
         type="text"
-        name="description"
+        name="content"
         placeholder="Beschreibung"
       />
 

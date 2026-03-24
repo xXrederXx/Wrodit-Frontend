@@ -76,7 +76,7 @@ export async function createPost(data) {
   });
 
   if (!res.ok) {
-    throw await res.json();
+    throw res;
   }
 
   return await res.json();

@@ -3,36 +3,26 @@ import { createPost } from "../lib/wrodit";
 import { redirect, useActionData, useNavigate } from "react-router";
 import { validateThread } from "../lib/validate";
 
-async function clientAction({ request }) {
+async function clientAction({ request, params }) {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
-  const url = new URL(request.url);
-  const pathParts = url.pathname.split("/");
-
-  const threadId = pathParts[4];
+  const threadId = params.id;
 
   const extendedData = {
     ...data,
     threadId,
   };
-  console.log("exdata",extendedData);
-  
-
-  const { isValid, errors } = validateThread(extendedData);
-  if (!isValid) {
-    return errors;
-  }
+  console.log("exdata", extendedData);
 
   try {
-    const res = await createPost(data);
-    console.log("res",res);
+    const res = await createPost(extendedData);
+    console.log("res", res);
+    return redirect(`/`);
   } catch (error) {
-    return error;
+    console.error("Create post error:", error);
+    return error?.message || { general: "Etwas ist schiefgelaufen" };
   }
-
-  return redirect(`/wrodit/thread/${threadId}`);
 }
-
 export default function CreatePostRoute() {
   const navigate = useNavigate();
   const errors = useActionData() ?? {};
