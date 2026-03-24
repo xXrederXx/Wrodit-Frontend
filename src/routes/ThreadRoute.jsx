@@ -28,7 +28,7 @@ export default function ThreadRoute() {
 
   return (
     <>
-    <ThreadInformation name={thread.name} description={thread.description}/>
+    <ThreadInformation name={thread.name} description={thread.description} to={`/wrodit/create/post/${thread.id}`}/>
 
       {posts.map((post, index) => (
         <PostBox
@@ -38,7 +38,7 @@ export default function ThreadRoute() {
           text={post.content}
           vote={post.vote}
           name={post.username}
-          threadId={post.threadId}
+          threadId={thread.id}
         />
       ))}
     </>
