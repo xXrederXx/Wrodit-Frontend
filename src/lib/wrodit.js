@@ -43,7 +43,7 @@ export async function fetchUser(id) {
   return await res.json();
 }
 
-export async function createPost(data) {
+export async function createThread(data) {
   const session = getJWTToken();
   const headers = {
     "Content-Type": "application/json",
@@ -51,6 +51,25 @@ export async function createPost(data) {
   };
 
   const res = await fetch(`${URL}/threads/`, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(data),
+  });
+
+  if (!res.ok) {
+    throw await res.json();
+  }
+
+  return await res.json();
+}
+export async function createPost(data) {
+  const session = getJWTToken();
+  const headers = {
+    "Content-Type": "application/json",
+    ...(session && { Authorization: `Bearer ${session}` }),
+  };
+
+  const res = await fetch(`${URL}/posts/`, {
     method: "POST",
     headers,
     body: JSON.stringify(data),
