@@ -57,7 +57,7 @@ export async function createPost(data) {
   });
 
   if (!res.ok) {
-    throw new Error("Fehler beim Erstellen des Posts");
+    throw await res.json();
   }
 
   return await res.json();

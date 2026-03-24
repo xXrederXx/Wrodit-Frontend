@@ -14,14 +14,9 @@ async function clientAction({ request }) {
 
   try {
     const res = await createPost(data);
+    console.log(res);
   } catch (error) {
-    try {
-      const response = await error.response.json();
-      return response;
-    } catch (convertError) {
-      console.error("Convert Error", convertError);
-      throw error;
-    }
+    return error;
   }
 
   return redirect("/");
