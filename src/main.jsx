@@ -13,7 +13,6 @@ import LoginRoute from "./routes/LoginRoute.jsx";
 import CreatePostRoute from "./routes/CreatePostRoute.jsx";
 import CreateThreadRoute from "./routes/CreateThreadRoute.jsx";
 
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -31,6 +30,7 @@ const router = createBrowserRouter([
       {
         path: "wrodit/thread/:id",
         element: <ThreadRoute />,
+        loader: ThreadRoute.loader,
       },
       {
         path: "wrodit/register",
@@ -53,7 +53,7 @@ const router = createBrowserRouter([
       {
         path: "wrodit/create/thread",
         element: <CreateThreadRoute />,
-        action: CreateThreadRoute.action
+        action: CreateThreadRoute.action,
       },
     ],
   },
