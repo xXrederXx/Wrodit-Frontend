@@ -1,7 +1,7 @@
 import { useParams, useLoaderData } from "react-router-dom";
 import { fetchThreadsById, fetchPostsByThread, fetchUser } from "../lib/wrodit";
 import PostBox from "../components/PostBox";
-import ThreadInformation from "../components/ThreatInformation";
+import ThreadInformation from "../components/ThreadInformation";
 
 const PAGE = 1;
 const SIZE = 10;
