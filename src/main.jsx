@@ -53,6 +53,7 @@ const router = createBrowserRouter([
       {
         path: "wrodit/create/thread",
         element: <CreateThreadRoute />,
+        action: CreateThreadRoute.action
       },
     ],
   },

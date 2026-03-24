@@ -21,9 +21,7 @@ export async function fetchPosts() {
 
 export async function fetchThread(id) {
   const session = getJWTToken();
-
   const headers = session ? { Authorization: `Bearer ${session}` } : {};
-
   const res = await fetch(`${URL}/threads/${id}`, { headers });
 
   if (!res.ok) {
@@ -35,9 +33,7 @@ export async function fetchThread(id) {
 
 export async function fetchUser(id) {
   const session = getJWTToken();
-
   const headers = session ? { Authorization: `Bearer ${session}` } : {};
-
   const res = await fetch(`${URL}/users/${id}`, { headers });
 
   if (!res.ok) {
@@ -45,4 +41,18 @@ export async function fetchUser(id) {
   }
 
   return await res.json();
+}
+
+export async function createPost(data) {
+  const session = getJWTToken();
+  const headers = session ? { Authorization: `Bearer ${session}` } : {};
+  return await fetch(
+    `${URL}/threads/`,
+    { headers },
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    },
+  ).then((res) => res.json());
 }
