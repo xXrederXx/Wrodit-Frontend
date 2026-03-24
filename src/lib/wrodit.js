@@ -62,3 +62,17 @@ export async function createPost(data) {
 
   return await res.json();
 }
+
+export async function fetchThreadsById(id) {
+  const session = getJWTToken();
+
+  const headers = session ? { Authorization: `Bearer ${session}` } : {};
+
+  const res = await fetch(`${URL}/threads/${id}`, { headers });
+
+  if (!res.ok) {
+    throw await res.json();
+  }
+
+  return await res.json();
+}
