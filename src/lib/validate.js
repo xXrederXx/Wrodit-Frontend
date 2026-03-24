@@ -1,4 +1,4 @@
-import { isBlankOrNull } from "./util";
+import { isBlankOrNull, isValidEmail } from "./util";
 
 export function validateSignIn(data) {
   const errors = {};
@@ -7,6 +7,10 @@ export function validateSignIn(data) {
   if (isBlankOrNull(data.email)) {
     isValid = false;
     errors.email = "Email darf nicht leer sein";
+  }
+  if (isValidEmail(data.email)) {
+    isValid = false;
+    errors.email = "Email muss dem Email format entsprechen";
   }
   if (isBlankOrNull(data.username)) {
     isValid = false;
