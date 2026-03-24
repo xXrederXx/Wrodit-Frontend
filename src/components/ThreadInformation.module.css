@@ -1,0 +1,18 @@
+.ThreadInformation {
+  padding: 1rem;
+}
+
+.topBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.linkButton {
+    text-decoration: none;
+    background-color: #d93900;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 1rem;
+}

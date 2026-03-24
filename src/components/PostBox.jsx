@@ -10,11 +10,12 @@ export default function PostBox({
   vote,
   createdAt,
   name,
+  threadId,
   threadName
 }) {
   return (
     <article className={styles.article}>
-      <PostInformation name={name} threadName={threadName} createdAt={createdAt}/>
+      <PostInformation name={name} threadId={threadId} threadName={threadName} createdAt={createdAt}/>
       <PostTitle title={title} />
       <PostText text={text} />
       <PostFooter vote={vote}/>

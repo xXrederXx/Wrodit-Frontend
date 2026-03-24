@@ -1,4 +1,5 @@
 import styles from "./PostInformation.module.css";
+import { Link } from "react-router-dom";
 
 function timeAgo(createdAt) {
   const now = new Date();
@@ -16,12 +17,20 @@ function timeAgo(createdAt) {
   return `${diffDays} Tagen`;
 }
 
-export default function PostInformation({name, threadName, createdAt}) {
-    return(
-        <header className={styles.header}>
-        <p>Von: {name}</p>
-        <p>Aus: {threadName}</p>
-        <p>Vor {timeAgo(createdAt)}</p>
-        </header>
-    )
+export default function PostInformation({
+  name,
+  threadId,
+  threadName,
+  createdAt,
+}) {
+  return (
+    <header className={styles.header}>
+      <p>Von: {name}</p>
+      <Link to={`wrodit/thread/${threadId}`}>
+        {" "}
+        <p>{threadName}</p>
+      </Link>
+      <p>Vor {timeAgo(createdAt)}</p>
+    </header>
+  );
 }
