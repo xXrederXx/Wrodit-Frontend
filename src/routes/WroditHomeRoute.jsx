@@ -19,6 +19,7 @@ export default function WroditHomeRoute() {
           name={
             post.userLoaderData ? post.userLoaderData.username : "Loading..."
           }
+          threadId={post.threadId}
           threadName={
             post.threadLoaderData ? post.threadLoaderData.name : "Loading..."
           }
