@@ -13,7 +13,7 @@ export default function PostForm({ onCancel, errors = {} }) {
       <Input
         {...(errors.username && { error: errors.username })}
         type="text"
-        name="name"
+        name="title"
         placeholder="Stelle deine Frage *"
       />
       <Text
