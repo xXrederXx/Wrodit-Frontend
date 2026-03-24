@@ -11,17 +11,12 @@ export default function ThradForm({ onCancel, errors = {} }) {
         Abbrechen
       </Button>
       <Input
-        {...(errors.username && { error: errors.username })}
+        {...(errors.name && { error: errors.name })}
         type="text"
         name="name"
         placeholder="Benenne deinen Thread *"
       />
-      <Text
-        {...(errors.password && { error: errors.password })}
-        type="text"
-        name="description"
-        placeholder="Beschreibung"
-      />
+      <Text type="text" name="description" placeholder="Beschreibung" />
 
       {errors?.error && <p className="error">{errors.error}</p>}
       <Button type="submit">Erstellen</Button>
