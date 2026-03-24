@@ -11,19 +11,19 @@ export default function PostForm({ onCancel, errors = {} }) {
         Abbrechen
       </Button>
       <Input
-        {...(errors.username && { error: errors.title  })}
+        {...(errors.title && { error: errors.title  })}
         type="text"
         name="title"
         placeholder="Stelle deine Frage *"
       />
       <Text
-        {...(errors.password && { error: errors.content  })}
+        {...(errors.content && { error: errors.content  })}
         type="text"
         name="content"
         placeholder="Beschreibung"
       />
 
-      {errors?.error && <p className="error">{errors.error}</p>}
+      {errors?.general && <p className="error">{errors.general}</p>}
       <Button type="submit">Erstellen</Button>
     </Form>
   );

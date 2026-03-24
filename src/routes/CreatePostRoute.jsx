@@ -1,12 +1,17 @@
 import PostForm from "../components/PostForm";
 import { createPost } from "../lib/wrodit";
 import { redirect, useActionData, useNavigate } from "react-router";
-import { validateThread } from "../lib/validate";
+import { validatePost } from "../lib/validate";
 
 async function clientAction({ request, params }) {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
   const threadId = params.id;
+
+  const { isValid, errors } = validatePost(data);
+  if (!isValid) {
+    return { errors };
+  }
 
   const extendedData = {
     ...data,

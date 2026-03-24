@@ -51,3 +51,13 @@ export function validateThread(data) {
   }
   return { isValid: isValid, errors };
 }
+export function validatePost(data) {
+  const errors = {};
+  let isValid = true;
+
+  if (isBlankOrNull(data.title)) {
+    isValid = false;
+    errors.title = "Name des Post dasf nicht leer sein";
+  }
+  return { isValid: isValid, errors };
+}
