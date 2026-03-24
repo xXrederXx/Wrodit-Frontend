@@ -30,7 +30,7 @@ async function clientAction({ request }) {
     return error;
   }
 
-  return redirect("/");
+  return redirect(`/wrodit/thread/${threadId}`);
 }
 
 export default function CreatePostRoute() {
@@ -42,10 +42,10 @@ export default function CreatePostRoute() {
   };
 
   return (
-    <>
-      <h1>CreatePostRoute</h1>
+    <div className="createPost">
+      <h1>Create a Post</h1>
       <PostForm errors={errors} onCancel={onCancel} />
-    </>
+    </div>
   );
 }
 CreatePostRoute.action = clientAction;
