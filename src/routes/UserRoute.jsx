@@ -18,7 +18,6 @@ async function clientLoader({ params }) {
   const postsWithThread = await Promise.all(
     posts.map(async (post) => {
       const thread = await fetchThreadsById(post.threadId);
-      console.log("thread:", thread);
 
       return {
         ...post,
@@ -26,7 +25,6 @@ async function clientLoader({ params }) {
       };
     }),
   );
-  console.log("posts", postsWithThread);
 
   return { user, posts: postsWithThread };
 }
@@ -35,7 +33,6 @@ export default function UserRoute() {
   const data = useLoaderData();
   const user = data.user;
   const posts = data.posts;
-  console.log("posts", posts.threadName);
 
   return (
     <>
