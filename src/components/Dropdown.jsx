@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styles from "./Dropdown.module.css";
 import { CgProfile } from "react-icons/cg";
 
-export default function Dropdown() {
+export default function Dropdown({ userId }) {
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -26,7 +26,7 @@ export default function Dropdown() {
         <CgProfile />
       </button>
       <div className={`${styles.dropdownContent} ${open ? styles.show : ""}`}>
-        <Link to="/wrodit/login">Mein Konto</Link>
+        <Link to={`/wrodit/user/${userId}`}>Mein Konto</Link>
         <Link to="/wrodit/register">Registrieren</Link>
         <Link to="/wrodit/login">Anmelden</Link>
       </div>

@@ -3,7 +3,7 @@ import Dropdown from "./Dropdown";
 import logo from "../assets/logo.svg";
 import { Link } from "react-router-dom";
 
-export default function Header() {
+export default function Header({ userId }) {
   return (
     <header className={styles.header}>
       {" "}
@@ -14,7 +14,7 @@ export default function Header() {
           style={{ width: "5rem", height: "5rem" }}
         ></img>{" "}
       </Link>
-      <Dropdown />
+      <Dropdown userId={userId} />
     </header>
   );
 }
