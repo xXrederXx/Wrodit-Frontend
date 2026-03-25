@@ -6,8 +6,9 @@ export default function UserDetail({ username, email }) {
   return (
     <div className={styles.userDetail}>
       <CgProfile className={styles.profileImage}/>
-      <h1>{username}testUser</h1>
-      <p>{email}test@mail</p>
+      <h1>{username}</h1>
+      <p>{email}</p>
+      <h2>Meine Posts</h2>
     </div>
   );
 }
