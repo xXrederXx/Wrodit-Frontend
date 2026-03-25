@@ -1,3 +1,54 @@
-export default function UserRoute() {
-    return <h1>UserRoute</h1>
+import PostBox from "../components/PostBox";
+import UserDetail from "../components/UserDetails";
+import {
+  fetchThreadsById,
+  fetchPostsByUser,
+  fetchAllUserData,
+} from "../lib/wrodit";
+import { useLoaderData } from "react-router-dom";
+
+async function clientLoader({ params }) {
+  const userId = params.id;
+
+  const user = await fetchAllUserData();
+
+  const res = await fetchPostsByUser(userId);
+  const posts = res.content;
+
+  const postsWithThread = await Promise.all(
+    posts.map(async (post) => {
+      const thread = await fetchThreadsById(post.threadId);
+
+      return {
+        ...post,
+        threadName: thread.name,
+      };
+    }),
+  );
+
+  return { user, posts: postsWithThread };
 }
+
+export default function UserRoute() {
+  const data = useLoaderData();
+  const user = data.user;
+  const posts = data.posts;
+
+  return (
+    <>
+      <UserDetail username={user.username} email={user.email} />
+      {posts.map((post, index) => (
+        <PostBox
+          key={index}
+          createdAt={post.createdAt}
+          title={post.title}
+          text={post.content}
+          vote={post.vote}
+          threadId={post.threadId}
+          threadName={post.threadName}
+        />
+      ))}
+    </>
+  );
+}
+UserRoute.loader = clientLoader;

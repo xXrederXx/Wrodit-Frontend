@@ -25,7 +25,7 @@ export default function PostInformation({
 }) {
   return (
     <header className={styles.header}>
-      <p>Von: {name}</p>
+      <p>{name}</p>
       <Link to={`wrodit/thread/${threadId}`}>
         {" "}
         <p>{threadName}</p>
