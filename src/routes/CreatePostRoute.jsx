@@ -1,6 +1,6 @@
 import PostForm from "../components/PostForm";
 import { createPost } from "../lib/wrodit";
-import { redirect, useActionData, useNavigate } from "react-router";
+import { redirect, useActionData, useNavigate } from "react-router-dom";
 import { validatePost } from "../lib/validate";
 
 async function clientAction({ request, params }) {
@@ -10,7 +10,7 @@ async function clientAction({ request, params }) {
 
   const { isValid, errors } = validatePost(data);
   if (!isValid) {
-    return { errors };
+    return errors;
   }
 
   const extendedData = {

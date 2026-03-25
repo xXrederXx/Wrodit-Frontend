@@ -14,13 +14,13 @@ export default function PostForm({ onCancel, errors = {} }) {
         {...(errors.title && { error: errors.title  })}
         type="text"
         name="title"
-        placeholder="Stelle deine Frage *"
+        placeholder="Dein Post *"
       />
       <Text
         {...(errors.content && { error: errors.content  })}
         type="text"
         name="content"
-        placeholder="Beschreibung"
+        placeholder="Beschreibung *"
       />
 
       {errors?.general && <p className="error">{errors.general}</p>}

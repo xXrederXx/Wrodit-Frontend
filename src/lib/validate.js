@@ -59,5 +59,10 @@ export function validatePost(data) {
     isValid = false;
     errors.title = "Name des Post dasf nicht leer sein";
   }
+
+  if (isBlankOrNull(data.content)) {
+    isValid = false;
+    errors.content = "Der Post mus einen Inhalt haben";
+  }
   return { isValid: isValid, errors };
 }
