@@ -1,3 +1,9 @@
+import UserDetail from "../components/UserDetails";
+
 export default function UserRoute() {
-    return <h1>UserRoute</h1>
+  return (
+    <>
+      <UserDetail/>
+    </>
+  );
 }
