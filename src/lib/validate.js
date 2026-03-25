@@ -8,7 +8,7 @@ export function validateSignIn(data) {
     isValid = false;
     errors.email = "Email darf nicht leer sein";
   }
-  if (isValidEmail(data.email)) {
+  if (!(isValidEmail(data.email))) {
     isValid = false;
     errors.email = "Email muss dem Email format entsprechen";
   }
