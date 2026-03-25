@@ -12,6 +12,7 @@ import RegisterRoute from "./routes/RegisterRoute.jsx";
 import LoginRoute from "./routes/LoginRoute.jsx";
 import CreatePostRoute from "./routes/CreatePostRoute.jsx";
 import CreateThreadRoute from "./routes/CreateThreadRoute.jsx";
+import ProtectedRoute from "./routes/ProtectedRoute.jsx";
 
 const router = createBrowserRouter([
   {
@@ -20,7 +21,11 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <WroditHomeRoute />,
+        element: (
+          <ProtectedRoute>
+            <WroditHomeRoute />
+          </ProtectedRoute>
+        ),
         loader: WroditHomeRoute.loader,
       },
       {
@@ -44,12 +49,20 @@ const router = createBrowserRouter([
       },
       {
         path: "wrodit/user/:id",
-        element: <UserRoute />,
+        element: (
+          <ProtectedRoute>
+            <UserRoute />
+          </ProtectedRoute>
+        ),
         loader: UserRoute.loader,
       },
       {
         path: "wrodit/create/post/:id",
-        element: <CreatePostRoute />,
+        element: (
+          <ProtectedRoute>
+            <CreatePostRoute />
+          </ProtectedRoute>
+        ),
         action: CreatePostRoute.action,
       },
       {

@@ -1,5 +1,5 @@
 import { atom, useAtom } from "jotai"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 const STORAGE_KEY = "session"
 const SESSION_EVENT = "session-changed"
@@ -78,6 +78,19 @@ export function useSession() {
 }
 
 export function useCurrentUser() {
-    const session = useSession()
-    return session?.user
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
+  const login = (userData) => {
+    setUser(userData);
+    localStorage.setItem("user", JSON.stringify(userData));
+  };
+
+  return { user, login };
 }
