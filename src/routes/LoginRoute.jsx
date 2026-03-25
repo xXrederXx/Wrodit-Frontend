@@ -15,7 +15,6 @@ async function clientAction({ request }) {
 
   try {
     const res = await signIn(data);
-    console.log("res:", res);
 
     if (res.status === 401) {
       return { formError: "Benutzername oder Passwort ist falsch." };
