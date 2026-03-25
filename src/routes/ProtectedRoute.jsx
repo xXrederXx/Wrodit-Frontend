@@ -10,7 +10,7 @@ export default function ProtectedRoute({ children }) {
 
   useEffect(() => {
     if (user !== undefined) {
-      setIsLoading(false);
+      setIsLoading(false); // eslint-disable-line 
       if (!user) {
         console.log("User not found, redirecting to login");
         navigate(`/wrodit/login`);

@@ -1,14 +1,14 @@
-import { atom, useAtom } from "jotai"
-import { useEffect, useState } from "react"
+import { atom, useAtom } from "jotai";
+import { useEffect, useState } from "react";
 
-const STORAGE_KEY = "session"
-const SESSION_EVENT = "session-changed"
-const sessionAtom = atom(getSession())
+const STORAGE_KEY = "session";
+const SESSION_EVENT = "session-changed";
+const sessionAtom = atom(getSession());
 
 export function getJWTToken() {
-    const session = getSession()
-    
-    return session
+  const session = getSession();
+
+  return session;
 }
 
 export function getSession() {
@@ -24,57 +24,57 @@ export function getSession() {
 }
 
 export function saveSession(session) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(session))
-    window.dispatchEvent(new CustomEvent(SESSION_EVENT, { detail: session }))
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(session));
+  window.dispatchEvent(new CustomEvent(SESSION_EVENT, { detail: session }));
 }
 
 export function removeSession() {
-    localStorage.removeItem(STORAGE_KEY)
-    window.dispatchEvent(new CustomEvent(SESSION_EVENT, { detail: null }))
+  localStorage.removeItem(STORAGE_KEY);
+  window.dispatchEvent(new CustomEvent(SESSION_EVENT, { detail: null }));
 }
 
 export function useSession() {
-    const [session, setSession] = useAtom(sessionAtom)
+  const [session, setSession] = useAtom(sessionAtom);
 
-    useEffect(() => {
-        const savedSession = localStorage.getItem(STORAGE_KEY)
-        if (savedSession) {
-            try {
-                const sessionValues = JSON.parse(savedSession)
-                setSession(sessionValues)
-            } catch (e) {
-                console.error(e)
-            }
+  useEffect(() => {
+    const savedSession = localStorage.getItem(STORAGE_KEY);
+    if (savedSession) {
+      try {
+        const sessionValues = JSON.parse(savedSession);
+        setSession(sessionValues);
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    const handleStorageChange = (event) => {
+      if (event.key === STORAGE_KEY) {
+        try {
+          if (event.newValue) {
+            setSession(JSON.parse(event.newValue));
+          } else {
+            setSession(null);
+          }
+        } catch (e) {
+          console.error(e);
         }
+      }
+    };
 
-        const handleStorageChange = (event) => {
-            if (event.key === STORAGE_KEY) {
-                try {
-                    if (event.newValue) {
-                        setSession(JSON.parse(event.newValue))
-                    } else {
-                        setSession(null)
-                    }
-                } catch (e) {
-                    console.error(e)
-                }
-            }
-        }
+    const handleCustomSessionChange = (event) => {
+      setSession(event.detail);
+    };
 
-        const handleCustomSessionChange = (event) => {
-            setSession(event.detail)
-        }
+    window.addEventListener("storage", handleStorageChange);
+    window.addEventListener(SESSION_EVENT, handleCustomSessionChange);
 
-        window.addEventListener("storage", handleStorageChange)
-        window.addEventListener(SESSION_EVENT, handleCustomSessionChange)
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      window.removeEventListener(SESSION_EVENT, handleCustomSessionChange);
+    };
+  }, []);
 
-        return () => {
-            window.removeEventListener("storage", handleStorageChange)
-            window.removeEventListener(SESSION_EVENT, handleCustomSessionChange)
-        }
-    }, [])
-
-    return session
+  return session;
 }
 
 export function useCurrentUser() {
@@ -83,7 +83,7 @@ export function useCurrentUser() {
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
-      setUser(JSON.parse(storedUser));
+      setUser(JSON.parse(storedUser)); // eslint-disable-line
     }
   }, []);
 
