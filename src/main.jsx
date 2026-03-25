@@ -49,6 +49,7 @@ const router = createBrowserRouter([
       {
         path: "wrodit/create/post/:id",
         element: <CreatePostRoute />,
+        action: CreatePostRoute.action,
       },
       {
         path: "wrodit/create/thread",

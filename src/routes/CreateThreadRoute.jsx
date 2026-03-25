@@ -1,5 +1,5 @@
 import ThradForm from "../components/ThreadForm";
-import { createPost } from "../lib/wrodit";
+import { createThread } from "../lib/wrodit";
 import { redirect, useActionData, useNavigate } from "react-router";
 import { validateThread } from "../lib/validate";
 
@@ -13,7 +13,7 @@ async function clientAction({ request }) {
   }
 
   try {
-    const res = await createPost(data);
+    const res = await createThread(data);
     console.log(res);
   } catch (error) {
     return error;
