@@ -118,3 +118,25 @@ export async function fetchPostsByThread(threadId, page = 1, size = 10) {
 
   return response.json();
 }
+export async function fetchPostsByUser(UserId, page = 1, size = 10) {
+  const session = getJWTToken();
+
+  if (!UserId) throw new Error("UserId wird benötigt");
+
+  const params = new URLSearchParams();
+  const headers = session ? { Authorization: `Bearer ${session}` } : {};
+
+  params.append("page", JSON.stringify({ page, size }));
+  params.append("user", UserId);
+
+  const response = await fetch(`${URL}/posts/?${params.toString()}`, {
+    method: "GET",
+    headers,
+  });
+
+  if (!response.ok) {
+    throw new Error("Fehler beim Laden der Posts");
+  }
+
+  return response.json();
+}

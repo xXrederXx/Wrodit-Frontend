@@ -3,14 +3,11 @@ import { fetchThreadsById, fetchPostsByThread, fetchUser } from "../lib/wrodit";
 import PostBox from "../components/PostBox";
 import ThreadInformation from "../components/ThreadInformation";
 
-const PAGE = 1;
-const SIZE = 10;
-
 async function clientLoader({ params }) {
   const threadId = params.id;
   const thread = await fetchThreadsById(threadId);
 
-  const postsData = await fetchPostsByThread(threadId, PAGE, SIZE);
+  const postsData = await fetchPostsByThread(threadId);
   const postsArray = postsData.content || [];
 
   const postsWithUsers = await Promise.all(
