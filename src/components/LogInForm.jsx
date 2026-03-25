@@ -22,7 +22,6 @@ export default function LogInForm({ onCancel, errors = {} }) {
         placeholder="Passwort *"
       />
       <Input
-        {...(errors.password && { error: errors.password })}
         type="hidden"
         name="email"
         value="fillerValue"

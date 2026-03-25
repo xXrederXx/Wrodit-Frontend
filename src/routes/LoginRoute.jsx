@@ -2,15 +2,20 @@ import LogInForm from "../components/LogInForm";
 import { Link, redirect, useActionData, useNavigate } from "react-router";
 import { signIn } from "../lib/auth";
 import { saveSession } from "../lib/session";
+import { validateLoginIn } from "../lib/validate";
 
 async function clientAction({ request }) {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
 
+  const { isValid, errors } = validateLoginIn(data);
+  if (!isValid) {
+    return errors;
+  }
+
   try {
     const res = await signIn(data);
     console.log(res);
-    
 
     saveSession(res.accessToken);
   } catch (error) {
@@ -18,9 +23,9 @@ async function clientAction({ request }) {
       const response = await error.response.json();
       return response;
     } catch (error) {
-    console.error("Login Error:", error);
-    return { error: error.message || "Unbekannter Fehler beim Login" };
-  }
+      console.error("Login Error:", error);
+      return { error: error.message || "Unbekannter Fehler beim Login" };
+    }
   }
 
   return redirect("/");
