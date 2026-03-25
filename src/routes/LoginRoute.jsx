@@ -15,20 +15,23 @@ async function clientAction({ request }) {
 
   try {
     const res = await signIn(data);
-    console.log(res);
+
+    if (res.status === 401) {
+      return { formError: "Benutzername oder Passwort ist falsch." };
+    }
+
+    if (!res.ok) {
+      throw new Error("Serverfehler: " + res.status);
+    }
 
     saveSession(res.accessToken);
-  } catch (error) {
-    try {
-      const response = await error.response.json();
-      return response;
-    } catch (error) {
-      console.error("Login Error:", error);
-      return { error: error.message || "Unbekannter Fehler beim Login" };
-    }
-  }
 
-  return redirect("/");
+    return redirect("/");
+  } catch (error) {
+    console.error("Login Error:", error);
+
+    return { formError: error.message || "Unbekannter Fehler beim Login" };
+  }
 }
 
 export default function LoginRoute() {
