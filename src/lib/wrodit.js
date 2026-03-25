@@ -42,6 +42,17 @@ export async function fetchUser(id) {
 
   return await res.json();
 }
+export async function fetchAllUserData() {
+  const session = getJWTToken();
+  const headers = session ? { Authorization: `Bearer ${session}` } : {};
+  const res = await fetch(`${URL}/users/self`, { headers });
+
+  if (!res.ok) {
+    throw new Error("Fehler beim Laden der UserDaten");
+  }
+
+  return await res.json();
+}
 
 export async function createThread(data) {
   const session = getJWTToken();
