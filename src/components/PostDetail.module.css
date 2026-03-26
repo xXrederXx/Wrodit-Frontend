@@ -1,0 +1,14 @@
+article {
+  border-bottom: 1px solid gray;
+  padding: 1rem;
+  text-decoration: none;
+}
+
+.link {
+  text-decoration: none;
+  color: white;
+}
+
+.title {
+    font-size: 2rem;
+}
