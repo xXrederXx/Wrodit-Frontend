@@ -10,3 +10,6 @@ body {
 .signup, .createThread, .createPost {
     text-align: center;
 }
+.signup {
+    margin-top: 5rem;
+}
