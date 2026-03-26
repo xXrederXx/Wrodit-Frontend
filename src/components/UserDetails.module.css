@@ -6,12 +6,3 @@
 .profileImage {
   font-size: 5rem;
 }
-
-@media (min-width: 800px) {
-
-    .userDetail {
-        padding-left: 10rem;
-        padding-right: 10rem;
-    }
-    
-}
