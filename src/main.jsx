@@ -39,16 +39,6 @@ const router = createBrowserRouter([
         loader: ThreadRoute.loader,
       },
       {
-        path: "wrodit/register",
-        element: <RegisterRoute />,
-        action: RegisterRoute.action,
-      },
-      {
-        path: "wrodit/login",
-        element: <LoginRoute />,
-        action: LoginRoute.action,
-      },
-      {
         path: "wrodit/user/:id",
         element: (
           <ProtectedRoute>
@@ -72,6 +62,16 @@ const router = createBrowserRouter([
         action: CreateThreadRoute.action,
       },
     ],
+  },
+  {
+    path: "wrodit/login",
+    element: <LoginRoute />,
+    action: LoginRoute.action,
+  },
+  {
+    path: "wrodit/register",
+    element: <RegisterRoute />,
+    action: RegisterRoute.action,
   },
 ]);
 

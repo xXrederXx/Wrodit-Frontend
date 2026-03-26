@@ -9,26 +9,18 @@ async function clientAction({ request }) {
   const data = Object.fromEntries(formData);
 
   const { isValid, errors } = validateLoginIn(data);
-  if (!isValid) {
-    return errors;
-  }
+  if (!isValid) return { errors };
 
   try {
     const res = await signIn(data);
-
-    if (res.status === 401) {
-      return { formError: "Benutzername oder Passwort ist falsch." };
-    }
-    if (!res.accessToken) {
-      return { formError: "Benutzername oder Passwort ist falsch." };
-    }
-
     saveSession(res.accessToken);
 
     return redirect("/");
   } catch (error) {
     console.error("Login Error:", error);
-
+    if (error.status === 401) {
+      return { formError: "Benutzername oder Passwort ist falsch." };
+    }
     return { formError: error.message || "Unbekannter Fehler beim Login" };
   }
 }
