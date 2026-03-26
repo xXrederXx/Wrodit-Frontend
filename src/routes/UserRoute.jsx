@@ -46,6 +46,7 @@ export default function UserRoute() {
           vote={post.vote}
           threadId={post.threadId}
           threadName={post.threadName}
+          to={post.id}
         />
       ))}
     </>

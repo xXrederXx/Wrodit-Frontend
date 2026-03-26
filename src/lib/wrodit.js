@@ -151,3 +151,15 @@ export async function fetchPostsByUser(UserId, page = 1, size = 10) {
 
   return response.json();
 }
+
+export async function fetchPostById(id) {
+  const session = getJWTToken();
+  const headers = session ? { Authorization: `Bearer ${session}` } : {};
+  const res = await fetch(`${URL}/posts/${id}`, { headers });
+
+  if (!res.ok) {
+    throw new Error("Fehler beim Laden des post");
+  }
+
+  return await res.json();
+}

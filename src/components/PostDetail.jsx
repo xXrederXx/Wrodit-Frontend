@@ -1,11 +1,10 @@
 import PostText from "./PostText";
-import PostTitle from "./PostTitle";
 import PostInformation from "./PostInformation";
-import styles from "./PostBox.module.css";
 import PostFooter from "./PostFooter";
-import { Link } from "react-router-dom";
+import styles from "./PostDetail.module.css";
 
-export default function PostBox({
+
+export default function PostDetail({
   title,
   text,
   vote,
@@ -13,7 +12,6 @@ export default function PostBox({
   name,
   threadId,
   threadName,
-  to,
 }) {
   return (
     <article className={styles.article}>
@@ -22,12 +20,9 @@ export default function PostBox({
         threadId={threadId}
         threadName={threadName}
         createdAt={createdAt}
-      />{" "}
-      <Link className={styles.link} to={`/wrodit/post/${to}`}>
-        <PostTitle title={title} />
-        <PostText text={text} />{" "}
-      </Link>
-      <PostFooter vote={vote} />
+      />
+      <h1 className={styles.title}>{title}</h1>
+      <PostText text={text} /> <PostFooter vote={vote} />
     </article>
   );
 }
