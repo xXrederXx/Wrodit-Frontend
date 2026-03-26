@@ -27,6 +27,7 @@ export default function SignUpForm({ onCancel, errors = {} }) {
         name="password"
         placeholder="Passwort *"
       />
+      {errors?.formError && <p className="error">{errors.formError}</p>}
       <Button type="submit">Registrieren</Button>
     </Form>
   );

@@ -2,28 +2,35 @@ import LogInForm from "../components/LogInForm";
 import { Link, redirect, useActionData, useNavigate } from "react-router";
 import { signIn } from "../lib/auth";
 import { saveSession } from "../lib/session";
+import { validateLoginIn } from "../lib/validate";
 
 async function clientAction({ request }) {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
 
+  const { isValid, errors } = validateLoginIn(data);
+  if (!isValid) {
+    return errors;
+  }
+
   try {
     const res = await signIn(data);
-    console.log(res);
-    
+
+    if (res.status === 401) {
+      return { formError: "Benutzername oder Passwort ist falsch." };
+    }
+    if (!res.accessToken) {
+      return { formError: "Benutzername oder Passwort ist falsch." };
+    }
 
     saveSession(res.accessToken);
-  } catch (error) {
-    try {
-      const response = await error.response.json();
-      return response;
-    } catch (error) {
-    console.error("Login Error:", error);
-    return { error: error.message || "Unbekannter Fehler beim Login" };
-  }
-  }
 
-  return redirect("/");
+    return redirect("/");
+  } catch (error) {
+    console.error("Login Error:", error);
+
+    return { formError: error.message || "Unbekannter Fehler beim Login" };
+  }
 }
 
 export default function LoginRoute() {

@@ -15,22 +15,22 @@ async function clientAction({ request }) {
 
   try {
     const res = await signUp(data);
-    console.log(res);
-    
-  } catch (error) {
-    try {
-      const response = await error.response.json();
-      return response;
-    } catch (convertError) {
-      //convertError can be ignored as it only throws when there is an unexpected different original error
-      console.error("Convert Error", convertError);
-      throw error;
+    console.log("SignUp response:", res); // Debug
+
+    if (res.error === "Conflict") {
+      console.log("Conflict error, returning formError"); // Debug
+
+      return { formError: "Benutzername oder Email Schon vergeben." };
     }
+
+    console.log("Signup success, redirecting"); // Debug
+
+    return redirect("/wrodit/login");
+  } catch (error) {
+    console.error("SignUp Error:", error);
+    return { formError: error.message || "Unbekannter Fehler beim Signup" };
   }
-
-  return redirect("/wrodit/login");
 }
-
 export default function RegisterRoute() {
   const navigate = useNavigate();
   const errors = useActionData() ?? {};
