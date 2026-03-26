@@ -1,5 +1,5 @@
 import PostBox from "../components/PostBox";
-import { fetchPosts, fetchUser, fetchThread} from "../lib/wrodit";
+import { fetchPosts, fetchUser, fetchThread } from "../lib/wrodit";
 import { useLoaderData } from "react-router-dom";
 
 export default function WroditHomeRoute() {
@@ -23,6 +23,7 @@ export default function WroditHomeRoute() {
           threadName={
             post.threadLoaderData ? post.threadLoaderData.name : "Loading..."
           }
+          to={post.id}
         />
       ))}
     </>

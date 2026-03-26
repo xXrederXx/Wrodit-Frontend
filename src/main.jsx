@@ -32,6 +32,7 @@ const router = createBrowserRouter([
       {
         path: "wrodit/post/:id",
         element: <PostRoute />,
+        loader: PostRoute.loader,
       },
       {
         path: "wrodit/thread/:id",
