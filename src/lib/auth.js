@@ -6,11 +6,22 @@ const URL =
 console.log(import.meta.env);
 
 export async function signUp(data) {
-  return await fetch(`${URL}/auth/signup`, {
+  const res = await fetch(`${URL}/auth/signup`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
-  }).then((res) => res.json());
+  });
+  const payload = await res.json().catch(() => ({}));
+
+  if (!res.ok) {
+    const message =
+      payload?.message || "Bennutzername oder E-Mail adresse schon vergeben";
+    const err = new Error(message);
+    err.status = res.status;
+    throw err;
+  }
+
+  return { ...payload, status: res.status };
 }
 
 export async function signIn(credentials) {
