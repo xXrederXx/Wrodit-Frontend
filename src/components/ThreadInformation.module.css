@@ -10,16 +10,9 @@
 }
 
 .linkButton {
-  text-decoration: none;
-  background-color: #d93900;
-  color: white;
-  padding: 0.5rem;
-  border-radius: 1rem;
-}
-
-@media (min-width: 800px) {
-  .ThreadInformation {
-    padding-left: 10rem;
-    padding-right: 10rem;
-  }
+    text-decoration: none;
+    background-color: #d93900;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 1rem;
 }
