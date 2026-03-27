@@ -13,6 +13,8 @@ import LoginRoute from "./routes/LoginRoute.jsx";
 import CreatePostRoute from "./routes/CreatePostRoute.jsx";
 import CreateThreadRoute from "./routes/CreateThreadRoute.jsx";
 import ProtectedRoute from "./routes/ProtectedRoute.jsx";
+import CommentRoute from "./routes/CommentRoute.jsx";
+import ChildCommentRoute from "./routes/ChildCommentRoute.jsx";
 
 const router = createBrowserRouter([
   {
@@ -61,6 +63,16 @@ const router = createBrowserRouter([
         path: "wrodit/create/thread",
         element: <CreateThreadRoute />,
         action: CreateThreadRoute.action,
+      },
+      {
+        path: "wrodit/create/comment/:id",
+        element: <CommentRoute />,
+        action: CommentRoute.action,
+      },
+      {
+        path: "wrodit/create/comment/parent/:postId/:id",
+        element: <ChildCommentRoute />,
+        action: ChildCommentRoute.action,
       },
     ],
   },

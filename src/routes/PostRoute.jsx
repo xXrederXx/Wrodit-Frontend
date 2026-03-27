@@ -1,6 +1,7 @@
 import ChildComment from "../components/CildComment";
 import Comment from "../components/Comment";
 import PostDetail from "../components/PostDetail";
+import { Link } from "react-router-dom";
 
 import {
   fetchPostById,
@@ -22,7 +23,6 @@ async function clientLoader({ params }) {
   const parentComments = data.content.filter(
     (comment) => comment.parentId === null,
   );
-  console.log("commentssorted: ", parentComments);
 
   const commentsWithChildren = await Promise.all(
     parentComments.map(async (comment) => {
@@ -49,14 +49,14 @@ async function clientLoader({ params }) {
     }),
   );
 
-  console.log("comments: ", commentsWithChildren);
 
   return { post, user, thread, comments: commentsWithChildren };
 }
 
 export default function PostRoute() {
   const { post, user, thread, comments } = useLoaderData();
-  console.log("comments:: ", comments);
+  console.log(post.id);
+  
 
   return (
     <>
@@ -68,25 +68,11 @@ export default function PostRoute() {
         name={user.username}
         threadId={thread.id}
         threadName={thread.name}
+        to={post.id}
       />
       {comments.map((comment, index) => (
         <>
-          <Comment
-            key={index}
-            content={comment.content}
-            votes={comment.votes}
-            createdAt={comment.createdAt}
-            name={comment.username}
-          />
-          {comment.children.map((comment, index) => (
-            <ChildComment
-              key={index}
-              content={comment.content}
-              votes={comment.votes}
-              createdAt={comment.createdAt}
-              name={comment.username}
-            />
-          ))}
+          <Comment postId={post.id} data={comment} lvl={0}/>
         </>
       ))}
     </>
