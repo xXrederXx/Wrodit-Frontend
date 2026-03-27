@@ -1,9 +1,15 @@
+import { filterContent } from "./filterUtil";
 import { getJWTToken } from "./session";
 
 const URL =
   import.meta.env.MODE === "development" || import.meta.env.MODE === "staging"
     ? "http://xcwkwswkso04gs40k8g48k8w.207.180.221.9.sslip.io"
     : "http://vcg00wk8ws8o0gcc4c8ckkgw.207.180.221.9.sslip.io";
+
+async function toFilteredJson(res) {
+  const obj = await res.json()
+  return filterContent(obj);
+}
 
 export async function fetchPosts() {
   const session = getJWTToken();
@@ -16,7 +22,7 @@ export async function fetchPosts() {
     throw new Error("Fehler beim Laden der Posts");
   }
 
-  return await res.json();
+  return await toFilteredJson(res);
 }
 
 export async function fetchThread(id) {
@@ -28,7 +34,7 @@ export async function fetchThread(id) {
     throw new Error("Fehler beim Laden des Threads");
   }
 
-  return await res.json();
+  return await toFilteredJson(res);
 }
 
 export async function fetchUser(id) {
@@ -40,7 +46,7 @@ export async function fetchUser(id) {
     throw new Error("Fehler beim Laden der User");
   }
 
-  return await res.json();
+  return await toFilteredJson(res);
 }
 export async function fetchAllUserData() {
   const session = getJWTToken();
@@ -51,7 +57,7 @@ export async function fetchAllUserData() {
     throw new Error("Fehler beim Laden der UserDaten");
   }
 
-  return await res.json();
+  return await toFilteredJson(res);
 }
 
 export async function createThread(data) {
@@ -68,10 +74,10 @@ export async function createThread(data) {
   });
 
   if (!res.ok) {
-    throw await res.json();
+    throw await toFilteredJson(res);
   }
 
-  return await res.json();
+  return await toFilteredJson(res);
 }
 export async function createPost(data) {
   const session = getJWTToken();
@@ -90,7 +96,7 @@ export async function createPost(data) {
     throw res;
   }
 
-  return await res.json();
+  return await toFilteredJson(res);
 }
 
 export async function fetchThreadsById(id) {
@@ -101,10 +107,10 @@ export async function fetchThreadsById(id) {
   const res = await fetch(`${URL}/threads/${id}`, { headers });
 
   if (!res.ok) {
-    throw await res.json();
+    throw await toFilteredJson(res);
   }
 
-  return await res.json();
+  return await toFilteredJson(res);
 }
 
 export async function fetchPostsByThread(threadId, page = 1, size = 10) {
@@ -127,7 +133,7 @@ export async function fetchPostsByThread(threadId, page = 1, size = 10) {
     throw new Error("Fehler beim Laden der Posts");
   }
 
-  return response.json();
+  return toFilteredJson(response);
 }
 export async function fetchPostsByUser(UserId, page = 1, size = 10) {
   const session = getJWTToken();
@@ -149,7 +155,7 @@ export async function fetchPostsByUser(UserId, page = 1, size = 10) {
     throw new Error("Fehler beim Laden der Posts");
   }
 
-  return response.json();
+  return toFilteredJson(response);
 }
 
 export async function fetchPostById(id) {
@@ -161,5 +167,5 @@ export async function fetchPostById(id) {
     throw new Error("Fehler beim Laden des post");
   }
 
-  return await res.json();
+  return await toFilteredJson(res);
 }
