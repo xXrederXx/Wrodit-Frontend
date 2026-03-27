@@ -163,3 +163,53 @@ export async function fetchPostById(id) {
 
   return await res.json();
 }
+
+export async function fetchCommentByPost(postId) {
+  const session = getJWTToken();
+
+  const headers = session ? { Authorization: `Bearer ${session}` } : {};
+  
+  const query = new URLSearchParams({
+    post: postId,
+    page: JSON.stringify({
+      page: 0,
+      size: 10,
+    }),
+  });
+
+  const response = await fetch(`${URL}/comments/?${query}`, {
+    method: "GET",
+    headers,
+  });
+
+  if (!response.ok) {
+    throw new Error("Fehler beim Laden der Posts");
+  }
+
+  return response.json();
+}
+
+export async function fetchCommentByParent(parentId, postId) {
+  const session = getJWTToken();
+
+  const headers = session ? { Authorization: `Bearer ${session}` } : {};
+  
+  const query = new URLSearchParams({
+    parent: parentId,
+    page: JSON.stringify({
+      page: 0,
+      size: 10,
+    }),
+  });
+
+  const response = await fetch(`${URL}/comments/?${query}`, {
+    method: "GET",
+    headers,
+  });
+
+  if (!response.ok) {
+    throw new Error("Fehler beim Laden der Posts");
+  }
+
+  return response.json();
+}
