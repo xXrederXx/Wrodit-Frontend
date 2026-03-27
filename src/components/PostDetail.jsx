@@ -2,7 +2,7 @@ import PostText from "./PostText";
 import PostInformation from "./PostInformation";
 import PostFooter from "./PostFooter";
 import styles from "./PostDetail.module.css";
-
+import { Link } from "react-router-dom";
 
 export default function PostDetail({
   title,
@@ -12,6 +12,7 @@ export default function PostDetail({
   name,
   threadId,
   threadName,
+  to,
 }) {
   return (
     <article className={styles.article}>
@@ -23,6 +24,9 @@ export default function PostDetail({
       />
       <h1 className={styles.title}>{title}</h1>
       <PostText text={text} /> <PostFooter vote={vote} />
+      <Link to={`/wrodit/create/comment/${to}`} className={styles.linkButton}>
+        Komentieren
+      </Link>
     </article>
   );
 }
