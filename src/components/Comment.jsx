@@ -5,13 +5,16 @@ import PostInformation from "./PostInformation";
 import { fetchCommentByPost, fetchCommentByParent } from "../lib/wrodit";
 import { Link } from "react-router-dom";
 
-export default function Comment({ postId, data, lvl }) {
+export default function Comment({ name, postId, data, lvl }) {
   const [children, setChildren] = useState([]);
   const [error, setError] = useState("");
   let level = lvl;
   if (level >= 4){
     level = 4
   }
+
+  
+  
     useEffect(() => {
       const fetchComments = async () => {
         try {
@@ -27,7 +30,7 @@ export default function Comment({ postId, data, lvl }) {
   return (
     <div style={{ paddingLeft: level * 0.5 + "rem" }}>
       <div className={styles.comment}>
-        <PostInformation name={data.name} createdAt={data.createdAt} />
+        <PostInformation name={name} createdAt={data.createdAt} />
         <p>{data.content}</p>
         <PostFooter vote={data.votes} />
         <Link
@@ -38,7 +41,7 @@ export default function Comment({ postId, data, lvl }) {
         </Link>
       </div>
       {children.map((child) => (
-        <Comment postId={postId} key={child.id} data={child} lvl={lvl + 1} />
+        <Comment name={name} postId={postId} key={child.id} data={child} lvl={lvl + 1} />
       ))}
     </div>
   );

@@ -49,14 +49,12 @@ async function clientLoader({ params }) {
     }),
   );
 
-
   return { post, user, thread, comments: commentsWithChildren };
 }
 
 export default function PostRoute() {
   const { post, user, thread, comments } = useLoaderData();
   console.log(post.id);
-  
 
   return (
     <>
@@ -72,7 +70,12 @@ export default function PostRoute() {
       />
       {comments.map((comment, index) => (
         <>
-          <Comment postId={post.id} data={comment} lvl={0}/>
+          <Comment
+            name={user.username}
+            postId={post.id}
+            data={comment}
+            lvl={0}
+          />
         </>
       ))}
     </>
