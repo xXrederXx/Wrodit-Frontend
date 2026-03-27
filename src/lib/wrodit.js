@@ -171,10 +171,8 @@ export async function fetchCommentByPost(postId) {
   
   const query = new URLSearchParams({
     post: postId,
-    page: JSON.stringify({
       page: 0,
       size: 10,
-    }),
   });
 
   const response = await fetch(`${URL}/comments/?${query}`, {
@@ -189,17 +187,15 @@ export async function fetchCommentByPost(postId) {
   return response.json();
 }
 
-export async function fetchCommentByParent(parentId, postId) {
+export async function fetchCommentByParent(parentId) {
   const session = getJWTToken();
 
   const headers = session ? { Authorization: `Bearer ${session}` } : {};
   
   const query = new URLSearchParams({
     parent: parentId,
-    page: JSON.stringify({
       page: 0,
       size: 10,
-    }),
   });
 
   const response = await fetch(`${URL}/comments/?${query}`, {
@@ -212,4 +208,24 @@ export async function fetchCommentByParent(parentId, postId) {
   }
 
   return response.json();
+}
+
+export async function createComment(data) {
+  const session = getJWTToken();
+  const headers = {
+    "Content-Type": "application/json",
+    ...(session && { Authorization: `Bearer ${session}` }),
+  };
+
+  const res = await fetch(`${URL}/comments/`, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(data),
+  });
+
+  if (!res.ok) {
+    throw res;
+  }
+
+  return await res.json();
 }
