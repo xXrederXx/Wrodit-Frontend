@@ -1,7 +1,5 @@
-import PostForm from "../components/PostForm";
 import { createComment } from "../lib/wrodit";
 import { redirect, useActionData, useNavigate } from "react-router-dom";
-import { validatePost } from "../lib/validate";
 import CommentForm from "../components/CommentForm";
 
 async function clientAction({ request, params }) {

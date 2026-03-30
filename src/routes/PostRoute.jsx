@@ -1,14 +1,11 @@
-import ChildComment from "../components/CildComment";
 import Comment from "../components/Comment";
 import PostDetail from "../components/PostDetail";
-import { Link } from "react-router-dom";
 
 import {
   fetchPostById,
   fetchUser,
   fetchThread,
   fetchCommentByPost,
-  fetchCommentByParent,
 } from "../lib/wrodit";
 import { useLoaderData } from "react-router-dom";
 
@@ -20,36 +17,11 @@ async function clientLoader({ params }) {
   const thread = await fetchThread(post.threadId);
 
   const data = await fetchCommentByPost(postId);
-  const parentComments = data.content.filter(
+  const comments = data.content.filter(
     (comment) => comment.parentId === null,
   );
 
-  const commentsWithChildren = await Promise.all(
-    parentComments.map(async (comment) => {
-      const user = await fetchUser(comment.userId);
-
-      const childData = await fetchCommentByParent(comment.id);
-
-      const childrenWithUser = await Promise.all(
-        childData.content.map(async (child) => {
-          const childUser = await fetchUser(child.userId);
-
-          return {
-            ...child,
-            username: childUser.username,
-          };
-        }),
-      );
-
-      return {
-        ...comment,
-        username: user.username,
-        children: childrenWithUser,
-      };
-    }),
-  );
-
-  return { post, user, thread, comments: commentsWithChildren };
+  return { post, user, thread, comments };
 }
 
 export default function PostRoute() {

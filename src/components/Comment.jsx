@@ -2,11 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "./Comment.module.css";
 import PostFooter from "./PostFooter";
 import PostInformation from "./PostInformation";
-import {
-  fetchCommentByPost,
-  fetchCommentByParent,
-  fetchUser,
-} from "../lib/wrodit";
+import { fetchCommentByParent, fetchUser } from "../lib/wrodit";
 import { Link } from "react-router-dom";
 
 export default function Comment({ name, postId, data, lvl }) {
@@ -16,7 +12,6 @@ export default function Comment({ name, postId, data, lvl }) {
   useEffect(() => {
     const fetchComments = async () => {
       try {
-
         const newData = await fetchCommentByParent(data.id);
 
         const childUsername = await Promise.all(
@@ -33,6 +28,7 @@ export default function Comment({ name, postId, data, lvl }) {
         setChildren(childUsername);
       } catch (err) {
         setError(err.message || "Fehler beim Laden");
+        console.log("Fehler beim Laden der Kommentare:", error);
       }
     };
 
@@ -41,21 +37,22 @@ export default function Comment({ name, postId, data, lvl }) {
     }
   }, [data.id]);
 
-  return (<>
-    <div style={{display:"flex"}}>
-      <div style={{flex:lvl}}></div>
-      <div className={styles.comment} style={{flex:10, minWidth:"20rem"}}>
-        <PostInformation name={name} createdAt={data.createdAt} />
-        <p>{data.content}</p>
-        <PostFooter vote={data.votes} />
-        <Link
-          to={`/wrodit/create/comment/parent/${postId}/${data.id}`}
-          className={styles.linkButton}
-        >
-          Komentieren
-        </Link>
+  return (
+    <>
+      <div style={{ display: "flex" }}>
+        <div style={{ flex: lvl }}></div>
+        <div className={styles.comment} style={{ flex: 10, minWidth: "20rem" }}>
+          <PostInformation name={name} createdAt={data.createdAt} />
+          <p>{data.content}</p>
+          <PostFooter vote={data.votes} />
+          <Link
+            to={`/wrodit/create/comment/parent/${postId}/${data.id}`}
+            className={styles.linkButton}
+          >
+            Komentieren
+          </Link>
+        </div>
       </div>
-    </div>
       {children.map((child) => (
         <Comment
           name={child.username}
@@ -64,6 +61,7 @@ export default function Comment({ name, postId, data, lvl }) {
           data={child}
           lvl={lvl + 1}
         />
-      ))}</>
+      ))}
+    </>
   );
 }
