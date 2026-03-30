@@ -113,7 +113,7 @@ export async function fetchThreadsById(id) {
   return await toFilteredJson(res);
 }
 
-export async function fetchPostsByThread(threadId, page = 1, size = 10) {
+export async function fetchPostsByThread(threadId, page = 1, size = 20) {
   const session = getJWTToken();
 
   if (!threadId) throw new Error("threadId wird benötigt");
@@ -135,7 +135,7 @@ export async function fetchPostsByThread(threadId, page = 1, size = 10) {
 
   return toFilteredJson(response);
 }
-export async function fetchPostsByUser(UserId, page = 1, size = 10) {
+export async function fetchPostsByUser(UserId, page = 1, size = 20) {
   const session = getJWTToken();
 
   if (!UserId) throw new Error("UserId wird benötigt");
@@ -168,4 +168,70 @@ export async function fetchPostById(id) {
   }
 
   return await toFilteredJson(res);
+}
+
+export async function fetchCommentByPost(postId) {
+  const session = getJWTToken();
+
+  const headers = session ? { Authorization: `Bearer ${session}` } : {};
+  
+  const query = new URLSearchParams({
+    post: postId,
+      page: 0,
+      size: 20,
+  });
+
+  const response = await fetch(`${URL}/comments/?${query}`, {
+    method: "GET",
+    headers,
+  });
+
+  if (!response.ok) {
+    throw new Error("Fehler beim Laden der Posts");
+  }
+
+  return response.json();
+}
+
+export async function fetchCommentByParent(parentId) {
+  const session = getJWTToken();
+
+  const headers = session ? { Authorization: `Bearer ${session}` } : {};
+  
+  const query = new URLSearchParams({
+    parent: parentId,
+      page: 0,
+      size: 10,
+  });
+
+  const response = await fetch(`${URL}/comments/?${query}`, {
+    method: "GET",
+    headers,
+  });
+
+  if (!response.ok) {
+    throw new Error("Fehler beim Laden der Posts");
+  }
+
+  return response.json();
+}
+
+export async function createComment(data) {
+  const session = getJWTToken();
+  const headers = {
+    "Content-Type": "application/json",
+    ...(session && { Authorization: `Bearer ${session}` }),
+  };
+
+  const res = await fetch(`${URL}/comments/`, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(data),
+  });
+
+  if (!res.ok) {
+    throw res;
+  }
+
+  return await res.json();
 }

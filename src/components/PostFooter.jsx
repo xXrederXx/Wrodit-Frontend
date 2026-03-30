@@ -1,4 +1,3 @@
-import { FaRegCommentDots } from "react-icons/fa";
 import { FcLike } from "react-icons/fc";
 import {
   AiOutlineHeart,
@@ -16,7 +15,6 @@ export default function PostFooter({ vote }) {
       <AiOutlineDislike />
       <AiFillDislike/>
 
-      <FaRegCommentDots />
     </footer>
   );
 }

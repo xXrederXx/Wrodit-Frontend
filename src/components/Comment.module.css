@@ -1,0 +1,31 @@
+.linkButton {
+  text-decoration: none;
+  background-color: #d93900;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 1rem;
+}
+
+.commentBox {
+  width: 100%;
+  min-width: 400px;
+  box-sizing: border-box;
+}
+
+.comment {
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 800px) {
+  .commentBox {
+    padding-left: 5rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .commentBox {
+    padding-left: 9rem;
+  }
+}
+
