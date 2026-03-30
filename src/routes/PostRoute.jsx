@@ -68,16 +68,18 @@ export default function PostRoute() {
         threadName={thread.name}
         to={post.id}
       />
-      {comments.map((comment, index) => (
-        <>
-          <Comment
-            name={user.username}
-            postId={post.id}
-            data={comment}
-            lvl={0}
-          />
-        </>
-      ))}
+      <div className="commentPadding">{
+        comments.map((comment) => (
+          <>
+            <Comment
+              name={comment.username}
+              postId={post.id}
+              data={comment}
+              lvl={0}
+            />
+          </>
+        ))}
+      </div>
     </>
   );
 }

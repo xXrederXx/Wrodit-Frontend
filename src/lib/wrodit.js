@@ -107,7 +107,7 @@ export async function fetchThreadsById(id) {
   return await res.json();
 }
 
-export async function fetchPostsByThread(threadId, page = 1, size = 10) {
+export async function fetchPostsByThread(threadId, page = 1, size = 20) {
   const session = getJWTToken();
 
   if (!threadId) throw new Error("threadId wird benötigt");
@@ -129,7 +129,7 @@ export async function fetchPostsByThread(threadId, page = 1, size = 10) {
 
   return response.json();
 }
-export async function fetchPostsByUser(UserId, page = 1, size = 10) {
+export async function fetchPostsByUser(UserId, page = 1, size = 20) {
   const session = getJWTToken();
 
   if (!UserId) throw new Error("UserId wird benötigt");
@@ -172,7 +172,7 @@ export async function fetchCommentByPost(postId) {
   const query = new URLSearchParams({
     post: postId,
       page: 0,
-      size: 10,
+      size: 20,
   });
 
   const response = await fetch(`${URL}/comments/?${query}`, {
