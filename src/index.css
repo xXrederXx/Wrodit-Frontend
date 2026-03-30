@@ -40,3 +40,12 @@ body {
   padding: 1rem;
   overflow-x: hidden;
 }
+
+.linkButton {
+  text-decoration: none;
+  background-color: #d93900;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  margin: 2rem;
+}

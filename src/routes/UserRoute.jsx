@@ -5,7 +5,7 @@ import {
   fetchPostsByUser,
   fetchAllUserData,
 } from "../lib/wrodit";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, Link } from "react-router-dom";
 
 async function clientLoader({ params }) {
   const userId = params.id;
@@ -38,16 +38,21 @@ export default function UserRoute() {
     <>
       <UserDetail username={user.username} email={user.email} />
       {posts.map((post, index) => (
-        <PostBox
-          key={index}
-          createdAt={post.createdAt}
-          title={post.title}
-          text={post.content}
-          vote={post.vote}
-          threadId={post.threadId}
-          threadName={post.threadName}
-          to={post.id}
-        />
+        <>
+          <Link to={`/wrodit/edit/post/${post.id}`} className="linkButton">
+            Bearbeiten
+          </Link>
+          <PostBox
+            key={index}
+            createdAt={post.createdAt}
+            title={post.title}
+            text={post.content}
+            vote={post.vote}
+            threadId={post.threadId}
+            threadName={post.threadName}
+            to={post.id}
+          />
+        </>
       ))}
     </>
   );
