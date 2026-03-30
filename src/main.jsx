@@ -15,6 +15,8 @@ import CreateThreadRoute from "./routes/CreateThreadRoute.jsx";
 import ProtectedRoute from "./routes/ProtectedRoute.jsx";
 import CommentRoute from "./routes/CommentRoute.jsx";
 import ChildCommentRoute from "./routes/ChildCommentRoute.jsx";
+import PostEditRoute from "./routes/PostEditRoute.jsx";
+import CommentEditRoute from "./routes/CommentEditRoute.jsx";
 
 const router = createBrowserRouter([
   {
@@ -73,6 +75,23 @@ const router = createBrowserRouter([
         path: "wrodit/create/comment/parent/:postId/:id",
         element: <ChildCommentRoute />,
         action: ChildCommentRoute.action,
+      },
+      {
+        path: "wrodit/create/comment/parent/:postId/:id",
+        element: <ChildCommentRoute />,
+        action: ChildCommentRoute.action,
+      },
+      {
+        path: "wrodit/edit/post/:id",
+        element: <PostEditRoute />,
+        action: PostEditRoute.action,
+        loader: PostEditRoute.loader,
+      },
+      {
+        path: "/wrodit/edit/comment/:id",
+        element: <CommentEditRoute />,
+        action: CommentEditRoute.action,
+        loader: CommentEditRoute.loader,
       },
     ],
   },

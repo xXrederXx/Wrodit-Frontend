@@ -7,35 +7,11 @@ const URL =
     : "http://vcg00wk8ws8o0gcc4c8ckkgw.207.180.221.9.sslip.io";
 
 async function toFilteredJson(res) {
-  const obj = await res.json()
+  const obj = await res.json();
   return filterContent(obj);
 }
 
-export async function fetchPosts() {
-  const session = getJWTToken();
-
-  const headers = session ? { Authorization: `Bearer ${session}` } : {};
-
-  const res = await fetch(`${URL}/posts/`, { headers });
-
-  if (!res.ok) {
-    throw new Error("Fehler beim Laden der Posts");
-  }
-
-  return await toFilteredJson(res);
-}
-
-export async function fetchThread(id) {
-  const session = getJWTToken();
-  const headers = session ? { Authorization: `Bearer ${session}` } : {};
-  const res = await fetch(`${URL}/threads/${id}`, { headers });
-
-  if (!res.ok) {
-    throw new Error("Fehler beim Laden des Threads");
-  }
-
-  return await toFilteredJson(res);
-}
+//user
 
 export async function fetchUser(id) {
   const session = getJWTToken();
@@ -60,6 +36,8 @@ export async function fetchAllUserData() {
   return await toFilteredJson(res);
 }
 
+//threads
+
 export async function createThread(data) {
   const session = getJWTToken();
   const headers = {
@@ -79,6 +57,49 @@ export async function createThread(data) {
 
   return await toFilteredJson(res);
 }
+
+export async function fetchThreadsById(id) {
+  const session = getJWTToken();
+
+  const headers = session ? { Authorization: `Bearer ${session}` } : {};
+
+  const res = await fetch(`${URL}/threads/${id}`, { headers });
+
+  if (!res.ok) {
+    throw await toFilteredJson(res);
+  }
+
+  return await toFilteredJson(res);
+}
+
+export async function fetchThread(id) {
+  const session = getJWTToken();
+  const headers = session ? { Authorization: `Bearer ${session}` } : {};
+  const res = await fetch(`${URL}/threads/${id}`, { headers });
+
+  if (!res.ok) {
+    throw new Error("Fehler beim Laden des Threads");
+  }
+
+  return await toFilteredJson(res);
+}
+
+//posts
+
+export async function fetchPosts() {
+  const session = getJWTToken();
+
+  const headers = session ? { Authorization: `Bearer ${session}` } : {};
+
+  const res = await fetch(`${URL}/posts/`, { headers });
+
+  if (!res.ok) {
+    throw new Error("Fehler beim Laden der Posts");
+  }
+
+  return await toFilteredJson(res);
+}
+
 export async function createPost(data) {
   const session = getJWTToken();
   const headers = {
@@ -94,20 +115,6 @@ export async function createPost(data) {
 
   if (!res.ok) {
     throw res;
-  }
-
-  return await toFilteredJson(res);
-}
-
-export async function fetchThreadsById(id) {
-  const session = getJWTToken();
-
-  const headers = session ? { Authorization: `Bearer ${session}` } : {};
-
-  const res = await fetch(`${URL}/threads/${id}`, { headers });
-
-  if (!res.ok) {
-    throw await toFilteredJson(res);
   }
 
   return await toFilteredJson(res);
@@ -170,15 +177,37 @@ export async function fetchPostById(id) {
   return await toFilteredJson(res);
 }
 
+export async function PatchPost(data, id) {
+  const session = getJWTToken();
+  const headers = {
+    "Content-Type": "application/json",
+    ...(session && { Authorization: `Bearer ${session}` }),
+  };
+
+  const res = await fetch(`${URL}/posts/${id}`, {
+    method: "PATCH",
+    headers,
+    body: JSON.stringify(data),
+  });
+
+  if (!res.ok) {
+    throw res;
+  }
+
+  return await toFilteredJson(res);
+}
+
+// Comments
+
 export async function fetchCommentByPost(postId) {
   const session = getJWTToken();
 
   const headers = session ? { Authorization: `Bearer ${session}` } : {};
-  
+
   const query = new URLSearchParams({
     post: postId,
-      page: 0,
-      size: 20,
+    page: 0,
+    size: 20,
   });
 
   const response = await fetch(`${URL}/comments/?${query}`, {
@@ -197,11 +226,11 @@ export async function fetchCommentByParent(parentId) {
   const session = getJWTToken();
 
   const headers = session ? { Authorization: `Bearer ${session}` } : {};
-  
+
   const query = new URLSearchParams({
     parent: parentId,
-      page: 0,
-      size: 10,
+    page: 0,
+    size: 10,
   });
 
   const response = await fetch(`${URL}/comments/?${query}`, {
@@ -234,4 +263,36 @@ export async function createComment(data) {
   }
 
   return await res.json();
+}
+
+export async function fetchCommentById(id) {
+  const session = getJWTToken();
+  const headers = session ? { Authorization: `Bearer ${session}` } : {};
+  const res = await fetch(`${URL}/comments/${id}`, { headers });
+
+  if (!res.ok) {
+    throw new Error("Fehler beim Laden des post");
+  }
+
+  return await toFilteredJson(res);
+}
+
+export async function PatchComment(data, id) {
+  const session = getJWTToken();
+  const headers = {
+    "Content-Type": "application/json",
+    ...(session && { Authorization: `Bearer ${session}` }),
+  };
+
+  const res = await fetch(`${URL}/comments/${id}`, {
+    method: "PATCH",
+    headers,
+    body: JSON.stringify(data),
+  });
+
+  if (!res.ok) {
+    throw res;
+  }
+
+  return await toFilteredJson(res);
 }

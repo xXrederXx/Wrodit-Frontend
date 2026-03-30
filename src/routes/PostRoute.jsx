@@ -1,3 +1,4 @@
+import { BiCurrentLocation } from "react-icons/bi";
 import Comment from "../components/Comment";
 import PostDetail from "../components/PostDetail";
 
@@ -6,6 +7,7 @@ import {
   fetchUser,
   fetchThread,
   fetchCommentByPost,
+  fetchAllUserData,
 } from "../lib/wrodit";
 import { useLoaderData } from "react-router-dom";
 
@@ -16,18 +18,17 @@ async function clientLoader({ params }) {
   const user = await fetchUser(post.userId);
   const thread = await fetchThread(post.threadId);
 
-  const data = await fetchCommentByPost(postId);
-  const comments = data.content.filter(
-    (comment) => comment.parentId === null,
-  );
+  const currentUser = await fetchAllUserData();
 
-  return { post, user, thread, comments };
+  const data = await fetchCommentByPost(postId);
+  const comments = data.content.filter((comment) => comment.parentId === null);
+
+  return { post, user, thread, comments, currentUser };
 }
 
 export default function PostRoute() {
-  const { post, user, thread, comments } = useLoaderData();
-  console.log(post.id);
-
+  const { post, user, thread, comments, currentUser } = useLoaderData();
+  
   return (
     <>
       <PostDetail
@@ -40,17 +41,22 @@ export default function PostRoute() {
         threadName={thread.name}
         to={post.id}
       />
-      <div className="commentPadding">{
-        comments.map((comment) => (
-          <>
+      <div className="commentPadding">
+        {comments.map((comment) => {
+
+          const isValid = currentUser.id === comment.userId;
+
+          return (
             <Comment
+              key={comment.id}
               name={comment.username}
               postId={post.id}
               data={comment}
               lvl={0}
+              isEditValid={isValid}
             />
-          </>
-        ))}
+          );
+        })}
       </div>
     </>
   );
