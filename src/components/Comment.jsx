@@ -43,8 +43,7 @@ export default function Comment({ name, postId, data, lvl, isEditValid, commentI
     if (data?.id) {
       fetchComments();
     }
-  }, [data.id]);
-
+  }, [data.id]);  
 
   return (
     
@@ -66,13 +65,12 @@ export default function Comment({ name, postId, data, lvl, isEditValid, commentI
             Komentieren
           </Link>
           
-          <CommentEditButton postId={commentId} isValid={isEditValid}/>
+          <CommentEditButton commentId={commentId} isValid={isEditValid}/>
 
         </div>
 
       </div>
-      {children.map((child) => {
-        
+      {children.map((child) => {        
 
         const isValid = self.id === child.userId;
 

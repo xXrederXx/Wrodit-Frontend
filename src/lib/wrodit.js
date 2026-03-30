@@ -264,3 +264,35 @@ export async function createComment(data) {
 
   return await res.json();
 }
+
+export async function fetchCommentById(id) {
+  const session = getJWTToken();
+  const headers = session ? { Authorization: `Bearer ${session}` } : {};
+  const res = await fetch(`${URL}/comments/${id}`, { headers });
+
+  if (!res.ok) {
+    throw new Error("Fehler beim Laden des post");
+  }
+
+  return await toFilteredJson(res);
+}
+
+export async function PatchComment(data, id) {
+  const session = getJWTToken();
+  const headers = {
+    "Content-Type": "application/json",
+    ...(session && { Authorization: `Bearer ${session}` }),
+  };
+
+  const res = await fetch(`${URL}/comments/${id}`, {
+    method: "PATCH",
+    headers,
+    body: JSON.stringify(data),
+  });
+
+  if (!res.ok) {
+    throw res;
+  }
+
+  return await toFilteredJson(res);
+}
