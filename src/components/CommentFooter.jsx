@@ -5,33 +5,33 @@ import {
   AiFillDislike,
 } from "react-icons/ai";
 import styles from "./PostFooter.module.css";
-import { useEffect, useState } from "react";
 import {
-  DislikeLikePost,
-  fetchSelfLikesPost,
-  likePost,
-  RemoveLikePost,
+  DislikeLikeComment,
+  fetchSelfLikesComment,
+  likeComment,
+  RemoveLikeComment,
 } from "../lib/wrodit";
+import { useEffect, useState } from "react";
 
-export default function PostFooter({ vote, postId }) {
+export default function CommentFooter({ vote, commentId }) {
   const [self, setSelf] = useState(0);
   const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchLikes = async () => {
       try {
-        const likeSelf = await fetchSelfLikesPost(postId);
+        const likeSelf = await fetchSelfLikesComment(commentId);
         setSelf(likeSelf.vote);
       } catch (err) {
         setError(err.message || "Fehler beim Laden");
       }
     };
     fetchLikes();
-  }, [self]);
+  }, [commentId]);
 
   const handleLike = async () => {
     try {
-      await likePost(postId);
+      await likeComment(commentId);
       setSelf(1);
     } catch (err) {
       console.error(err);
@@ -40,7 +40,7 @@ export default function PostFooter({ vote, postId }) {
 
   const handleRemoveLike = async () => {
     try {
-      await RemoveLikePost(postId);
+      await RemoveLikeComment(commentId);
       setSelf(0);
     } catch (err) {
       console.error(err);
@@ -49,7 +49,7 @@ export default function PostFooter({ vote, postId }) {
 
   const handleDisLike = async () => {
     try {
-      await DislikeLikePost(postId);
+      await DislikeLikeComment(commentId);
       setSelf(-1);
     } catch (err) {
       console.error(err);

@@ -1,5 +1,5 @@
 import styles from "./ChildComment.module.css";
-import PostFooter from "./PostFooter";
+import CommentFooter from "./CommentFooter";
 import PostInformation from "./PostInformation";
 
 export default function ChildComment({
@@ -12,7 +12,7 @@ export default function ChildComment({
     <div className={styles.comment}>
       <PostInformation name={name} createdAt={createdAt} />
       <p>{content}</p>
-      <PostFooter vote={votes} />
+      <CommentFooter vote={votes} />
     </div>
   );
 }
