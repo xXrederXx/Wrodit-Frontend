@@ -15,7 +15,7 @@ import { useEffect, useState } from "react";
 
 export default function CommentFooter({ vote, commentId }) {
   const [self, setSelf] = useState(0);
-  const [error, setError] = useState("");
+  const [error, setError] = useState(""); // eslint-disable-line
 
   useEffect(() => {
     const fetchLikes = async () => {

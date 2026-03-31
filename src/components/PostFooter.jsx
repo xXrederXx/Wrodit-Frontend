@@ -15,7 +15,7 @@ import {
 
 export default function PostFooter({ vote, postId }) {
   const [self, setSelf] = useState(0);
-  const [error, setError] = useState("");
+  const [error, setError] = useState(""); // eslint-disable-line
 
   useEffect(() => {
     const fetchLikes = async () => {
