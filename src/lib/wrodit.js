@@ -1,4 +1,4 @@
-import { getAuthorizationHeader, getJWTToken } from "./session";
+import { getAuthorizationHeader } from "./session";
 import { betterFetch, checkResponse, toFilteredJson } from "./fetchUtil";
 
 const URL =
@@ -45,7 +45,7 @@ export async function fetchPosts() {
 }
 
 export async function createPost(data) {
-  const res = await betterFetch(`${URL}/threads/${id}`, "POST", getAuthorizationHeader(), data);
+  const res = await betterFetch(`${URL}/posts`, "POST", getAuthorizationHeader(), data);
   checkResponse(res)
   return await toFilteredJson(res);
 }
@@ -104,7 +104,7 @@ export async function fetchCommentByPost(postId, page = 0, size = 20) {
   return await toFilteredJson(response);
 }
 
-export async function fetchCommentByParent(parentId) {
+export async function fetchCommentByParent(parentId, page = 0, size = 20) {
   const response = await betterFetch(`${URL}/comments/?parent=${parentId}&page=${page}&size=${size}`, "GET", getAuthorizationHeader())
   checkResponse(response,"Fehler beim Laden der Posts")
   return await toFilteredJson(response);
