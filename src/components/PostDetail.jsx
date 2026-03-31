@@ -3,6 +3,7 @@ import PostInformation from "./PostInformation";
 import PostFooter from "./PostFooter";
 import styles from "./PostDetail.module.css";
 import { Link } from "react-router-dom";
+import CopyLinkButton from "./CopyLinkButton";
 
 export default function PostDetail({
   title,
@@ -27,6 +28,7 @@ export default function PostDetail({
       <Link to={`/wrodit/create/comment/${to}`} className={styles.linkButton}>
         Komentieren
       </Link>
+      <CopyLinkButton />
     </article>
   );
 }
