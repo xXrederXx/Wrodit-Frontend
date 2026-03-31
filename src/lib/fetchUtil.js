@@ -8,7 +8,7 @@ export async function checkResponse(response, errorMessage = "") {
 }
 
 export async function toFilteredJson(res) {
-    if(typeof res !== "object" || !res)
+    if(typeof res !== "object" || !res || res.status === 204)
     {
         return res;
     }
