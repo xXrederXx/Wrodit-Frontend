@@ -1,6 +1,5 @@
 import { getAuthorizationHeader } from "./session";
-import { betterFetch, checkResponse, toFilteredJson } from "./fetchUtil";
-import { cachedRequest, getCache, setCache } from "./apiCache";
+import { cachedRequest } from "./apiCache";
 
 const BASE_URL =
   import.meta.env.MODE === "development" || import.meta.env.MODE === "staging"
@@ -98,7 +97,7 @@ export async function PatchComment(data, id, force = false) {
 
 //comment like
 
-export async function likeComment(id, vote = 1) {
+export async function likeComment(id, vote = 1, force = false) {
   return cachedRequest(`${BASE_URL}/comments/${id}/vote`, "PUT", undefined, {vote}, force);
 }
 
@@ -109,6 +108,6 @@ export async function DislikeLikeComment(id, vote = -1) {
   return likeComment(id, vote);
 }
 
-export async function fetchSelfLikesComment(id) {
+export async function fetchSelfLikesComment(id, force = false) {
   return cachedRequest(`${BASE_URL}/comments/${id}/vote`, "GET", undefined, undefined, force);
 }
