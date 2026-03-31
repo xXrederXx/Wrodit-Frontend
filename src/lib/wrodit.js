@@ -1,7 +1,8 @@
 import { getAuthorizationHeader } from "./session";
 import { betterFetch, checkResponse, toFilteredJson } from "./fetchUtil";
+import { cachedRequest, getCache, setCache } from "./apiCache";
 
-const URL =
+const BASE_URL =
   import.meta.env.MODE === "development" || import.meta.env.MODE === "staging"
     ? "http://xcwkwswkso04gs40k8g48k8w.207.180.221.9.sslip.io"
     : "http://vcg00wk8ws8o0gcc4c8ckkgw.207.180.221.9.sslip.io";
@@ -10,77 +11,56 @@ const URL =
 
 //user
 
-export async function fetchUser(id) {
-  const res = await betterFetch(`${URL}/users/${id}`, "GET", getAuthorizationHeader());
-  checkResponse(res, "Fehler beim Laden der User")
-  return await toFilteredJson(res);
+export async function fetchUser(id, force = false) {
+  return cachedRequest(`${BASE_URL}/users/${id}`, "GET", getAuthorizationHeader(), undefined, force);
 }
 
-export async function fetchAllUserData() {
-  const res = await betterFetch(`${URL}/users/self`, "GET", getAuthorizationHeader());
-  checkResponse(res, "Fehler beim Laden der UserDaten");
-  return await toFilteredJson(res);
+export async function fetchAllUserData(force = false) {
+  return cachedRequest(`${BASE_URL}/users/self`, "GET", undefined, undefined, force);
 }
 
 //threads
 
-export async function createThread(data) {
-  const res = await betterFetch(`${URL}/threads/`, "POST", getAuthorizationHeader(), data)
-  checkResponse(res)
-  return await toFilteredJson(res);
+export async function createThread(data, force = false) {
+  return cachedRequest(`${BASE_URL}/threads/`, "POST", undefined, data, force);
 }
 
-export async function fetchThread(id) {
-  const res = await betterFetch(`${URL}/threads/${id}`, "GET", getAuthorizationHeader());
-  checkResponse(res,"Fehler beim Laden des Threads")
-  return await toFilteredJson(res);
+export async function fetchThread(id, force = false) {
+  return cachedRequest(`${BASE_URL}/threads/${id}`, "GET", undefined, undefined, force);
 }
 
 //posts
 
-export async function fetchPosts() {
-  const res = await betterFetch(`${URL}/posts/`, "GET", getAuthorizationHeader());
-  checkResponse(res,"Fehler beim Laden der Posts")
-  return await toFilteredJson(res);
+export async function fetchPosts(force = false) {
+  return cachedRequest(`${BASE_URL}/posts/`, "GET", undefined, undefined, force);
 }
 
-export async function createPost(data) {
-  const res = await betterFetch(`${URL}/posts`, "POST", getAuthorizationHeader(), data);
-  checkResponse(res)
-  return await toFilteredJson(res);
+export async function createPost(data, force = false) {
+  return cachedRequest(`${BASE_URL}/posts`, "POST", undefined, data, force);
+
 }
 
-export async function fetchPostsByThread(threadId, page = 1, size = 20) {
+export async function fetchPostsByThread(threadId, page = 1, size = 20, force = false) {
   if (!threadId) throw new Error("threadId wird benötigt");
-  const response = await betterFetch(`${URL}/posts/?thread=${threadId}&page=${page}&size=${size}`, "GET", getAuthorizationHeader())
-  checkResponse(response,"Fehler beim Laden der Posts")
-  return await toFilteredJson(response);
+  return cachedRequest(`${BASE_URL}/posts/?thread=${threadId}&page=${page}&size=${size}`, "GET", undefined, undefined, force);
 }
-export async function fetchPostsByUser(UserId, page = 1, size = 20) {
+export async function fetchPostsByUser(UserId, page = 1, size = 20, force = false) {
   if (!UserId) throw new Error("UserId wird benötigt");
-  const response = await betterFetch(`${URL}/posts/?user=${UserId}&page=${page}&size=${size}`, "GET", getAuthorizationHeader())
-  checkResponse(response,"Fehler beim Laden der Posts")
-  return await toFilteredJson(response);
+  return cachedRequest(`${BASE_URL}/posts/?user=${UserId}&page=${page}&size=${size}`, "GET", undefined, undefined, force);
 }
 
-export async function fetchPostById(id) {
-  const res = await betterFetch(`${URL}/posts/${id}`, "GET", getAuthorizationHeader());
-  checkResponse(res,"Fehler beim Laden des post")
-  return await toFilteredJson(res);
+export async function fetchPostById(id, force = false) {
+  return cachedRequest(`${BASE_URL}/posts/${id}`, "GET", undefined, undefined, force);
 }
 
-export async function PatchPost(data, id) {
-  const res = await betterFetch(`${URL}/posts/${id}`, "PATCH", getAuthorizationHeader(), data)
-  checkResponse(res);
-  return await toFilteredJson(res);
+export async function PatchPost(data, id, force = false) {
+  return cachedRequest(`${BASE_URL}/posts/${id}`, "PATCH", undefined, data, force);
 }
 
 //post like
 
-export async function likePost(id, vote = 1) {
-  const res = await betterFetch(`${URL}/posts/${id}/vote`, "PUT", getAuthorizationHeader(), {vote});
-  checkResponse(res);
-  return await toFilteredJson(res);
+export async function likePost(id, vote = 1, force = false) {
+  return cachedRequest(`${BASE_URL}/posts/${id}`, "PATCH", undefined, {vote}, force);
 }
 
 export async function RemoveLikePost(id, vote = 0) {
@@ -90,40 +70,28 @@ export async function DislikeLikePost(id, vote = -1) {
   return likePost(id, vote);
 }
 
-export async function fetchSelfLikesPost(id) {
-  const res = await fetch(`${URL}/posts/${id}/vote`, "GET", getAuthorizationHeader());
-  checkResponse(res, "Fehler beim Laden der likes")
-  return await toFilteredJson(res);
+export async function fetchSelfLikesPost(id, force = false) {
+  return cachedRequest(`${BASE_URL}/posts/${id}/vote`, "GET", undefined, undefined, force);
 }
 
 // Comments
 
-export async function fetchCommentByPost(postId, page = 0, size = 20) {
-  const response = await betterFetch(`${URL}/comments/?post=${postId}&page=${page}&size=${size}`, "GET", getAuthorizationHeader())
-  checkResponse(response,"Fehler beim Laden der Posts")
-  return await toFilteredJson(response);
+export async function fetchCommentByPost(postId, page = 0, size = 20, force = false) {
+  return cachedRequest(`${BASE_URL}/comments/?post=${postId}&page=${page}&size=${size}`, "GET", undefined, undefined, force);
 }
 
-export async function fetchCommentByParent(parentId, page = 0, size = 20) {
-  const response = await betterFetch(`${URL}/comments/?parent=${parentId}&page=${page}&size=${size}`, "GET", getAuthorizationHeader())
-  checkResponse(response,"Fehler beim Laden der Posts")
-  return await toFilteredJson(response);
+export async function fetchCommentByParent(parentId, page = 0, size = 20, force = false) {
+  return cachedRequest(`${BASE_URL}/comments/?parent=${parentId}&page=${page}&size=${size}`, "GET", undefined, undefined, force);
 }
 
-export async function createComment(data) {
-  const res = await betterFetch(`${URL}/comments/`,  "POST", getAuthorizationHeader(), data);
-  checkResponse(res);
-  return await toFilteredJson(res);
+export async function createComment(data, force = false) {
+  return cachedRequest(`${BASE_URL}/comments/`,  "POST", undefined, data, force);
 }
 
-export async function fetchCommentById(id) {
-  const res = await betterFetch(`${URL}/comments/${id}`, "GET", getAuthorizationHeader());
-  checkResponse(res,"Fehler beim Laden des post")
-  return await toFilteredJson(res);
+export async function fetchCommentById(id, force = false) {
+  return cachedRequest(`${BASE_URL}/comments/${id}`, "GET", undefined, undefined, force);
 }
 
-export async function PatchComment(data, id) {
-  const res = await betterFetch(`${URL}/comments/${id}`, "PATCH", getAuthorizationHeader(), data);
-  checkResponse(res);
-  return await toFilteredJson(res);
+export async function PatchComment(data, id, force = false) {
+  return cachedRequest(`${BASE_URL}/comments/${id}`, "PATCH", undefined, data, force);
 }
