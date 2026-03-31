@@ -1,9 +1,9 @@
 import PostBox from "../components/PostBox";
 import UserDetail from "../components/UserDetails";
 import {
-  fetchThreadsById,
   fetchPostsByUser,
   fetchAllUserData,
+  fetchThread,
 } from "../lib/wrodit";
 import { useLoaderData, Link } from "react-router-dom";
 
@@ -17,7 +17,7 @@ async function clientLoader({ params }) {
 
   const postsWithThread = await Promise.all(
     posts.map(async (post) => {
-      const thread = await fetchThreadsById(post.threadId);
+      const thread = await fetchThread(post.threadId);
 
       return {
         ...post,

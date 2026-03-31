@@ -11,6 +11,12 @@ export function getJWTToken() {
   return session;
 }
 
+export function getAuthorizationHeader()
+{
+  const session = getJWTToken();
+  return session ? { Authorization: `Bearer ${session}` } : {}
+}
+
 export function getSession() {
   const session = localStorage.getItem(STORAGE_KEY);
 
