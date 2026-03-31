@@ -16,6 +16,7 @@ import {
 export default function PostFooter({ vote, postId }) {
   const [self, setSelf] = useState(0);
   const [error, setError] = useState("");
+  console.log(error)
 
   useEffect(() => {
     const fetchLikes = async () => {
