@@ -28,6 +28,7 @@ async function clientLoader({ params }) {
 
 export default function PostRoute() {
   const { post, user, thread, comments, currentUser } = useLoaderData();
+  console.log(post.id);
   
   return (
     <>
@@ -39,7 +40,7 @@ export default function PostRoute() {
         name={user.username}
         threadId={thread.id}
         threadName={thread.name}
-        to={post.id}
+        postId={post.id}
       />
       <div className="commentPadding">
         {comments.map((comment) => {

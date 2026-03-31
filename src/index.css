@@ -49,3 +49,10 @@ body {
   border-radius: 1rem;
   margin: 2rem;
 }
+.threadButton {
+  text-decoration: none;
+  background-color: #d93900;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 1rem;
+}

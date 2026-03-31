@@ -10,7 +10,14 @@ import {
 import { Link } from "react-router-dom";
 import CommentEditButton from "./CommentEditButton";
 
-export default function Comment({ name, postId, data, lvl, isEditValid, commentId }) {
+export default function Comment({
+  name,
+  postId,
+  data,
+  lvl,
+  isEditValid,
+  commentId,
+}) {
   const [children, setChildren] = useState([]);
   const [error, setError] = useState("");
   const [self, setSelf] = useState(false);
@@ -43,35 +50,33 @@ export default function Comment({ name, postId, data, lvl, isEditValid, commentI
     if (data?.id) {
       fetchComments();
     }
-  }, [data.id]);  
+  }, [data.id]);
 
   return (
-    
     <>
       <div style={{ display: "flex" }}>
         <div style={{ flex: lvl }}></div>
 
         <div className={styles.comment} style={{ flex: 10, minWidth: "20rem" }}>
-
           <PostInformation name={name} createdAt={data.createdAt} />
 
           <p>{data.content}</p>
           <PostFooter vote={data.votes} />
-
-          <Link
-            to={`/wrodit/create/comment/parent/${postId}/${data.id}`}
-            className={styles.linkButton}
-          >
-            Komentieren
-          </Link>
-          
-          <CommentEditButton commentId={commentId} isValid={isEditValid}/>
-
+          <div>
+            <Link
+              to={`/wrodit/create/comment/parent/${postId}/${data.id}`}
+              className={styles.linkButton}
+            >
+              Komentieren
+            </Link>
+            <CommentEditButton
+              commentId={commentId}
+              isValid={isEditValid}
+            />{" "}
+          </div>
         </div>
-
       </div>
-      {children.map((child) => {        
-
+      {children.map((child) => {
         const isValid = self.id === child.userId;
 
         return (
