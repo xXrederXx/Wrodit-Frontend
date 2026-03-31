@@ -36,7 +36,8 @@ export default function UserRoute() {
 
   return (
     <>
-      <UserDetail username={user.username} email={user.email} />
+      <UserDetail username={user.username} email={user.email} userId={user.id}/>
+
       {posts.map((post, index) => (
         <>
           <Link to={`/wrodit/edit/post/${post.id}`} className="linkButton">
