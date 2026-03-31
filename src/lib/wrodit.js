@@ -199,6 +199,83 @@ export async function PatchPost(data, id) {
   return await toFilteredJson(res);
 }
 
+//post like
+
+export async function likePost(id, vote = 1) {
+  const session = getJWTToken();
+  const headers = {
+    "Content-Type": "application/json",
+    ...(session && { Authorization: `Bearer ${session}` }),
+  };
+
+  const res = await fetch(`${URL}/posts/${id}/vote`, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify({vote}),
+  });
+
+  if (!res.ok) {
+    throw res;
+  }
+
+  return await toFilteredJson(res);
+}
+
+export async function RemoveLikePost(id, vote = 0) {
+  const session = getJWTToken();
+  const headers = {
+    "Content-Type": "application/json",
+    ...(session && { Authorization: `Bearer ${session}` }),
+  };
+
+  const res = await fetch(`${URL}/posts/${id}/vote`, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify({ vote }),
+  });
+
+  if (!res.ok) {
+    throw res;
+  }
+
+  return await toFilteredJson(res);
+}
+export async function DislikeLikePost(id, vote = -1) {
+  const session = getJWTToken();
+  const headers = {
+    "Content-Type": "application/json",
+    ...(session && { Authorization: `Bearer ${session}` }),
+  };
+
+  const res = await fetch(`${URL}/posts/${id}/vote`, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify({ vote }),
+  });
+
+  if (!res.ok) {
+    throw res;
+  }
+
+  return await toFilteredJson(res);
+}
+
+export async function fetchSelfLikesPost(id) {
+  const session = getJWTToken();
+
+  const headers = session ? { Authorization: `Bearer ${session}` } : {};
+
+  const res = await fetch(`${URL}/posts/${id}/vote`, { headers });
+
+  if (!res.ok) {
+    const error = new Error("Fehler beim Laden der likes");
+    error.status = res.status;
+    throw error;
+  }
+
+  return await toFilteredJson(res);
+}
+
 // Comments
 
 export async function fetchCommentByPost(postId) {
