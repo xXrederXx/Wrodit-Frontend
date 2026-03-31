@@ -18,4 +18,10 @@ article {
   color: white;
   padding: 0.5rem;
   border-radius: 1rem;
+  border: none;
+  margin-right: 1rem;
+}
+
+.linkButton:hover {
+  background-color: darkorange;
 }
