@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import styles from "./Comment.module.css";
-import PostFooter from "./PostFooter";
 import PostInformation from "./PostInformation";
 import {
   fetchAllUserData,
@@ -9,6 +8,7 @@ import {
 } from "../lib/wrodit";
 import { Link } from "react-router-dom";
 import CommentEditButton from "./CommentEditButton";
+import CommentFooter from "./CommentFooter";
 
 export default function Comment({
   name,
@@ -61,7 +61,7 @@ export default function Comment({
           <PostInformation name={name} createdAt={data.createdAt} />
 
           <p>{data.content}</p>
-          <PostFooter vote={data.votes} />
+          <CommentFooter vote={data.votes} commentId={data.id}/>
           <div>
             <Link
               to={`/wrodit/create/comment/parent/${postId}/${data.id}`}

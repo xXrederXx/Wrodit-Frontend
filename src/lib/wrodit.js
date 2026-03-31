@@ -127,3 +127,24 @@ export async function PatchComment(data, id) {
   checkResponse(res);
   return await toFilteredJson(res);
 }
+
+//comment like
+
+export async function likeComment(id, vote = 1) {
+  const res = await betterFetch(`${URL}/comments/${id}/vote`, "PUT", getAuthorizationHeader(), {vote});
+  checkResponse(res);
+  return await toFilteredJson(res);
+}
+
+export async function RemoveLikeComment(id, vote = 0) {
+  return likeComment(id, vote);
+}
+export async function DislikeLikeComment(id, vote = -1) {
+  return likeComment(id, vote);
+}
+
+export async function fetchSelfLikesComment(id) {
+  const res = await fetch(`${URL}/comments/${id}/vote`, "GET", getAuthorizationHeader());
+  checkResponse(res, "Fehler beim Laden der likes")
+  return await toFilteredJson(res);
+}
