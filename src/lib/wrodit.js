@@ -99,9 +99,7 @@ export async function PatchComment(data, id, force = false) {
 //comment like
 
 export async function likeComment(id, vote = 1) {
-  const res = await betterFetch(`${URL}/comments/${id}/vote`, "PUT", getAuthorizationHeader(), {vote});
-  checkResponse(res);
-  return await toFilteredJson(res);
+  return cachedRequest(`${BASE_URL}/comments/${id}/vote`, "PUT", undefined, {vote}, force);
 }
 
 export async function RemoveLikeComment(id, vote = 0) {
@@ -112,7 +110,5 @@ export async function DislikeLikeComment(id, vote = -1) {
 }
 
 export async function fetchSelfLikesComment(id) {
-  const res = await fetch(`${URL}/comments/${id}/vote`, "GET", getAuthorizationHeader());
-  checkResponse(res, "Fehler beim Laden der likes")
-  return await toFilteredJson(res);
+  return cachedRequest(`${BASE_URL}/comments/${id}/vote`, "GET", undefined, undefined, force);
 }
