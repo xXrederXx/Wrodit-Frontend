@@ -1,6 +1,6 @@
 import PostBox from "../components/PostBox";
 import { fetchPosts, fetchUser, fetchThread } from "../lib/wrodit";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, redirect } from "react-router-dom";
 
 export default function WroditHomeRoute() {
   const data = useLoaderData();
@@ -31,22 +31,31 @@ export default function WroditHomeRoute() {
 }
 
 WroditHomeRoute.loader = async function clientLoader() {
-  const postsData = await fetchPosts();
+  try {
+    const postsData = await fetchPosts();
 
-  const postsWithData = await Promise.all(
-    postsData.content.map(async (post) => {
-      const [userData, threadData] = await Promise.all([
-        fetchUser(post.userId),
-        fetchThread(post.threadId),
-      ]);
+    const postsWithData = await Promise.all(
+      postsData.content.map(async (post) => {
+        const [userData, threadData] = await Promise.all([
+          fetchUser(post.userId),
+          fetchThread(post.threadId),
+        ]);
 
-      return {
-        ...post,
-        userLoaderData: userData,
-        threadLoaderData: threadData,
-      };
-    }),
-  );
+        return {
+          ...post,
+          userLoaderData: userData,
+          threadLoaderData: threadData,
+        };
+      }),
+    );
 
-  return { ...postsData, content: postsWithData };
+    return { ...postsData, content: postsWithData };
+  } catch (err) {
+    console.log("ERROR:", err.status);
+
+    if (err.status === 401) {
+      return redirect("/wrodit/login");
+    }
+    throw err;
+  }
 };

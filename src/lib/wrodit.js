@@ -94,7 +94,9 @@ export async function fetchPosts() {
   const res = await fetch(`${URL}/posts/`, { headers });
 
   if (!res.ok) {
-    throw new Error("Fehler beim Laden der Posts");
+    const error = new Error("Fehler beim Laden der Posts");
+    error.status = res.status;
+    throw error;
   }
 
   return await toFilteredJson(res);
