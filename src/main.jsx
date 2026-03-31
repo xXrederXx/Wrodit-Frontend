@@ -17,12 +17,15 @@ import CommentRoute from "./routes/CommentRoute.jsx";
 import ChildCommentRoute from "./routes/ChildCommentRoute.jsx";
 import PostEditRoute from "./routes/PostEditRoute.jsx";
 import CommentEditRoute from "./routes/CommentEditRoute.jsx";
+import ErrorRoute from "./routes/ErrorRoute.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     loader: App.loader,
+    errorElement: <ErrorRoute />,
+
     children: [
       {
         index: true,
