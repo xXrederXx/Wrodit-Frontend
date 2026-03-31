@@ -3,20 +3,44 @@ import { getAuthorizationHeader } from "./session";
 
 const cache = new Map();
 
-export async function cachedRequest(url, method, headers = {}, body = undefined, force = false) {    
-      const cached = getCache(url)
-      if(cached && !force)
-      {
-        return cached;
-      }
-    
-      const res = await betterFetch(url, method, {...headers, ...getAuthorizationHeader()}, body);
-      checkResponse(res)
+export async function cachedRequest(
+  url,
+  method,
+  headers = {},
+  body = undefined,
+  force = false,
+) {
+  const cached = getCache(url);
+  if (cached && !force) {
+    return cached;
+  }
+
+  const requestPromise = (async () => {
+    try {
+      const res = await betterFetch(
+        url,
+        method,
+        { ...headers, ...getAuthorizationHeader() },
+        body,
+      );
+
+      checkResponse(res);
       const jsonResponse = await toFilteredJson(res);
-    
-      setCache(url, jsonResponse)
-      
+
+      // Replace promise with resolved value
+      setCache(url, jsonResponse);
+
       return jsonResponse;
+    } catch (err) {
+      // Remove failed request from cache so it can retry
+      cache.delete(url);
+      throw err;
+    }
+  })();
+
+  setCache(url, requestPromise);
+
+  return requestPromise;
 }
 
 export function setCache(url, data, expirationSeconds = 300) {
