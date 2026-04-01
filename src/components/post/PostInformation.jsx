@@ -17,10 +17,10 @@ function timeAgo(createdAt) {
   return `${diffDays} Tagen`;
 }
 
-export default function PostInformation({ name, threadId, threadName, createdAt }) {
+export default function PostInformation({ username, threadId, threadName, createdAt }) {
   return (
     <header className={styles.header}>
-      <p>{name}</p>
+      <p>{username}</p>
       <Link className={styles.link} to={`/wrodit/thread/${threadId}`}>
         {" "}
         <p>{threadName}</p>

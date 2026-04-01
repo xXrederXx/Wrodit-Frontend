@@ -48,11 +48,11 @@ export default function PostRoute() {
           return (
             <Comment
               key={comment.id}
-              name={comment.username}
+              username={comment.username}
               postId={post.id}
               data={comment}
               lvl={0}
-              isEditValid={isValid}
+              canEdit={isValid}
             />
           );
         })}

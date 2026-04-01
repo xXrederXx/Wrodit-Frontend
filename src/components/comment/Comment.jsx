@@ -6,18 +6,19 @@ import { Link } from "react-router-dom";
 import CommentEditButton from "./CommentEditButton.jsx";
 import CommentFooter from "./CommentFooter.jsx";
 
-export default function Comment({ name, postId, data, lvl, isEditValid, commentId }) {
+export default function Comment({ username, postId, data, lvl, canEdit, commentId }) {
   const [children, setChildren] = useState([]);
-  const [self, setSelf] = useState(false);
+  const [thisCommentData, setThisCommentData] = useState(false);
 
+  // fetch children
   useEffect(() => {
-    const fetchComments = async () => {
+    const fetchChildComments = async () => {
       try {
-        const newData = await fetchCommentByParent(data.id);
+        const childComments = await fetchCommentByParent(data.id);
         const user = await fetchAllUserData();
 
         const childUsername = await Promise.all(
-          newData.content.map(async item => {
+          childComments.content.map(async item => {
             const dataUser = await fetchUser(item.userId);
 
             return {
@@ -27,7 +28,7 @@ export default function Comment({ name, postId, data, lvl, isEditValid, commentI
           }),
         );
 
-        setSelf(user);
+        setThisCommentData(user);
         setChildren(childUsername);
       } catch (err) {
         console.error("Fehler beim Laden der Kommentare:", err.message || "Fehler beim Laden");
@@ -35,7 +36,7 @@ export default function Comment({ name, postId, data, lvl, isEditValid, commentI
     };
 
     if (data?.id) {
-      fetchComments();
+      fetchChildComments();
     }
   }, [data.id]);
 
@@ -45,7 +46,7 @@ export default function Comment({ name, postId, data, lvl, isEditValid, commentI
         <div style={{ flex: lvl }}></div>
 
         <div className={styles.comment} style={{ flex: 10, minWidth: "20rem" }}>
-          <PostInformation name={name} createdAt={data.createdAt} />
+          <PostInformation username={username} createdAt={data.createdAt} />
 
           <p>{data.content}</p>
           <CommentFooter vote={data.votes} commentId={data.id} />
@@ -55,21 +56,22 @@ export default function Comment({ name, postId, data, lvl, isEditValid, commentI
               className={styles.linkButton}>
               Komentieren
             </Link>
-            <CommentEditButton commentId={commentId} isValid={isEditValid} />{" "}
+            <CommentEditButton commentId={commentId} isValid={canEdit} />{" "}
           </div>
         </div>
       </div>
       {children.map(child => {
-        const isValid = self.id === child.userId;
+        const userCanEdit = thisCommentData.id === child.userId;
 
         return (
           <Comment
-            name={child.username}
+            key={child.id}
+            username={child.username}
             postId={postId}
             commentId={child.id}
             data={child}
             lvl={lvl + 1}
-            isEditValid={isValid}
+            canEdit={userCanEdit}
           />
         );
       })}
