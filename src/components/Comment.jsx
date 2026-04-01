@@ -8,7 +8,6 @@ import CommentFooter from "./CommentFooter";
 
 export default function Comment({ name, postId, data, lvl, isEditValid, commentId }) {
   const [children, setChildren] = useState([]);
-  const [error, setError] = useState("");
   const [self, setSelf] = useState(false);
 
   useEffect(() => {
@@ -31,8 +30,7 @@ export default function Comment({ name, postId, data, lvl, isEditValid, commentI
         setSelf(user);
         setChildren(childUsername);
       } catch (err) {
-        setError(err.message || "Fehler beim Laden");
-        console.log("Fehler beim Laden der Kommentare:", error);
+        console.error("Fehler beim Laden der Kommentare:", err.message || "Fehler beim Laden");
       }
     };
 

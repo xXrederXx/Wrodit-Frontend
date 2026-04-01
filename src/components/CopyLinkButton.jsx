@@ -4,7 +4,6 @@ export default function CopyLinkButton() {
   const copyToClipboard = async () => {
     try {
       await navigator.clipboard.writeText(window.location.href);
-      console.log("Link kopiert!");
     } catch (err) {
       console.error("Fehler beim Kopieren:", err);
     }

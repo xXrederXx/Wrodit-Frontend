@@ -47,7 +47,7 @@ WroditHomeRoute.loader = async function clientLoader() {
 
     return { ...postsData, content: postsWithData };
   } catch (err) {
-    console.log("ERROR:", err.status);
+    console.error("ERROR:", err.status);
 
     if (err.status === 401) {
       return redirect("/wrodit/login");

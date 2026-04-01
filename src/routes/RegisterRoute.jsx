@@ -15,15 +15,12 @@ async function clientAction({ request }) {
 
   try {
     const res = await signUp(data);
-    console.log("SignUp response:", res); // Debug
 
     if (res.error === "Conflict") {
-      console.log("Conflict error, returning formError"); // Debug
 
       return { formError: "Benutzername oder Email Schon vergeben." };
     }
 
-    console.log("Signup success, redirecting"); // Debug
 
     return redirect("/wrodit/login");
   } catch (error) {

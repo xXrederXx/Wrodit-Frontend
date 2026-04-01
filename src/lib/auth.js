@@ -3,8 +3,6 @@ const URL =
     "http://xcwkwswkso04gs40k8g48k8w.207.180.221.9.sslip.io"
   : "http://vcg00wk8ws8o0gcc4c8ckkgw.207.180.221.9.sslip.io";
 
-console.log(import.meta.env);
-
 export async function signUp(data) {
   const res = await fetch(`${URL}/auth/signup`, {
     method: "POST",
