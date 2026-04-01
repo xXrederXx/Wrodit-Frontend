@@ -9,6 +9,7 @@
     "buildStage": "vite build --mode staging",
     "buildProd": "vite build --mode production",
     "lint": "eslint .",
+    "pretty": "npx prettier \"**/*.{js,ts,json,css,md,jsx}\" --write",
     "preview": "vite preview"
   },
   "dependencies": {
