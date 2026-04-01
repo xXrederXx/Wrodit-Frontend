@@ -1,5 +1,5 @@
 import PostBox from "../components/post/PostBox.jsx";
-import UserDetail from "../components/UserDetails";
+import UserDetail from "../components/user/UserDetails.jsx";
 import {
   fetchPostsByUser,
   fetchAllUserData,

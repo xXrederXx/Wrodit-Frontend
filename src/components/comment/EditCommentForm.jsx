@@ -1,7 +1,7 @@
 import { Form } from "react-router";
 import Button from "../ui/Button.jsx";
 import Text from "../ui/Text.jsx";
-import styles from "../SignUpForm.module.css";
+import styles from "../user/SignUpForm.module.css";
 import { useState, useEffect } from "react";
 
 export default function EditCommentForm({ onCancel, errors = {}, content }) {
