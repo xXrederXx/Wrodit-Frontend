@@ -28,7 +28,7 @@ export async function cachedRequest(
       const jsonResponse = await toFilteredJson(res);
 
       // Replace promise with resolved value
-      setCache(url, jsonResponse);
+      setCache(url, jsonResponse, 1);
 
       return jsonResponse;
     } catch (err) {
@@ -47,8 +47,6 @@ export function setCache(url, data, expirationSeconds = 300) {
   const expTime = Date.now() + expirationSeconds * 1000;
 
   cache.set(url, { value: data, exp: expTime });
-
-  console.log("Cache updated:", Array.from(cache.entries()));
 }
 
 export function getCache(url) {

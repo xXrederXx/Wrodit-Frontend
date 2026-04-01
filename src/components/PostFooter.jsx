@@ -14,60 +14,50 @@ import {
 } from "../lib/wrodit";
 
 export default function PostFooter({ vote, postId }) {
-  const [self, setSelf] = useState(0);
-  const [error, setError] = useState(""); // eslint-disable-line
+  const [userVote, setUserVote] = useState(0);
 
   useEffect(() => {
     const fetchLikes = async () => {
       try {
-        const likeSelf = await fetchSelfLikesPost(postId);
-        setSelf(likeSelf.vote ? likeSelf.vote : 0);
+        const likeSelf = await fetchSelfLikesPost(postId, true);
+        setUserVote(likeSelf.vote || 0);
       } catch (err) {
-        setError(err.message || "Fehler beim Laden");
+        console.error(err.message || "Fehler beim Laden");
       }
     };
     fetchLikes();
   }, [postId]);
 
-  const handleLike = async () => {
-    try {
-      await likePost(postId);
-      setSelf(1);
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  const handleLike = async (value) => {
+    const previous = userVote;
 
-  const handleRemoveLike = async () => {
-    try {
-      await RemoveLikePost(postId);
-      setSelf(0);
-    } catch (err) {
-      console.error(err);
-    }
-  };
+    // optimistic update
+    setUserVote(value);
 
-  const handleDisLike = async () => {
     try {
-      await DislikeLikePost(postId);
-      setSelf(-1);
+      await likePost(postId, value);
     } catch (err) {
       console.error(err);
+
+      // rollback if failed
+      setUserVote(previous);
     }
   };
 
   return (
     <footer className={styles.footer}>
-      {vote + self}
-      {self === 1 ? (
-        <FcLike onClick={handleRemoveLike} />
+      {vote + userVote}
+
+      {userVote === 1 ? (
+        <FcLike onClick={() => handleLike(0)} />
       ) : (
-        <AiOutlineHeart onClick={handleLike} />
+        <AiOutlineHeart onClick={() => handleLike(1)} />
       )}
-      {self === -1 ? (
-        <AiFillDislike onClick={handleRemoveLike} />
+
+      {userVote === -1 ? (
+        <AiFillDislike onClick={() => handleLike(0)} />
       ) : (
-        <AiOutlineDislike onClick={handleDisLike} />
+        <AiOutlineDislike onClick={() => handleLike(-1)} />
       )}
     </footer>
   );
