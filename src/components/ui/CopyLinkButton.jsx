@@ -1,4 +1,4 @@
-import styles from "./PostDetail.module.css";
+import styles from "../post/PostDetail.module.css";
 
 export default function CopyLinkButton() {
   const copyToClipboard = async () => {

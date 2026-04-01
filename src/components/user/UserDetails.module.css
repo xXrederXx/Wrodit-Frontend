@@ -1,0 +1,17 @@
+.userDetail {
+  padding: 1rem;
+  border-bottom: 1px solid gray;
+  margin-bottom: 2rem;
+}
+
+.profileImage {
+  font-size: 5rem;
+}
+
+.threadButton {
+  text-decoration: none;
+  background-color: var(--clr-primary);
+  color: white;
+  padding: 0.5rem;
+  border-radius: 1rem;
+}

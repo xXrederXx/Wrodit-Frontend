@@ -14,7 +14,7 @@
 .dropdownContent {
   display: none;
   position: absolute;
-  background-color: #d93900;
+  background-color: var(--clr-primary);
   left: auto;
   right: 0;
   font-size: 1rem;

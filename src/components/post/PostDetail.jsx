@@ -1,16 +1,16 @@
-import PostText from "./PostText";
-import PostInformation from "./PostInformation";
-import PostFooter from "./PostFooter";
+import PostText from "./PostText.jsx";
+import PostInformation from "./PostInformation.jsx";
+import PostFooter from "./PostFooter.jsx";
 import styles from "./PostDetail.module.css";
 import { Link } from "react-router-dom";
-import CopyLinkButton from "./CopyLinkButton";
+import CopyLinkButton from "../ui/CopyLinkButton.jsx";
 
 export default function PostDetail({
   title,
   text,
   vote,
   createdAt,
-  name,
+  username,
   threadId,
   threadName,
   postId,
@@ -18,7 +18,7 @@ export default function PostDetail({
   return (
     <article className={styles.article}>
       <PostInformation
-        name={name}
+        username={username}
         threadId={threadId}
         threadName={threadName}
         createdAt={createdAt}

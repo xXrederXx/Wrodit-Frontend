@@ -1,6 +1,6 @@
 import { fetchCommentById, PatchComment } from "../lib/wrodit";
 import { redirect, useActionData, useNavigate, useLoaderData } from "react-router-dom";
-import EditCommentForm from "../components/EditCommentForm";
+import EditCommentForm from "../components/comment/EditCommentForm.jsx";
 
 async function clientLoader({ params }) {
   const commentId = params.id;

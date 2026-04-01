@@ -1,6 +1,6 @@
 import styles from "./ChildComment.module.css";
-import CommentFooter from "./CommentFooter";
-import PostInformation from "./PostInformation";
+import CommentFooter from "./CommentFooter.jsx";
+import PostInformation from "../post/PostInformation.jsx";
 
 export default function ChildComment({ content, votes, createdAt, name }) {
   return (

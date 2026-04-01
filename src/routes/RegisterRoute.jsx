@@ -1,4 +1,4 @@
-import SignUpForm from "../components/SignUpForm";
+import SignUpForm from "../components/user/SignUpForm.jsx";
 
 import { Link, redirect, useActionData, useNavigate } from "react-router";
 import { signUp } from "../lib/auth";

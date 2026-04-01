@@ -11,7 +11,7 @@
 
 .linkButton {
   text-decoration: none;
-  background-color: #d93900;
+  background-color: var(--clr-primary);
   color: white;
   padding: 0.5rem;
   border-radius: 1rem;

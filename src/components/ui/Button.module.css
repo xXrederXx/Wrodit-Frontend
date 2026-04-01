@@ -1,5 +1,5 @@
 .button {
-  background-color: #d93900;
+  background-color: var(--clr-primary);
   border: none;
   color: white;
   font-size: 1.5rem;

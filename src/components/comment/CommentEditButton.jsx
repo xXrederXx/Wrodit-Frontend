@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { deleteComment } from "../lib/wrodit";
+import { deleteComment } from "../../lib/wrodit.js";
+import style from "./CommentEditButton.module.css"
 export default function CommentEditButton({ isValid, commentId }) {
   const handleCommentDelete = async () => {
     try {
@@ -12,10 +13,10 @@ export default function CommentEditButton({ isValid, commentId }) {
     <>
       {isValid && (
         <>
-          <Link className="linkButton" to={`/wrodit/edit/comment/${commentId}`}>
+          <Link className={style.linkButton} to={`/wrodit/edit/comment/${commentId}`}>
             Bearbeiten
           </Link>
-          <Link onClick={handleCommentDelete} className="deleteButton">
+          <Link onClick={handleCommentDelete} className={style.deleteButton}>
             Kommentar Löschen
           </Link>
         </>

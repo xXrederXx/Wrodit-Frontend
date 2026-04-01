@@ -1,6 +1,6 @@
-import { BiCurrentLocation } from "react-icons/bi";
-import Comment from "../components/Comment";
-import PostDetail from "../components/PostDetail";
+import style from "./PostRoute.module.css";
+import Comment from "../components/comment/Comment.jsx";
+import PostDetail from "../components/post/PostDetail.jsx";
 
 import {
   fetchPostById,
@@ -20,8 +20,8 @@ async function clientLoader({ params }) {
 
   const currentUser = await fetchAllUserData();
 
-  const data = await fetchCommentByPost(postId);
-  const comments = data.content.filter(comment => comment.parentId === null);
+  const commentData = await fetchCommentByPost(postId);
+  const comments = commentData.content.filter(comment => comment.parentId === null);
 
   return { post, user, thread, comments, currentUser };
 }
@@ -36,23 +36,23 @@ export default function PostRoute() {
         title={post.title}
         text={post.content}
         vote={post.vote}
-        name={user.username}
+        username={user.username}
         threadId={thread.id}
         threadName={thread.name}
         postId={post.id}
       />
-      <div className="commentPadding">
+      <div className={style.commentContainer}>
         {comments.map(comment => {
-          const isValid = currentUser.id === comment.userId;
+          const canUserEdit = currentUser.id === comment.userId;
 
           return (
             <Comment
               key={comment.id}
-              name={comment.username}
+              username={comment.username}
               postId={post.id}
               data={comment}
               lvl={0}
-              isEditValid={isValid}
+              canEdit={canUserEdit}
             />
           );
         })}

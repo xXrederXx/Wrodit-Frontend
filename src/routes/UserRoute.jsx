@@ -1,5 +1,5 @@
-import PostBox from "../components/PostBox";
-import UserDetail from "../components/UserDetails";
+import PostBox from "../components/post/PostBox.jsx";
+import UserDetail from "../components/user/UserDetails.jsx";
 import {
   fetchPostsByUser,
   fetchAllUserData,
@@ -8,6 +8,7 @@ import {
   deletePost,
 } from "../lib/wrodit";
 import { useLoaderData, Link } from "react-router-dom";
+import style from "./UserRoute.module.css"
 
 async function clientLoader({ params }) {
   const userId = params.id;
@@ -32,9 +33,9 @@ async function clientLoader({ params }) {
 }
 
 export default function UserRoute() {
-  const data = useLoaderData();
-  const user = data.user;
-  const posts = data.posts;
+  const loaderData = useLoaderData();
+  const user = loaderData.user;
+  const posts = loaderData.posts;
 
   const handleUserDelete = async () => {
     try {
@@ -53,22 +54,23 @@ export default function UserRoute() {
 
   return (
     <>
-      <Link onClick={handleUserDelete} className="deleteButton" to={"/wrodit/login"}>
+      <Link onClick={handleUserDelete} className={style.deleteButton} to={"/wrodit/login"}>
         Account Löschen
       </Link>
 
       <UserDetail username={user.username} email={user.email} userId={user.id} />
 
-      {posts.map((post, index) => (
+      {posts.map(post => (
         <>
-          <Link onClick={handlePostDelete(post.id)} className="deleteButton">
+          <Link onClick={() => handlePostDelete(post.id)} className={style.deleteButton}>
             Post Löschen
           </Link>
-          <Link to={`/wrodit/edit/post/${post.id}`} className="linkButton">
+          <Link to={`/wrodit/edit/post/${post.id}`} className={style.linkButton}>
             Bearbeiten
           </Link>
           <PostBox
-            key={index}
+            key={post.id}
+            username={user.username}
             createdAt={post.createdAt}
             title={post.title}
             text={post.content}

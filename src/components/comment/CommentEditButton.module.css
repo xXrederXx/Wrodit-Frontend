@@ -1,0 +1,20 @@
+.linkButton {
+  text-decoration: none;
+  background-color: var(--clr-primary);
+  color: white;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  margin: 2rem;
+  display: inline-block;
+}
+
+.deleteButton {
+  text-decoration: none;
+  background-color: var(--clr-primary);
+  color: white;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  margin: 1rem;
+  display: inline-block;
+  border: none;
+}

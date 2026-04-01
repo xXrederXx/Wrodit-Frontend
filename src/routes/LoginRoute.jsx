@@ -1,4 +1,4 @@
-import LogInForm from "../components/LogInForm";
+import LogInForm from "../components/user/LogInForm.jsx";
 import { Link, redirect, useActionData, useNavigate } from "react-router";
 import { signIn } from "../lib/auth";
 import { saveSession } from "../lib/session";

@@ -7,8 +7,8 @@
   font-size: 0.9rem;
 }
 .link {
-  color: #3498db;
+  color: var(--clr-link);
 }
 .link:visited {
-  color: grey;
+  color: var(--clr-link-visited);
 }
