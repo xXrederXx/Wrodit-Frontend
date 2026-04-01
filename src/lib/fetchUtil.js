@@ -1,5 +1,11 @@
 import { filterContent } from "./filterUtil";
 
+/**
+ * Throws if the response is not OK
+ * @param {*} response the fetch response
+ * @param {*} errorMessage a custom error message appended 
+ * @returns nothing
+ */
 export async function checkResponse(response, errorMessage = "") {
   if (response.ok) {
     return response;
@@ -7,14 +13,29 @@ export async function checkResponse(response, errorMessage = "") {
   throwFetchResponseError(response, errorMessage);
 }
 
-export async function toFilteredJson(res) {
-  if (typeof res !== "object" || !res || res.status === 204) {
-    return res;
+/**
+ * Converts response into a json with filtered bad words
+ * @param {*} response 
+ * @returns 
+ */
+export async function toFilteredJson(response) {
+  if (typeof response !== "object" || !response || response.status === 204) {
+    return response;
   }
-  const obj = await res.json();
-  return filterContent(obj);
+  const jsonData = await response.json();
+  return filterContent(jsonData);
 }
 
+
+/**
+ * A better fetch method. Automaticaly applys a content type json header if a body is provided
+ * body is also automaticaly convertet to json.
+ * @param {*} url 
+ * @param {*} method 
+ * @param {*} headers 
+ * @param {*} body 
+ * @returns 
+ */
 export async function betterFetch(url, method = "GET", headers = {}, body = undefined) {
   const payload = { method, headers };
 
