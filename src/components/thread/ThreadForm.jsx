@@ -1,8 +1,8 @@
 import { Form } from "react-router";
-import Button from "./ui/Button.jsx";
-import Input from "./ui/Input.jsx";
-import Text from "./ui/Text.jsx";
-import styles from "./SignUpForm.module.css";
+import Button from "../ui/Button.jsx";
+import Input from "../ui/Input.jsx";
+import Text from "../ui/Text.jsx";
+import styles from "../SignUpForm.module.css";
 
 export default function ThradForm({ onCancel, errors = {} }) {
   return (
