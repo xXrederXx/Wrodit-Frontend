@@ -61,7 +61,7 @@ export default function UserRoute() {
 
       {posts.map(post => (
         <>
-          <Link onClick={()=>handlePostDelete(post.id)} className="deleteButton">
+          <Link onClick={() => handlePostDelete(post.id)} className="deleteButton">
             Post Löschen
           </Link>
           <Link to={`/wrodit/edit/post/${post.id}`} className="linkButton">

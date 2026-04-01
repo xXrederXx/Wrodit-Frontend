@@ -13,7 +13,7 @@ export default function CommentFooter({ vote, commentId }) {
         const likeSelf = await fetchSelfLikesComment(commentId);
         setUserVote(likeSelf.vote ? likeSelf.vote : 0);
       } catch (err) {
-        setError(err.message || "Fehler beim Laden");
+        console.error(err.message || "Fehler beim Laden");
       }
     };
     fetchLikes();

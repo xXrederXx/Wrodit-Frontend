@@ -3,7 +3,7 @@ import { filterContent } from "./filterUtil";
 /**
  * Throws if the response is not OK
  * @param {*} response the fetch response
- * @param {*} errorMessage a custom error message appended 
+ * @param {*} errorMessage a custom error message appended
  * @returns nothing
  */
 export async function checkResponse(response, errorMessage = "") {
@@ -15,8 +15,8 @@ export async function checkResponse(response, errorMessage = "") {
 
 /**
  * Converts response into a json with filtered bad words
- * @param {*} response 
- * @returns 
+ * @param {*} response
+ * @returns
  */
 export async function toFilteredJson(response) {
   if (typeof response !== "object" || !response || response.status === 204) {
@@ -26,15 +26,14 @@ export async function toFilteredJson(response) {
   return filterContent(jsonData);
 }
 
-
 /**
  * A better fetch method. Automaticaly applys a content type json header if a body is provided
  * body is also automaticaly convertet to json.
- * @param {*} url 
- * @param {*} method 
- * @param {*} headers 
- * @param {*} body 
- * @returns 
+ * @param {*} url
+ * @param {*} method
+ * @param {*} headers
+ * @param {*} body
+ * @returns
  */
 export async function betterFetch(url, method = "GET", headers = {}, body = undefined) {
   const payload = { method, headers };

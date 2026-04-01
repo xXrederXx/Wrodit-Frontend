@@ -6,10 +6,10 @@ const cache = new Map();
 /**
  * This makes a fetch (betterFetch is used) request which gets cached for 1 second.
  * It automaticaly adds the baerer token to the headers.
- * @param {*} url 
+ * @param {*} url
  * @param {*} method GET, POST, PUT etc.
- * @param {*} headers 
- * @param {*} body 
+ * @param {*} headers
+ * @param {*} body
  * @param {*} force Disable cached values
  * @returns filtered json object
  */

@@ -5,7 +5,16 @@ import styles from "./PostBox.module.css";
 import PostFooter from "./PostFooter.jsx";
 import { Link } from "react-router-dom";
 
-export default function PostBox({ title, text, vote, createdAt, username, threadId, threadName, to }) {
+export default function PostBox({
+  title,
+  text,
+  vote,
+  createdAt,
+  username,
+  threadId,
+  threadName,
+  to,
+}) {
   return (
     <article className={styles.article}>
       <PostHeader
