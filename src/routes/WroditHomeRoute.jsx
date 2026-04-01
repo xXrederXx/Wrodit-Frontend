@@ -32,7 +32,7 @@ export default function WroditHomeRoute() {
 
 WroditHomeRoute.loader = async function clientLoader() {
   try {
-    const postsData = await fetchPosts();
+    const postsData = await fetchPosts(true);
 
     const postsWithData = await Promise.all(
       postsData.content.map(async (post) => {

@@ -12,6 +12,7 @@ export default function UserDetail({ username, email, userId }) {
       <Link to={`/wrodit/create/thread/${userId}`} className="threadButton">
         Thread erstellen
       </Link>
+      
     </div>
   );
 }

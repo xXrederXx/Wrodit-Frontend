@@ -21,13 +21,13 @@ export default function PostFooter({ vote, postId }) {
     const fetchLikes = async () => {
       try {
         const likeSelf = await fetchSelfLikesPost(postId);
-        setSelf(likeSelf.vote);
+        setSelf(likeSelf.vote ? likeSelf.vote : 0);
       } catch (err) {
         setError(err.message || "Fehler beim Laden");
       }
     };
     fetchLikes();
-  }, [self]);
+  }, [postId]);
 
   const handleLike = async () => {
     try {

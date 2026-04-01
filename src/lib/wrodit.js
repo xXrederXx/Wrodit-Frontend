@@ -18,6 +18,10 @@ export async function fetchAllUserData(force = false) {
   return cachedRequest(`${BASE_URL}/users/self`, "GET", undefined, undefined, force);
 }
 
+export async function deleteUser(force = false) {
+  return cachedRequest(`${BASE_URL}/users/`, "DELETE", undefined, force);
+}
+
 //threads
 
 export async function createThread(data) {
@@ -35,15 +39,15 @@ export async function fetchPosts(force = false) {
 }
 
 export async function createPost(data) {
-  return cachedRequest(`${BASE_URL}/posts`, "POST", undefined, data, true);
+  return cachedRequest(`${BASE_URL}/posts/`, "POST", undefined, data, true);
 
 }
 
-export async function fetchPostsByThread(threadId, page = 1, size = 20, force = false) {
+export async function fetchPostsByThread(threadId, page = 0, size = 20, force = false) {
   if (!threadId) throw new Error("threadId wird benötigt");
   return cachedRequest(`${BASE_URL}/posts/?thread=${threadId}&page=${page}&size=${size}`, "GET", undefined, undefined, force);
 }
-export async function fetchPostsByUser(UserId, page = 1, size = 20, force = false) {
+export async function fetchPostsByUser(UserId, page = 0, size = 20, force = false) {
   if (!UserId) throw new Error("UserId wird benötigt");
   return cachedRequest(`${BASE_URL}/posts/?user=${UserId}&page=${page}&size=${size}`, "GET", undefined, undefined, force);
 }
@@ -52,14 +56,18 @@ export async function fetchPostById(id, force = false) {
   return cachedRequest(`${BASE_URL}/posts/${id}`, "GET", undefined, undefined, force);
 }
 
-export async function PatchPost(data, id) {
+export async function patchPost(data, id) {
   return cachedRequest(`${BASE_URL}/posts/${id}`, "PATCH", undefined, data, true);
+}
+
+export async function deletePost(id, force = false) {
+  return cachedRequest(`${BASE_URL}/posts/${id}`, "DELETE", undefined, force);
 }
 
 //post like
 
 export async function likePost(id, vote = 1) {
-  return cachedRequest(`${BASE_URL}/posts/${id}`, "PATCH", undefined, {vote}, true);
+  return cachedRequest(`${BASE_URL}/posts/${id}/vote`, "PUT", undefined, {vote}, true);
 }
 
 export async function RemoveLikePost(id, vote = 0) {
@@ -93,6 +101,10 @@ export async function fetchCommentById(id, force = false) {
 
 export async function PatchComment(data, id) {
   return cachedRequest(`${BASE_URL}/comments/${id}`, "PATCH", undefined, data, true);
+}
+
+export async function deleteComment(id, force = false) {
+  return cachedRequest(`${BASE_URL}/comments/${id}`, "DELETE", undefined, force);
 }
 
 //comment like
