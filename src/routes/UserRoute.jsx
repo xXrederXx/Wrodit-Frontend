@@ -10,7 +10,6 @@ import {
 } from "../lib/wrodit";
 import { useLoaderData, Link } from "react-router-dom";
 import style from "./UserRoute.module.css";
-import ThreadInformation from "../components/thread/ThreadInformation.jsx";
 
 async function clientLoader({ params }) {
   const userId = params.id;
@@ -84,14 +83,18 @@ export default function UserRoute() {
           />
         </>
       ))}
-      {threads.map(thread => (
-        <ThreadInformation
-          key={thread.id}
-          name={thread.name}
-          description={thread.description}
-          to={thread.id}
-        />
-      ))}
+      <h3>Meine Threads</h3>
+      {threads.map(thread => {
+        console.log("thread", thread.id);
+
+        return (
+          <>
+            <Link className="threadDescription" to={`wrodit/threads/${thread.id}`}>
+              <h1>w/{thread.name}</h1>
+            </Link>
+          </>
+        );
+      })}
     </>
   );
 }
