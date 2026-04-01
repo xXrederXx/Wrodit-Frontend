@@ -1,8 +1,8 @@
-import PostText from "./PostText";
-import PostTitle from "./PostTitle";
-import PostInformation from "./PostInformation";
+import PostText from "./PostText.jsx";
+import PostTitle from "./PostTitle.jsx";
+import PostInformation from "./PostInformation.jsx";
 import styles from "./PostBox.module.css";
-import PostFooter from "./PostFooter";
+import PostFooter from "./PostFooter.jsx";
 import { Link } from "react-router-dom";
 
 export default function PostBox({ title, text, vote, createdAt, name, threadId, threadName, to }) {

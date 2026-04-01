@@ -1,4 +1,4 @@
-import PostBox from "../components/PostBox";
+import PostBox from "../components/post/PostBox.jsx";
 import { fetchPosts, fetchUser, fetchThread } from "../lib/wrodit";
 import { useLoaderData, redirect } from "react-router-dom";
 

@@ -1,6 +1,6 @@
 import { FcLike } from "react-icons/fc";
 import { AiOutlineHeart, AiOutlineDislike, AiFillDislike } from "react-icons/ai";
-import styles from "../PostFooter.module.css";
+import styles from "../post/PostFooter.module.css";
 import {
   DislikeLikeComment,
   fetchSelfLikesComment,

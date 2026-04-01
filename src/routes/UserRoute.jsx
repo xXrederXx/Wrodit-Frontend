@@ -1,4 +1,4 @@
-import PostBox from "../components/PostBox";
+import PostBox from "../components/post/PostBox.jsx";
 import UserDetail from "../components/UserDetails";
 import {
   fetchPostsByUser,

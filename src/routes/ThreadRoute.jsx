@@ -1,6 +1,6 @@
 import { useLoaderData } from "react-router-dom";
 import { fetchPostsByThread, fetchUser, fetchThread } from "../lib/wrodit";
-import PostBox from "../components/PostBox";
+import PostBox from "../components/post/PostBox.jsx";
 import ThreadInformation from "../components/ThreadInformation";
 
 async function clientLoader({ params }) {

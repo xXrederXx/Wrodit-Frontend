@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./Comment.module.css";
-import PostInformation from "../PostInformation.jsx";
+import PostInformation from "../post/PostInformation.jsx";
 import { fetchAllUserData, fetchCommentByParent, fetchUser } from "../../lib/wrodit.js";
 import { Link } from "react-router-dom";
 import CommentEditButton from "./CommentEditButton.jsx";

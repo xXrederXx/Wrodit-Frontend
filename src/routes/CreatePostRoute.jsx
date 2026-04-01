@@ -1,4 +1,4 @@
-import PostForm from "../components/PostForm";
+import PostForm from "../components/post/PostForm.jsx";
 import { createPost } from "../lib/wrodit";
 import { redirect, useActionData, useNavigate } from "react-router-dom";
 import { validatePost } from "../lib/validate";

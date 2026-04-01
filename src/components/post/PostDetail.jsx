@@ -1,9 +1,9 @@
-import PostText from "./PostText";
-import PostInformation from "./PostInformation";
-import PostFooter from "./PostFooter";
+import PostText from "./PostText.jsx";
+import PostInformation from "./PostInformation.jsx";
+import PostFooter from "./PostFooter.jsx";
 import styles from "./PostDetail.module.css";
 import { Link } from "react-router-dom";
-import CopyLinkButton from "./ui/CopyLinkButton.jsx";
+import CopyLinkButton from "../ui/CopyLinkButton.jsx";
 
 export default function PostDetail({
   title,
