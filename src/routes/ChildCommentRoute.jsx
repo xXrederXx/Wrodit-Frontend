@@ -1,6 +1,6 @@
 import { createComment } from "../lib/wrodit";
 import { redirect, useActionData, useNavigate } from "react-router-dom";
-import CommentForm from "../components/CommentForm";
+import CommentForm from "../components/comment/CommentForm.jsx";
 
 async function clientAction({ request, params }) {
   const formData = await request.formData();

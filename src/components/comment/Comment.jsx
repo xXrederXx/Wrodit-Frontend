@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import styles from "./Comment.module.css";
-import PostInformation from "./PostInformation";
-import { fetchAllUserData, fetchCommentByParent, fetchUser } from "../lib/wrodit";
+import PostInformation from "../PostInformation.jsx";
+import { fetchAllUserData, fetchCommentByParent, fetchUser } from "../../lib/wrodit.js";
 import { Link } from "react-router-dom";
-import CommentEditButton from "./CommentEditButton";
-import CommentFooter from "./CommentFooter";
+import CommentEditButton from "./CommentEditButton.jsx";
+import CommentFooter from "./CommentFooter.jsx";
 
 export default function Comment({ name, postId, data, lvl, isEditValid, commentId }) {
   const [children, setChildren] = useState([]);

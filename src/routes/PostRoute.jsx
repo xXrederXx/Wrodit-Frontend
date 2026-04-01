@@ -1,5 +1,5 @@
 import { BiCurrentLocation } from "react-icons/bi";
-import Comment from "../components/Comment";
+import Comment from "../components/comment/Comment.jsx";
 import PostDetail from "../components/PostDetail";
 
 import {

@@ -1,12 +1,12 @@
 import { FcLike } from "react-icons/fc";
 import { AiOutlineHeart, AiOutlineDislike, AiFillDislike } from "react-icons/ai";
-import styles from "./PostFooter.module.css";
+import styles from "../PostFooter.module.css";
 import {
   DislikeLikeComment,
   fetchSelfLikesComment,
   likeComment,
   RemoveLikeComment,
-} from "../lib/wrodit";
+} from "../../lib/wrodit.js";
 import { useEffect, useState } from "react";
 
 export default function CommentFooter({ vote, commentId }) {
