@@ -63,7 +63,7 @@ export async function patchPost(data, id) {
 //post like
 
 export async function likePost(id, vote = 1) {
-  return cachedRequest(`${BASE_URL}/posts/${id}`, "PATCH", undefined, {vote}, true);
+  return cachedRequest(`${BASE_URL}/posts/${id}/vote`, "PUT", undefined, {vote}, true);
 }
 
 export async function RemoveLikePost(id, vote = 0) {
