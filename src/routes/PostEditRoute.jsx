@@ -1,4 +1,4 @@
-import { fetchPostById, PatchPost } from "../lib/wrodit";
+import { fetchPostById, patchPost } from "../lib/wrodit";
 import {
   redirect,
   useActionData,
@@ -27,7 +27,7 @@ async function clientAction({ request, params }) {
   }
 
   try {
-    const res = await PatchPost(data, postId);
+    const res = await patchPost(data, postId);
     console.log("res", res);
     return redirect(`/`);
   } catch (error) {

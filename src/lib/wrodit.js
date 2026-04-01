@@ -18,6 +18,10 @@ export async function fetchAllUserData(force = false) {
   return cachedRequest(`${BASE_URL}/users/self`, "GET", undefined, undefined, force);
 }
 
+export async function deleteUser(id, force = false) {
+  return cachedRequest(`${BASE_URL}/users/${id}`, "DELETE", undefined, force);
+}
+
 //threads
 
 export async function createThread(data) {
@@ -35,15 +39,15 @@ export async function fetchPosts(force = false) {
 }
 
 export async function createPost(data) {
-  return cachedRequest(`${BASE_URL}/posts`, "POST", undefined, data, true);
+  return cachedRequest(`${BASE_URL}/posts/`, "POST", undefined, data, true);
 
 }
 
-export async function fetchPostsByThread(threadId, page = 1, size = 20, force = false) {
+export async function fetchPostsByThread(threadId, page = 0, size = 20, force = false) {
   if (!threadId) throw new Error("threadId wird benötigt");
   return cachedRequest(`${BASE_URL}/posts/?thread=${threadId}&page=${page}&size=${size}`, "GET", undefined, undefined, force);
 }
-export async function fetchPostsByUser(UserId, page = 1, size = 20, force = false) {
+export async function fetchPostsByUser(UserId, page = 0, size = 20, force = false) {
   if (!UserId) throw new Error("UserId wird benötigt");
   return cachedRequest(`${BASE_URL}/posts/?user=${UserId}&page=${page}&size=${size}`, "GET", undefined, undefined, force);
 }
@@ -52,7 +56,7 @@ export async function fetchPostById(id, force = false) {
   return cachedRequest(`${BASE_URL}/posts/${id}`, "GET", undefined, undefined, force);
 }
 
-export async function PatchPost(data, id) {
+export async function patchPost(data, id) {
   return cachedRequest(`${BASE_URL}/posts/${id}`, "PATCH", undefined, data, true);
 }
 

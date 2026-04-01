@@ -4,6 +4,7 @@ import {
   fetchPostsByUser,
   fetchAllUserData,
   fetchThread,
+  deleteUser,
 } from "../lib/wrodit";
 import { useLoaderData, Link } from "react-router-dom";
 
@@ -34,9 +35,26 @@ export default function UserRoute() {
   const user = data.user;
   const posts = data.posts;
 
+  const handleDelete = async () => {
+    try {
+      await deleteUser(user.id);
+      navigate("/wrodit/login");
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <>
-      <UserDetail username={user.username} email={user.email} userId={user.id}/>
+      <Link onClick={handleDelete} className="deleteButton">
+        Account Löschen
+      </Link>
+
+      <UserDetail
+        username={user.username}
+        email={user.email}
+        userId={user.id}
+      />
 
       {posts.map((post, index) => (
         <>

@@ -21,7 +21,7 @@ export default function CommentFooter({ vote, commentId }) {
     const fetchLikes = async () => {
       try {
         const likeSelf = await fetchSelfLikesComment(commentId);
-        setSelf(likeSelf.vote);
+        setSelf(likeSelf.vote ? likeSelf.vote : 0);
       } catch (err) {
         setError(err.message || "Fehler beim Laden");
       }
