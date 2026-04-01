@@ -28,7 +28,7 @@ export async function cachedRequest(
       const jsonResponse = await toFilteredJson(res);
 
       // Replace promise with resolved value
-      setCache(url, jsonResponse);
+      setCache(url, jsonResponse, 1);
 
       return jsonResponse;
     } catch (err) {
