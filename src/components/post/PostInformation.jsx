@@ -2,7 +2,7 @@ import styles from "./PostInformation.module.css";
 import { Link } from "react-router-dom";
 import { timeAgo } from "../../lib/util.js";
 
-export default function PostInformation({ username, threadId, threadName, createdAt }) {
+export default function PostHeader({ username, threadId, threadName, createdAt }) {
   return (
     <header className={styles.header}>
       <p>{username}</p>

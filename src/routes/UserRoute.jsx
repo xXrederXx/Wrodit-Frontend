@@ -32,9 +32,9 @@ async function clientLoader({ params }) {
 }
 
 export default function UserRoute() {
-  const data = useLoaderData();
-  const user = data.user;
-  const posts = data.posts;
+  const loaderData = useLoaderData();
+  const user = loaderData.user;
+  const posts = loaderData.posts;
 
   const handleUserDelete = async () => {
     try {
@@ -59,16 +59,17 @@ export default function UserRoute() {
 
       <UserDetail username={user.username} email={user.email} userId={user.id} />
 
-      {posts.map((post, index) => (
+      {posts.map(post => (
         <>
-          <Link onClick={handlePostDelete(post.id)} className="deleteButton">
+          <Link onClick={()=>handlePostDelete(post.id)} className="deleteButton">
             Post Löschen
           </Link>
           <Link to={`/wrodit/edit/post/${post.id}`} className="linkButton">
             Bearbeiten
           </Link>
           <PostBox
-            key={index}
+            key={post.id}
+            username={user.username}
             createdAt={post.createdAt}
             title={post.title}
             text={post.content}
