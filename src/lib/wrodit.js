@@ -18,6 +18,10 @@ export async function fetchAllUserData(force = false) {
   return cachedRequest(`${BASE_URL}/users/self`, "GET", undefined, undefined, force);
 }
 
+export async function deleteUser(id, force = false) {
+  return cachedRequest(`${BASE_URL}/users/${id}`, "DELETE", undefined, force);
+}
+
 //threads
 
 export async function createThread(data, force = false) {
@@ -52,14 +56,14 @@ export async function fetchPostById(id, force = false) {
   return cachedRequest(`${BASE_URL}/posts/${id}`, "GET", undefined, undefined, force);
 }
 
-export async function PatchPost(data, id, force = false) {
+export async function patchPost(data, id, force = false) {
   return cachedRequest(`${BASE_URL}/posts/${id}`, "PATCH", undefined, data, force);
 }
 
 //post like
 
 export async function likePost(id, vote = 1, force = false) {
-  return cachedRequest(`${BASE_URL}/posts/${id}`, "PATCH", undefined, {vote}, force);
+  return cachedRequest(`${BASE_URL}/posts/${id}/vote`, "PUT", undefined, {vote}, force);
 }
 
 export async function RemoveLikePost(id, vote = 0) {

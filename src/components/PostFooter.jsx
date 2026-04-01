@@ -27,7 +27,7 @@ export default function PostFooter({ vote, postId }) {
       }
     };
     fetchLikes();
-  }, [self]);
+  }, [postId]);
 
   const handleLike = async () => {
     try {

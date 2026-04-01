@@ -48,7 +48,20 @@ body {
   padding: 0.5rem;
   border-radius: 1rem;
   margin: 2rem;
+  display: inline-block;
 }
+
+.deleteButton {
+  text-decoration: none;
+  background-color: #d93900;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  margin: 1rem;
+  display: inline-block;
+  border: none;
+}
+
 .threadButton {
   text-decoration: none;
   background-color: #d93900;
