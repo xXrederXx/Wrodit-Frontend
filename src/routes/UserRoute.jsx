@@ -38,7 +38,6 @@ export default function UserRoute() {
   const handleDelete = async () => {
     try {
       await deleteUser(user.id);
-      navigate("/wrodit/login");
     } catch (err) {
       console.error(err);
     }

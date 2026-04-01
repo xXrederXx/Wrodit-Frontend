@@ -15,7 +15,6 @@ import {
 
 export default function PostFooter({ vote, postId }) {
   const [userVote, setUserVote] = useState(0);
-  const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchLikes = async () => {
@@ -23,7 +22,7 @@ export default function PostFooter({ vote, postId }) {
         const likeSelf = await fetchSelfLikesPost(postId, true);
         setUserVote(likeSelf.vote || 0);
       } catch (err) {
-        setError(err.message || "Fehler beim Laden");
+        console.error(err.message || "Fehler beim Laden");
       }
     };
     fetchLikes();
