@@ -1,6 +1,6 @@
 import { Form } from "react-router";
-import Button from "./Button";
-import Input from "./Input";
+import Button from "./ui/Button.jsx";
+import Input from "./ui/Input.jsx";
 import styles from "./SignUpForm.module.css";
 
 export default function LogInForm({ onCancel, errors = {} }) {

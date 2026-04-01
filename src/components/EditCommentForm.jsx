@@ -1,6 +1,6 @@
 import { Form } from "react-router";
-import Button from "./Button";
-import Text from "./Text";
+import Button from "./ui/Button.jsx";
+import Text from "./ui/Text.jsx";
 import styles from "./SignUpForm.module.css";
 import { useState, useEffect } from "react";
 

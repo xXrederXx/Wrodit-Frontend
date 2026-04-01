@@ -3,7 +3,7 @@ import PostInformation from "./PostInformation";
 import PostFooter from "./PostFooter";
 import styles from "./PostDetail.module.css";
 import { Link } from "react-router-dom";
-import CopyLinkButton from "./CopyLinkButton";
+import CopyLinkButton from "./ui/CopyLinkButton.jsx";
 
 export default function PostDetail({
   title,
