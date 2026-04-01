@@ -11,10 +11,9 @@ export function getJWTToken() {
   return session;
 }
 
-export function getAuthorizationHeader()
-{
+export function getAuthorizationHeader() {
   const session = getJWTToken();
-  return session ? { Authorization: `Bearer ${session}` } : {}
+  return session ? { Authorization: `Bearer ${session}` } : {};
 }
 
 export function getSession() {
@@ -53,7 +52,7 @@ export function useSession() {
       }
     }
 
-    const handleStorageChange = (event) => {
+    const handleStorageChange = event => {
       if (event.key === STORAGE_KEY) {
         try {
           if (event.newValue) {
@@ -67,7 +66,7 @@ export function useSession() {
       }
     };
 
-    const handleCustomSessionChange = (event) => {
+    const handleCustomSessionChange = event => {
       setSession(event.detail);
     };
 
@@ -93,7 +92,7 @@ export function useCurrentUser() {
     }
   }, []);
 
-  const login = (userData) => {
+  const login = userData => {
     setUser(userData);
     localStorage.setItem("user", JSON.stringify(userData));
   };

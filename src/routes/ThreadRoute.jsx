@@ -11,13 +11,13 @@ async function clientLoader({ params }) {
   const postsArray = postsData.content || [];
 
   const postsWithUsers = await Promise.all(
-    postsArray.map(async (post) => {
+    postsArray.map(async post => {
       const user = await fetchUser(post.userId);
       return { ...post, username: user.username || "Unbekannt" };
     }),
   );
 
-  return { thread, posts : postsWithUsers};
+  return { thread, posts: postsWithUsers };
 }
 
 export default function ThreadRoute() {
@@ -25,7 +25,11 @@ export default function ThreadRoute() {
 
   return (
     <>
-    <ThreadInformation name={thread.name} description={thread.description} to={`/wrodit/create/post/${thread.id}`}/>
+      <ThreadInformation
+        name={thread.name}
+        description={thread.description}
+        to={`/wrodit/create/post/${thread.id}`}
+      />
 
       {posts.map((post, index) => (
         <PostBox

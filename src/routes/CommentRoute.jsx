@@ -11,11 +11,9 @@ async function clientAction({ request, params }) {
     ...data,
     postId,
   };
-  console.log("exdata", extendedData);
 
   try {
-    const res = await createComment(extendedData);
-    console.log("res", res);
+    await createComment(extendedData);
     return redirect(`/wrodit/post/${postId}`);
   } catch (error) {
     console.error("Create post error:", error);
@@ -29,7 +27,7 @@ export default function CommentRoute() {
   const onCancel = () => {
     navigate(-1);
   };
-  
+
   return (
     <div className="createPost">
       <h1>Komentiere</h1>

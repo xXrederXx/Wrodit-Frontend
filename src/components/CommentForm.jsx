@@ -11,7 +11,7 @@ export default function CommentForm({ onCancel, errors = {} }) {
       </Button>
 
       <Text
-        {...(errors.content && { error: errors.content  })}
+        {...(errors.content && { error: errors.content })}
         type="text"
         name="content"
         placeholder="Komentiere *"

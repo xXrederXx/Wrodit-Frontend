@@ -1,9 +1,5 @@
 import { FcLike } from "react-icons/fc";
-import {
-  AiOutlineHeart,
-  AiOutlineDislike,
-  AiFillDislike,
-} from "react-icons/ai";
+import { AiOutlineHeart, AiOutlineDislike, AiFillDislike } from "react-icons/ai";
 import styles from "./PostFooter.module.css";
 import {
   DislikeLikeComment,
@@ -59,16 +55,12 @@ export default function CommentFooter({ vote, commentId }) {
   return (
     <footer className={styles.footer}>
       {vote + self}
-      {self === 1 ? (
+      {self === 1 ?
         <FcLike onClick={handleRemoveLike} />
-      ) : (
-        <AiOutlineHeart onClick={handleLike} />
-      )}
-      {self === -1 ? (
+      : <AiOutlineHeart onClick={handleLike} />}
+      {self === -1 ?
         <AiFillDislike onClick={handleRemoveLike} />
-      ) : (
-        <AiOutlineDislike onClick={handleDisLike} />
-      )}
+      : <AiOutlineDislike onClick={handleDisLike} />}
     </footer>
   );
 }

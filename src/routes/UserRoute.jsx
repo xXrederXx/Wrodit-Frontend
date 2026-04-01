@@ -18,7 +18,7 @@ async function clientLoader({ params }) {
   const posts = res.content;
 
   const postsWithThread = await Promise.all(
-    posts.map(async (post) => {
+    posts.map(async post => {
       const thread = await fetchThread(post.threadId);
 
       return {
@@ -43,7 +43,7 @@ export default function UserRoute() {
       console.error(err);
     }
   };
-  const handlePostDelete = async (id) => {
+  const handlePostDelete = async id => {
     try {
       await deletePost(id);
     } catch (err) {
@@ -53,19 +53,11 @@ export default function UserRoute() {
 
   return (
     <>
-      <Link
-        onClick={handleUserDelete}
-        className="deleteButton"
-        to={"/wrodit/login"}
-      >
+      <Link onClick={handleUserDelete} className="deleteButton" to={"/wrodit/login"}>
         Account Löschen
       </Link>
 
-      <UserDetail
-        username={user.username}
-        email={user.email}
-        userId={user.id}
-      />
+      <UserDetail username={user.username} email={user.email} userId={user.id} />
 
       {posts.map((post, index) => (
         <>

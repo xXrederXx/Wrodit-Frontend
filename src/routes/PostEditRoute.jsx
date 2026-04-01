@@ -1,10 +1,5 @@
 import { fetchPostById, patchPost } from "../lib/wrodit";
-import {
-  redirect,
-  useActionData,
-  useNavigate,
-  useLoaderData,
-} from "react-router-dom";
+import { redirect, useActionData, useNavigate, useLoaderData } from "react-router-dom";
 import { validatePost } from "../lib/validate";
 import EditPostForm from "../components/EditPostForm";
 
@@ -27,8 +22,7 @@ async function clientAction({ request, params }) {
   }
 
   try {
-    const res = await patchPost(data, postId);
-    console.log("res", res);
+    await patchPost(data, postId);
     return redirect(`/`);
   } catch (error) {
     console.error("Create post error:", error);

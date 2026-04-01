@@ -5,17 +5,12 @@ import Text from "./Text";
 import styles from "./SignUpForm.module.css";
 import { useEffect, useState } from "react";
 
-export default function EditPostForm({
-  onCancel,
-  errors = {},
-  title,
-  content,
-}) {
+export default function EditPostForm({ onCancel, errors = {}, title, content }) {
   const [postTitle, setTitle] = useState("");
   const [postContent, setContent] = useState("");
 
   useEffect(() => {
-    setTitle(title);// eslint-disable-line 
+    setTitle(title); // eslint-disable-line
     setContent(content);
   }, [title, content]);
 
@@ -30,7 +25,7 @@ export default function EditPostForm({
         name="title"
         placeholder="Dein Post *"
         value={postTitle}
-        onChange={(e) => setTitle(e.target.value)}
+        onChange={e => setTitle(e.target.value)}
       />
       <Text
         {...(errors.content && { error: errors.content })}
@@ -38,7 +33,7 @@ export default function EditPostForm({
         name="content"
         placeholder="Beschreibung *"
         value={postContent}
-        onChange={(e) => setContent(e.target.value)}
+        onChange={e => setContent(e.target.value)}
       />
 
       {errors?.general && <p className="error">{errors.general}</p>}

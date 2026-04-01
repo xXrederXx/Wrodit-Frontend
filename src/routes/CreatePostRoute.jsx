@@ -17,11 +17,9 @@ async function clientAction({ request, params }) {
     ...data,
     threadId,
   };
-  console.log("exdata", extendedData);
 
   try {
-    const res = await createPost(extendedData);
-    console.log("res", res);
+    await createPost(extendedData);
     return redirect(`/`);
   } catch (error) {
     console.error("Create post error:", error);

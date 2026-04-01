@@ -11,13 +11,13 @@ export default function PostForm({ onCancel, errors = {} }) {
         Abbrechen
       </Button>
       <Input
-        {...(errors.title && { error: errors.title  })}
+        {...(errors.title && { error: errors.title })}
         type="text"
         name="title"
         placeholder="Dein Post *"
       />
       <Text
-        {...(errors.content && { error: errors.content  })}
+        {...(errors.content && { error: errors.content })}
         type="text"
         name="content"
         placeholder="Beschreibung *"
