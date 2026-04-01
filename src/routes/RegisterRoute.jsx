@@ -17,10 +17,8 @@ async function clientAction({ request }) {
     const res = await signUp(data);
 
     if (res.error === "Conflict") {
-
       return { formError: "Benutzername oder Email Schon vergeben." };
     }
-
 
     return redirect("/wrodit/login");
   } catch (error) {
