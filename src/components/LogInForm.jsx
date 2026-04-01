@@ -21,12 +21,8 @@ export default function LogInForm({ onCancel, errors = {} }) {
         name="password"
         placeholder="Passwort *"
       />
-      <Input
-        type="hidden"
-        name="email"
-        value="fillerValue"
-      />
-      {errors?.formError  && <p className="error">{errors.formError }</p>}
+      <Input type="hidden" name="email" value="fillerValue" />
+      {errors?.formError && <p className="error">{errors.formError}</p>}
       <Button type="submit">Anmelden</Button>
     </Form>
   );

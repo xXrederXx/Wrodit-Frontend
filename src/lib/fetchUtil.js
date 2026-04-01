@@ -8,27 +8,21 @@ export async function checkResponse(response, errorMessage = "") {
 }
 
 export async function toFilteredJson(res) {
-    if(typeof res !== "object" || !res || res.status === 204)
-    {
-        return res;
-    }
+  if (typeof res !== "object" || !res || res.status === 204) {
+    return res;
+  }
   const obj = await res.json();
   return filterContent(obj);
 }
 
-export async function betterFetch(
-  url,
-  method = "GET",
-  headers = {},
-  body = undefined,
-) {
+export async function betterFetch(url, method = "GET", headers = {}, body = undefined) {
   const payload = { method, headers };
 
   if (body) {
     payload.body = JSON.stringify(body);
-    payload.headers = { 
-      "Content-Type": "application/json", 
-      ...headers 
+    payload.headers = {
+      "Content-Type": "application/json",
+      ...headers,
     };
   }
 
@@ -43,9 +37,7 @@ async function throwFetchResponseError(response, msg = "") {
     try {
       body = await response.clone().text();
     } catch {
-      console.warn(
-        "Could not read json or text form response, while trying to throw",
-      );
+      console.warn("Could not read json or text form response, while trying to throw");
     }
   }
   throw new Error(

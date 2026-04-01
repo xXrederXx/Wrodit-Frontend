@@ -23,7 +23,7 @@ export default function EditCommentForm({ onCancel, errors = {}, content }) {
         name="content"
         placeholder="Komentiere *"
         value={postContent}
-        onChange={(e) => setContent(e.target.value)}
+        onChange={e => setContent(e.target.value)}
       />
 
       {errors?.general && <p className="error">{errors.general}</p>}

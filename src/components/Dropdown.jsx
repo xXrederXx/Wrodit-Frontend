@@ -11,7 +11,7 @@ export default function Dropdown({ userId }) {
 
   // Klick außerhalb schließt das Dropdown
   useEffect(() => {
-    const handleClickOutside = (event) => {
+    const handleClickOutside = event => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setOpen(false);
       }

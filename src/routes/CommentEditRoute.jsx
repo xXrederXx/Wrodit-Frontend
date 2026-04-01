@@ -1,13 +1,5 @@
-import {
-  fetchCommentById,
-  PatchComment,
-} from "../lib/wrodit";
-import {
-  redirect,
-  useActionData,
-  useNavigate,
-  useLoaderData,
-} from "react-router-dom";
+import { fetchCommentById, PatchComment } from "../lib/wrodit";
+import { redirect, useActionData, useNavigate, useLoaderData } from "react-router-dom";
 import EditCommentForm from "../components/EditCommentForm";
 
 async function clientLoader({ params }) {
@@ -18,14 +10,13 @@ async function clientLoader({ params }) {
 }
 
 async function clientAction({ request, params }) {
-  const commentId = params.id;  
+  const commentId = params.id;
 
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
 
   try {
-    const res = await PatchComment(data, commentId);
-    console.log("res", res);
+    await PatchComment(data, commentId);
     return redirect(`/wrodit/post/1`);
   } catch (error) {
     console.error("Create post error:", error);
@@ -45,11 +36,7 @@ export default function CommentEditRoute() {
   return (
     <div className="createPost">
       <h1>Bearbeite deinen komentar</h1>
-      <EditCommentForm
-        errors={errors}
-        onCancel={onCancel}
-        content={data.commentData.content}
-      />
+      <EditCommentForm errors={errors} onCancel={onCancel} content={data.commentData.content} />
     </div>
   );
 }

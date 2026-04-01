@@ -8,11 +8,7 @@ export default function Header({ userId }) {
     <header className={styles.header}>
       {" "}
       <Link to="/">
-        <img
-          src={logo}
-          alt="Mein Logo"
-          style={{ width: "5rem", height: "5rem" }}
-        ></img>{" "}
+        <img src={logo} alt="Mein Logo" style={{ width: "5rem", height: "5rem" }}></img>{" "}
       </Link>
       <Dropdown userId={userId} />
     </header>
