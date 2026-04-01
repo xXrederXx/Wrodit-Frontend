@@ -14,7 +14,6 @@ async function clientAction({ request }) {
 
   try {
     const res = await createThread(data);
-    console.log(res);
   } catch (error) {
     return error;
   }

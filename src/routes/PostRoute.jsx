@@ -28,7 +28,6 @@ async function clientLoader({ params }) {
 
 export default function PostRoute() {
   const { post, user, thread, comments, currentUser } = useLoaderData();
-  console.log(post.id);
 
   return (
     <>

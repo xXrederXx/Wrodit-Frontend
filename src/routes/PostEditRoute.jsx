@@ -23,7 +23,6 @@ async function clientAction({ request, params }) {
 
   try {
     const res = await patchPost(data, postId);
-    console.log("res", res);
     return redirect(`/`);
   } catch (error) {
     console.error("Create post error:", error);
