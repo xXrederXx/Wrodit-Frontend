@@ -2,31 +2,7 @@ import PostBox from "../components/post/PostBox.jsx";
 import { fetchPosts, fetchUser, fetchThread } from "../lib/wrodit";
 import { useLoaderData, redirect } from "react-router-dom";
 
-export default function WroditHomeRoute() {
-  const data = useLoaderData();
-  const posts = data.content;
-
-  return (
-    <>
-      {posts.map((post, index) => (
-        <PostBox
-          key={index}
-          userLoaderData={post.userLoaderData}
-          createdAt={post.createdAt}
-          title={post.title}
-          text={post.content}
-          vote={post.vote}
-          name={post.userLoaderData ? post.userLoaderData.username : "Loading..."}
-          threadId={post.threadId}
-          threadName={post.threadLoaderData ? post.threadLoaderData.name : "Loading..."}
-          to={post.id}
-        />
-      ))}
-    </>
-  );
-}
-
-WroditHomeRoute.loader = async function clientLoader() {
+async function clientLoader() {
   try {
     const postsData = await fetchPosts(true);
 
@@ -55,3 +31,29 @@ WroditHomeRoute.loader = async function clientLoader() {
     throw err;
   }
 };
+
+export default function WroditHomeRoute() {
+  const data = useLoaderData();
+  const posts = data.content;
+
+  return (
+    <>
+      {posts.map((post, index) => (
+        <PostBox
+          key={index}
+          userLoaderData={post.userLoaderData}
+          createdAt={post.createdAt}
+          title={post.title}
+          text={post.content}
+          vote={post.vote}
+          name={post.userLoaderData ? post.userLoaderData.username : "Loading..."}
+          threadId={post.threadId}
+          threadName={post.threadLoaderData ? post.threadLoaderData.name : "Loading..."}
+          to={post.id}
+        />
+      ))}
+    </>
+  );
+}
+
+WroditHomeRoute.loader = clientLoader;
