@@ -61,7 +61,7 @@ export default function Comment({
           <PostInformation name={name} createdAt={data.createdAt} />
 
           <p>{data.content}</p>
-          <CommentFooter vote={data.votes} commentId={data.id}/>
+          <CommentFooter vote={data.votes} commentId={data.id} />
           <div>
             <Link
               to={`/wrodit/create/comment/parent/${postId}/${data.id}`}
@@ -69,6 +69,7 @@ export default function Comment({
             >
               Komentieren
             </Link>
+
             <CommentEditButton
               commentId={commentId}
               isValid={isEditValid}
