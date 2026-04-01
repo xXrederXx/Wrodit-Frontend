@@ -8,6 +8,7 @@ import {
   deletePost,
 } from "../lib/wrodit";
 import { useLoaderData, Link } from "react-router-dom";
+import style from "./UserRoute.module.css"
 
 async function clientLoader({ params }) {
   const userId = params.id;
@@ -53,7 +54,7 @@ export default function UserRoute() {
 
   return (
     <>
-      <Link onClick={handleUserDelete} className="deleteButton" to={"/wrodit/login"}>
+      <Link onClick={handleUserDelete} className={style.deleteButton} to={"/wrodit/login"}>
         Account Löschen
       </Link>
 
@@ -61,10 +62,10 @@ export default function UserRoute() {
 
       {posts.map(post => (
         <>
-          <Link onClick={() => handlePostDelete(post.id)} className="deleteButton">
+          <Link onClick={() => handlePostDelete(post.id)} className={style.deleteButton}>
             Post Löschen
           </Link>
-          <Link to={`/wrodit/edit/post/${post.id}`} className="linkButton">
+          <Link to={`/wrodit/edit/post/${post.id}`} className={style.linkButton}>
             Bearbeiten
           </Link>
           <PostBox
