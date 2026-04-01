@@ -8,7 +8,7 @@ export default function ErrorRoute() {
   
   if(!useCurrentUser().user)
   {
-    window.location.href = "/wrodit/login"
+    window.location.href = "/wrodit/login" // eslint-disable-line
     return
   }
 
