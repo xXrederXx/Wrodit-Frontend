@@ -36,11 +36,6 @@ body {
   }
 }
 
-.commentPadding {
-  padding: 1rem;
-  overflow-x: hidden;
-}
-
 .linkButton {
   text-decoration: none;
   background-color: #d93900;
