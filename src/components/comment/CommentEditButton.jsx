@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { deleteComment } from "../../lib/wrodit.js";
-import style from "./CommentEditButton.module.css"
+import style from "./CommentEditButton.module.css";
 export default function CommentEditButton({ isValid, commentId }) {
   const handleCommentDelete = async () => {
     try {

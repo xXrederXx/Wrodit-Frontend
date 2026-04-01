@@ -10,25 +10,25 @@ async function clientAction({ request }) {
 
   const { isValid, errors } = validateSignIn(data);
   if (!isValid) {
-    return errors;
+    return { errors };
   }
 
   try {
     const res = await signUp(data);
 
     if (res.error === "Conflict") {
-      return { formError: "Benutzername oder Email Schon vergeben." };
+      return { errors: { formError: "Benutzername oder Email Schon vergeben." } };
     }
 
     return redirect("/wrodit/login");
   } catch (error) {
     console.error("SignUp Error:", error);
-    return { formError: error.message || "Unbekannter Fehler beim Signup" };
+    return { errors: { formError: error.message || "Unbekannter Fehler beim Signup" } };
   }
 }
 export default function RegisterRoute() {
   const navigate = useNavigate();
-  const errors = useActionData() ?? {};
+  const { errors } = useActionData() ?? {};
 
   const onCancel = () => {
     return navigate("/");
@@ -38,7 +38,6 @@ export default function RegisterRoute() {
     <div className="signup">
       <h1>Registrieren</h1>
       <SignUpForm errors={errors} onCancel={onCancel} />
-      {errors["email/username"] && <p>{errors["email/username"]}</p>}
 
       <p>
         Schon Wroditor*in? <Link to="/wrodit/login">Anmelden</Link>

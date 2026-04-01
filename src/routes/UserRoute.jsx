@@ -9,7 +9,7 @@ import {
   fetchUserThreads,
 } from "../lib/wrodit";
 import { useLoaderData, Link } from "react-router-dom";
-import style from "./UserRoute.module.css"
+import style from "./UserRoute.module.css";
 import ThreadInformation from "../components/thread/ThreadInformation.jsx";
 
 async function clientLoader({ params }) {
@@ -38,8 +38,7 @@ async function clientLoader({ params }) {
 }
 
 export default function UserRoute() {
-  const {user, posts, threads} = useLoaderData();
-
+  const { user, posts, threads } = useLoaderData();
 
   const handleUserDelete = async () => {
     try {
@@ -85,9 +84,14 @@ export default function UserRoute() {
           />
         </>
       ))}
-      {
-        threads.map(thread => <ThreadInformation key={thread.id} name={thread.name} description={thread.description} to={thread.id} />)
-      }
+      {threads.map(thread => (
+        <ThreadInformation
+          key={thread.id}
+          name={thread.name}
+          description={thread.description}
+          to={thread.id}
+        />
+      ))}
     </>
   );
 }
