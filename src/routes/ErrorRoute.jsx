@@ -5,11 +5,10 @@ import { useCurrentUser } from "../lib/session";
 export default function ErrorRoute() {
   const error = useRouteError();
   console.error(error, useCurrentUser());
-  
-  if(!useCurrentUser().user)
-  {
-    window.location.href = "/wrodit/login" // eslint-disable-line
-    return
+
+  if (!useCurrentUser().user) {
+    window.location.href = "/wrodit/login"; // eslint-disable-line
+    return;
   }
 
   return (

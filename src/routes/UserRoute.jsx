@@ -6,17 +6,19 @@ import {
   fetchThread,
   deleteUser,
   deletePost,
+  fetchUserThreads,
 } from "../lib/wrodit";
 import { useLoaderData, Link } from "react-router-dom";
-import style from "./UserRoute.module.css"
+import style from "./UserRoute.module.css";
+import ThreadInformation from "../components/thread/ThreadInformation.jsx";
 
 async function clientLoader({ params }) {
   const userId = params.id;
 
-  const user = await fetchAllUserData();
+  const userData = await fetchAllUserData();
 
-  const res = await fetchPostsByUser(userId);
-  const posts = res.content;
+  const userPostsPage = await fetchPostsByUser(userId, 0, 10, true);
+  const posts = userPostsPage.content;
 
   const postsWithThread = await Promise.all(
     posts.map(async post => {
@@ -29,13 +31,14 @@ async function clientLoader({ params }) {
     }),
   );
 
-  return { user, posts: postsWithThread };
+  const threadsPage = await fetchUserThreads();
+  const threads = threadsPage.content;
+
+  return { user: userData, posts: postsWithThread, threads };
 }
 
 export default function UserRoute() {
-  const loaderData = useLoaderData();
-  const user = loaderData.user;
-  const posts = loaderData.posts;
+  const { user, posts, threads } = useLoaderData();
 
   const handleUserDelete = async () => {
     try {
@@ -80,6 +83,14 @@ export default function UserRoute() {
             to={post.id}
           />
         </>
+      ))}
+      {threads.map(thread => (
+        <ThreadInformation
+          key={thread.id}
+          name={thread.name}
+          description={thread.description}
+          to={thread.id}
+        />
       ))}
     </>
   );

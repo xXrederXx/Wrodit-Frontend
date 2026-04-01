@@ -36,6 +36,10 @@ export async function fetchThread(id, force = false) {
   return cachedRequest(`${BASE_URL}/threads/${id}`, "GET", undefined, undefined, force);
 }
 
+export async function fetchUserThreads(force = false) {
+  return cachedRequest(`${BASE_URL}/threads/userfeed`, "GET", undefined, undefined, force);
+}
+
 //posts
 
 export async function fetchPosts(force = false) {

@@ -19,15 +19,15 @@ async function clientAction({ request }) {
   } catch (error) {
     console.error("Login Error:", error);
     if (error.status === 401) {
-      return { formError: "Benutzername oder Passwort ist falsch." };
+      return { errors: { formError: "Benutzername oder Passwort ist falsch." } };
     }
-    return { formError: error.message || "Unbekannter Fehler beim Login" };
+    return { errors: { formError: error.message || "Unbekannter Fehler beim Login" } };
   }
 }
 
 export default function LoginRoute() {
   const navigate = useNavigate();
-  const errors = useActionData();
+  const { errors } = useActionData() ?? {};
 
   const onCancel = () => {
     return navigate("/");
