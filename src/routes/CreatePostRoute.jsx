@@ -19,7 +19,7 @@ async function clientAction({ request, params }) {
   };
 
   try {
-    const res = await createPost(extendedData);
+    await createPost(extendedData);
     return redirect(`/`);
   } catch (error) {
     console.error("Create post error:", error);

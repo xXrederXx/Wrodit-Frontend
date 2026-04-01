@@ -16,7 +16,7 @@ async function clientAction({ request, params }) {
   const data = Object.fromEntries(formData);
 
   try {
-    const res = await PatchComment(data, commentId);
+    await PatchComment(data, commentId);
     return redirect(`/wrodit/post/1`);
   } catch (error) {
     console.error("Create post error:", error);

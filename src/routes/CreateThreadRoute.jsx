@@ -13,7 +13,7 @@ async function clientAction({ request }) {
   }
 
   try {
-    const res = await createThread(data);
+    await createThread(data);
   } catch (error) {
     return error;
   }

@@ -14,7 +14,7 @@ async function clientAction({ request, params }) {
   };
 
   try {
-    const res = await createComment(extendedData);
+    await createComment(extendedData);
     return redirect(`/wrodit/post/${postId}`);
   } catch (error) {
     console.error("Create post error:", error);
