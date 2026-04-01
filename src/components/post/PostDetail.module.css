@@ -38,10 +38,10 @@ article {
   z-index: 100;
   min-width: 200px;
 
-  >div {
+  > div {
     display: flex;
     justify-content: space-between;
-    align-items: center
+    align-items: center;
   }
   span {
     word-break: break-all;
@@ -54,5 +54,4 @@ article {
     font-weight: bold;
     color: white;
   }
-
 }
