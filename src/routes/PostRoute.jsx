@@ -36,7 +36,7 @@ export default function PostRoute() {
         title={post.title}
         text={post.content}
         vote={post.vote}
-        name={user.username}
+        username={user.username}
         threadId={thread.id}
         threadName={thread.name}
         postId={post.id}

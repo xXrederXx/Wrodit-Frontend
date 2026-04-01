@@ -5,20 +5,11 @@ import styles from "./PostDetail.module.css";
 import { Link } from "react-router-dom";
 import CopyLinkButton from "../ui/CopyLinkButton.jsx";
 
-export default function PostDetail({
-  title,
-  text,
-  vote,
-  createdAt,
-  name,
-  threadId,
-  threadName,
-  postId,
-}) {
+export default function PostDetail({ title, text, vote, createdAt, username, threadId, threadName, postId }) {
   return (
     <article className={styles.article}>
       <PostInformation
-        name={name}
+        username={username}
         threadId={threadId}
         threadName={threadName}
         createdAt={createdAt}
