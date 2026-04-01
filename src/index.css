@@ -28,3 +28,9 @@ body {
     padding-right: 10rem;
   }
 }
+
+:root {
+  --clr-primary: #d93900;
+  --clr-link: #3498db;
+  --clr-link-visited: #808080;
+}
