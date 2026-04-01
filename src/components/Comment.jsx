@@ -1,23 +1,12 @@
 import { useEffect, useState } from "react";
 import styles from "./Comment.module.css";
 import PostInformation from "./PostInformation";
-import {
-  fetchAllUserData,
-  fetchCommentByParent,
-  fetchUser,
-} from "../lib/wrodit";
+import { fetchAllUserData, fetchCommentByParent, fetchUser } from "../lib/wrodit";
 import { Link } from "react-router-dom";
 import CommentEditButton from "./CommentEditButton";
 import CommentFooter from "./CommentFooter";
 
-export default function Comment({
-  name,
-  postId,
-  data,
-  lvl,
-  isEditValid,
-  commentId,
-}) {
+export default function Comment({ name, postId, data, lvl, isEditValid, commentId }) {
   const [children, setChildren] = useState([]);
   const [error, setError] = useState("");
   const [self, setSelf] = useState(false);
@@ -29,7 +18,7 @@ export default function Comment({
         const user = await fetchAllUserData();
 
         const childUsername = await Promise.all(
-          newData.content.map(async (item) => {
+          newData.content.map(async item => {
             const dataUser = await fetchUser(item.userId);
 
             return {
@@ -65,19 +54,14 @@ export default function Comment({
           <div>
             <Link
               to={`/wrodit/create/comment/parent/${postId}/${data.id}`}
-              className={styles.linkButton}
-            >
+              className={styles.linkButton}>
               Komentieren
             </Link>
-
-            <CommentEditButton
-              commentId={commentId}
-              isValid={isEditValid}
-            />{" "}
+            <CommentEditButton commentId={commentId} isValid={isEditValid} />{" "}
           </div>
         </div>
       </div>
-      {children.map((child) => {
+      {children.map(child => {
         const isValid = self.id === child.userId;
 
         return (

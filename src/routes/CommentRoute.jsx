@@ -29,7 +29,7 @@ export default function CommentRoute() {
   const onCancel = () => {
     navigate(-1);
   };
-  
+
   return (
     <div className="createPost">
       <h1>Komentiere</h1>

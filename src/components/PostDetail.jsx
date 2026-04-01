@@ -25,7 +25,7 @@ export default function PostDetail({
       />
       <h1 className={styles.title}>{title}</h1>
       <PostText text={text} />
-      <PostFooter vote={vote} postId={postId}/>
+      <PostFooter vote={vote} postId={postId} />
       <Link to={`/wrodit/create/comment/${postId}`} className={styles.linkButton}>
         Komentieren
       </Link>

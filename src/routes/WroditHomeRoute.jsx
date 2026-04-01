@@ -16,13 +16,9 @@ export default function WroditHomeRoute() {
           title={post.title}
           text={post.content}
           vote={post.vote}
-          name={
-            post.userLoaderData ? post.userLoaderData.username : "Loading..."
-          }
+          name={post.userLoaderData ? post.userLoaderData.username : "Loading..."}
           threadId={post.threadId}
-          threadName={
-            post.threadLoaderData ? post.threadLoaderData.name : "Loading..."
-          }
+          threadName={post.threadLoaderData ? post.threadLoaderData.name : "Loading..."}
           to={post.id}
         />
       ))}
@@ -35,7 +31,7 @@ WroditHomeRoute.loader = async function clientLoader() {
     const postsData = await fetchPosts(true);
 
     const postsWithData = await Promise.all(
-      postsData.content.map(async (post) => {
+      postsData.content.map(async post => {
         const [userData, threadData] = await Promise.all([
           fetchUser(post.userId),
           fetchThread(post.threadId),

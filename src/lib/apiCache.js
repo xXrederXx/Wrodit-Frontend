@@ -3,13 +3,7 @@ import { getAuthorizationHeader } from "./session";
 
 const cache = new Map();
 
-export async function cachedRequest(
-  url,
-  method,
-  headers = {},
-  body = undefined,
-  force = false,
-) {
+export async function cachedRequest(url, method, headers = {}, body = undefined, force = false) {
   const cached = getCache(url);
   if (cached && !force) {
     return cached;
@@ -17,12 +11,7 @@ export async function cachedRequest(
 
   const requestPromise = (async () => {
     try {
-      const res = await betterFetch(
-        url,
-        method,
-        { ...headers, ...getAuthorizationHeader() },
-        body,
-      );
+      const res = await betterFetch(url, method, { ...headers, ...getAuthorizationHeader() }, body);
 
       checkResponse(res);
       const jsonResponse = await toFilteredJson(res);

@@ -21,7 +21,7 @@ async function clientLoader({ params }) {
   const currentUser = await fetchAllUserData();
 
   const data = await fetchCommentByPost(postId);
-  const comments = data.content.filter((comment) => comment.parentId === null);
+  const comments = data.content.filter(comment => comment.parentId === null);
 
   return { post, user, thread, comments, currentUser };
 }
@@ -29,7 +29,7 @@ async function clientLoader({ params }) {
 export default function PostRoute() {
   const { post, user, thread, comments, currentUser } = useLoaderData();
   console.log(post.id);
-  
+
   return (
     <>
       <PostDetail
@@ -43,8 +43,7 @@ export default function PostRoute() {
         postId={post.id}
       />
       <div className="commentPadding">
-        {comments.map((comment) => {
-
+        {comments.map(comment => {
           const isValid = currentUser.id === comment.userId;
 
           return (

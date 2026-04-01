@@ -5,7 +5,7 @@ import { useLoaderData } from "react-router-dom";
 
 async function clientLoader() {
   const user = await fetchAllUserData();
-  console.log("userr",user)
+  console.log("userr", user);
 
   return { user };
 }
