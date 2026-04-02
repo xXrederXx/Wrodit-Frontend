@@ -89,7 +89,7 @@ export default function UserRoute() {
 
         return (
           <>
-            <Link className="threadDescription" to={`wrodit/threads/${thread.id}`}>
+            <Link className="threadDescription" to={`/wrodit/thread/${thread.id}`}>
               <h1>w/{thread.name}</h1>
             </Link>
           </>

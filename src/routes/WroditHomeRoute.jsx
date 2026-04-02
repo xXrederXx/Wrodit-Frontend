@@ -3,7 +3,10 @@ import { fetchPosts, fetchUser, fetchThread } from "../lib/wrodit";
 import { useLoaderData } from "react-router-dom";
 
 async function clientLoader() {
-  const postsData = await fetchPosts();
+  const postsData = await fetchPosts(true);
+
+  console.log("post",postsData);
+  
 
   const postsWithData = await Promise.all(
     postsData.content.map(async post => {
