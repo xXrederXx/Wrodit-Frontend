@@ -10,6 +10,7 @@ import {
 } from "../lib/wrodit";
 import { useLoaderData, Link } from "react-router-dom";
 import style from "./UserRoute.module.css";
+import { removeSession } from "../lib/session.js";
 
 async function clientLoader({ params }) {
   const userId = params.id;
@@ -42,6 +43,7 @@ export default function UserRoute() {
   const handleUserDelete = async () => {
     try {
       await deleteUser();
+      removeSession()
     } catch (err) {
       console.error(err);
     }
@@ -56,7 +58,7 @@ export default function UserRoute() {
 
   return (
     <>
-      <Link onClick={handleUserDelete} className={style.deleteButton} to={"/wrodit/login"}>
+      <Link onClick={handleUserDelete} className={style.deleteButton}>
         Account Löschen
       </Link>
 
