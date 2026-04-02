@@ -19,7 +19,7 @@ export async function cachedRequest(url, method, headers = {}, body = undefined,
     return cached;
   }
 
-  const requestPromise = (async () => {
+  const requestPromise = await (async () => {
     try {
       const res = await betterFetch(url, method, { ...headers, ...getAuthorizationHeader() }, body);
 
