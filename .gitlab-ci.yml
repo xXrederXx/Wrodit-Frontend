@@ -16,6 +16,9 @@ lint:
   script:
     - npm ci --cache .npm --prefer-offline
     - npm run lint
+  only:
+    - merge_requests
+
 
 build:
   stage: build
@@ -24,6 +27,8 @@ build:
     - npm run build
   needs:
     - lint
+  only:
+    - merge_requests
 
 # 4. Notify Coolify webhook for redeploy
 coolify_deploy_staging:
