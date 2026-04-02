@@ -53,6 +53,7 @@ export default function PostRoute() {
               data={comment}
               lvl={0}
               canEdit={canUserEdit}
+              commentId={comment.id}
             />
           );
         })}
