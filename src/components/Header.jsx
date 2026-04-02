@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 export default function Header({ userId }) {
   return (
     <header className={styles.header}>
-      <h1>Hallo</h1>
       {" "}
       <Link to="/">
         <img src={logo} alt="Mein Logo" style={{ width: "5rem", height: "5rem" }}></img>{" "}
