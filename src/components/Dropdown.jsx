@@ -21,7 +21,7 @@ export default function Dropdown({ userId }) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleLogout = async value => {
+  const handleLogout = async () => {
     try {
       removeSession();
     } catch (err) {
