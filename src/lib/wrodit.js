@@ -43,7 +43,7 @@ export async function fetchUserThreads(force = false) {
 //posts
 
 export async function fetchPosts(force = false) {
-  return await cachedRequest(`${BASE_URL}/posts/`, "GET", undefined, undefined, force);
+  return await cachedRequest(`${BASE_URL}/posts/?sort=createdAt,desc`, "GET", undefined, undefined, force);
 }
 
 export async function createPost(data) {
@@ -53,7 +53,7 @@ export async function createPost(data) {
 export async function fetchPostsByThread(threadId, page = 0, size = 20, force = false) {
   if (!threadId) throw new Error("threadId wird benötigt");
   return await cachedRequest(
-    `${BASE_URL}/posts/?thread=${threadId}&page=${page}&size=${size}`,
+    `${BASE_URL}/posts/?thread=${threadId}&page=${page}&size=${size}&sort=createdAt,desc`,
     "GET",
     undefined,
     undefined,
@@ -63,7 +63,7 @@ export async function fetchPostsByThread(threadId, page = 0, size = 20, force = 
 export async function fetchPostsByUser(UserId, page = 0, size = 20, force = false) {
   if (!UserId) throw new Error("UserId wird benötigt");
   return await cachedRequest(
-    `${BASE_URL}/posts/?user=${UserId}&page=${page}&size=${size}`,
+    `${BASE_URL}/posts/?user=${UserId}&page=${page}&size=${size}&sort=createdAt,desc`,
     "GET",
     undefined,
     undefined,
