@@ -1,7 +1,10 @@
 import { getAuthorizationHeader } from "./session";
 import { cachedRequest } from "./apiCache";
 
-const BASE_URL = "http://localhost:8080";
+const BASE_URL =
+  import.meta.env.MODE === "development" || import.meta.env.MODE === "staging" ?
+    "http://xcwkwswkso04gs40k8g48k8w.207.180.221.9.sslip.io"
+  : "http://vcg00wk8ws8o0gcc4c8ckkgw.207.180.221.9.sslip.io";
 
 export async function fillPostUserAndThread(postsPage) {
   const posts = await Promise.all(
