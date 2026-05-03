@@ -9,7 +9,7 @@ async function clientLoader() {
 }
 
 export default function App() {
-  const { user } = useLoaderData();
+  const { user } = useLoaderData();  
 
   return (
     <>

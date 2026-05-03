@@ -8,7 +8,7 @@ const sessionAtom = atom(getSession());
 export function getJWTToken() {
   const session = getSession();
 
-  return session;
+  return session.accessToken;
 }
 
 export function getAuthorizationHeader() {

@@ -13,7 +13,7 @@ async function clientAction({ request }) {
 
   try {
     const res = await signIn(data);
-    saveSession(res.accessToken);
+    saveSession(res);
 
     return redirect("/");
   } catch (error) {
