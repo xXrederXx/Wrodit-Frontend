@@ -3,10 +3,10 @@ import UserDetail from "../components/user/UserDetails.jsx";
 import {
   fetchPostsByUser,
   fetchAllUserData,
-  fetchThread,
   deleteUser,
   deletePost,
   fetchUserThreads,
+  fillPostUserAndThread,
 } from "../lib/wrodit";
 import { useLoaderData, Link } from "react-router-dom";
 import style from "./UserRoute.module.css";
@@ -14,27 +14,14 @@ import { removeSession } from "../lib/session.js";
 
 async function clientLoader({ params }) {
   const userId = params.id;
-
-  const userData = await fetchAllUserData();
+  const user = await fetchAllUserData();
 
   const userPostsPage = await fetchPostsByUser(userId, 0, 10, true);
-  const posts = userPostsPage.content;
+  const posts = await fillPostUserAndThread(userPostsPage);
 
-  const postsWithThread = await Promise.all(
-    posts.map(async post => {
-      const thread = await fetchThread(post.threadId);
+  const threads = await fetchUserThreads();
 
-      return {
-        ...post,
-        threadName: thread.name,
-      };
-    }),
-  );
-
-  const threadsPage = await fetchUserThreads();
-  const threads = threadsPage.content;
-
-  return { user: userData, posts: postsWithThread, threads };
+  return { user, posts, threads };
 }
 
 export default function UserRoute() {
@@ -43,7 +30,7 @@ export default function UserRoute() {
   const handleUserDelete = async () => {
     try {
       await deleteUser();
-      removeSession()
+      removeSession();
     } catch (err) {
       console.error(err);
     }
@@ -64,7 +51,7 @@ export default function UserRoute() {
 
       <UserDetail username={user.username} email={user.email} userId={user.id} />
 
-      {posts.map(post => (
+      {posts.content.map(post => (
         <>
           <Link onClick={() => handlePostDelete(post.id)} className={style.deleteButton}>
             Post Löschen
@@ -72,29 +59,15 @@ export default function UserRoute() {
           <Link to={`/wrodit/edit/post/${post.id}`} className={style.linkButton}>
             Bearbeiten
           </Link>
-          <PostBox
-            key={post.id}
-            username={user.username}
-            createdAt={post.createdAt}
-            title={post.title}
-            text={post.content}
-            vote={post.vote}
-            threadId={post.threadId}
-            threadName={post.threadName}
-            to={post.id}
-          />
+          <PostBox key={post.id} post={post} />
         </>
       ))}
       <h3>Meine Threads</h3>
-      {threads.map(thread => {
-        console.log("thread", thread.id);
-
+      {threads.content.map(thread => {
         return (
-          <>
-            <Link className="threadDescription" to={`/wrodit/thread/${thread.id}`}>
+            <Link key={thread.id} className="threadDescription" to={`/wrodit/thread/${thread.id}`}>
               <h1>w/{thread.name}</h1>
             </Link>
-          </>
         );
       })}
     </>

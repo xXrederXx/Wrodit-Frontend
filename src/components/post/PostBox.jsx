@@ -6,28 +6,18 @@ import PostFooter from "./PostFooter.jsx";
 import { Link } from "react-router-dom";
 
 export default function PostBox({
-  title,
-  text,
-  vote,
-  createdAt,
-  username,
-  threadId,
-  threadName,
-  to,
+  post
 }) {
   return (
     <article className={styles.article}>
       <PostHeader
-        username={username}
-        threadId={threadId}
-        threadName={threadName}
-        createdAt={createdAt}
+        post={post}
       />{" "}
-      <Link className={styles.link} to={`/wrodit/post/${to}`}>
-        <PostTitle title={title} />
-        <PostText text={text} />{" "}
+      <Link className={styles.link} to={`/wrodit/post/${post.id}`}>
+        <PostTitle title={post.title} />
+        <PostText text={post.content} />{" "}
       </Link>
-      <PostFooter vote={vote} postId={to} />
+      <PostFooter vote={post.vote} postId={post.id} />
     </article>
   );
 }

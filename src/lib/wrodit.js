@@ -6,6 +6,23 @@ const BASE_URL =
     "http://xcwkwswkso04gs40k8g48k8w.207.180.221.9.sslip.io"
   : "http://vcg00wk8ws8o0gcc4c8ckkgw.207.180.221.9.sslip.io";
 
+export async function fillPostUserAndThread(postsPage) {
+  const posts = await Promise.all(
+    postsPage.content.map(async post => {
+      return {
+        content: post.content,
+        createdAt: post.createdAt,
+        id: post.id,
+        thread: await fetchThread(post.threadId),
+        user: await fetchUser(post.userId),
+        vote: post.vote,
+      };
+    }),
+  );
+
+  return { ...postsPage, content: posts };
+}
+
 //user
 
 export async function fetchUser(id, force = false) {

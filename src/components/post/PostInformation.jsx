@@ -2,15 +2,15 @@ import styles from "./PostInformation.module.css";
 import { Link } from "react-router-dom";
 import { timeAgo } from "../../lib/util.js";
 
-export default function PostHeader({ username, threadId, threadName, createdAt }) {
+export default function PostHeader({ post }) {
   return (
     <header className={styles.header}>
-      <p>{username}</p>
-      <Link className={styles.link} to={`/wrodit/thread/${threadId}`}>
+      <p>{post.user.username}</p>
+      <Link className={styles.link} to={`/wrodit/thread/${post.thread.id}`}>
         {" "}
-        <p>{threadName}</p>
+        <p>{post.thread.name}</p>
       </Link>
-      <p>Vor {timeAgo(createdAt)}</p>
+      <p>Vor {timeAgo(post.createdAt)}</p>
     </header>
   );
 }
