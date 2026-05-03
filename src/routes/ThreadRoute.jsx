@@ -15,7 +15,6 @@ async function clientLoader({ params }) {
 export default function ThreadRoute() {
   const { thread, posts } = useLoaderData();
   console.log(posts);
-  
 
   return (
     <>
@@ -25,11 +24,8 @@ export default function ThreadRoute() {
         to={`/wrodit/create/post/${thread.id}`}
       />
 
-      {posts.content.map((post) => (
-        <PostBox
-          key={post.id}
-          post={post}
-        />
+      {posts.content.map(post => (
+        <PostBox key={post.id} post={post} />
       ))}
     </>
   );

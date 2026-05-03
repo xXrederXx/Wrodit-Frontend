@@ -6,7 +6,7 @@ import { removeSession, useSession } from "../lib/session";
 
 export default function Dropdown() {
   const [open, setOpen] = useState(false);
-  const session = useSession()
+  const session = useSession();
   const dropdownRef = useRef(null);
 
   const toggleDropdown = () => setOpen(!open);

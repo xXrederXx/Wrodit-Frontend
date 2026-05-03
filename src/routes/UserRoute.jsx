@@ -65,9 +65,9 @@ export default function UserRoute() {
       <h3>Meine Threads</h3>
       {threads.content.map(thread => {
         return (
-            <Link key={thread.id} className="threadDescription" to={`/wrodit/thread/${thread.id}`}>
-              <h1>w/{thread.name}</h1>
-            </Link>
+          <Link key={thread.id} className="threadDescription" to={`/wrodit/thread/${thread.id}`}>
+            <h1>w/{thread.name}</h1>
+          </Link>
         );
       })}
     </>

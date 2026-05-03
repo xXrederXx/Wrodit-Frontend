@@ -1,16 +1,14 @@
 import { getAuthorizationHeader } from "./session";
 import { cachedRequest } from "./apiCache";
 
-const BASE_URL =
-  import.meta.env.MODE === "development" || import.meta.env.MODE === "staging" ?
-    "http://xcwkwswkso04gs40k8g48k8w.207.180.221.9.sslip.io"
-  : "http://vcg00wk8ws8o0gcc4c8ckkgw.207.180.221.9.sslip.io";
+const BASE_URL = "http://localhost:8080";
 
 export async function fillPostUserAndThread(postsPage) {
   const posts = await Promise.all(
     postsPage.content.map(async post => {
       return {
         content: post.content,
+        title: post.title,
         createdAt: post.createdAt,
         id: post.id,
         thread: await fetchThread(post.threadId),
@@ -60,7 +58,13 @@ export async function fetchUserThreads(force = false) {
 //posts
 
 export async function fetchPosts(force = false) {
-  return await cachedRequest(`${BASE_URL}/posts/?sort=createdAt,desc`, "GET", undefined, undefined, force);
+  return await cachedRequest(
+    `${BASE_URL}/posts/?sort=createdAt,desc`,
+    "GET",
+    undefined,
+    undefined,
+    force,
+  );
 }
 
 export async function createPost(data) {

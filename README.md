@@ -1,9 +1,11 @@
 ## Lokal Starten
 
 Projekt klonen:
+
 ```bash
 https://git.bbcag.ch/inf-bl/be/2025/team-h/bbrawn/fullstack/wrodit-frontend.git
 ```
+
 In das Projekt navigieren
 
 ```bash
@@ -24,4 +26,3 @@ Für die Lokale Bearbeitung dieses Projekt muss [Node Js](https://nodejs.org/en/
 ### Dokumenration
 
 Die Dokumentation befindet sich im Backendrepository unter [docs](https://git.bbcag.ch/inf-bl/be/2025/team-h/bbrawn/fullstack/wrodit-backend/-/tree/main/docs?ref_type=heads)
-

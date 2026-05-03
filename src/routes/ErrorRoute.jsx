@@ -1,9 +1,10 @@
 import { useRouteError } from "react-router";
 import { Link } from "react-router";
-import { useCurrentUser, useSession } from "../lib/session";
+import { useSession } from "../lib/session";
 
 export default function ErrorRoute() {
   const error = useRouteError();
+  console.log(error);
 
   if (!useSession()) {
     window.location.href = "/wrodit/login"; // eslint-disable-line
