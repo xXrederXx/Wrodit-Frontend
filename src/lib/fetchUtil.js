@@ -6,7 +6,7 @@ import { filterContent } from "./filterUtil";
  * @param {*} errorMessage a custom error message appended
  * @returns nothing
  */
-export async function checkResponse(response, errorMessage = "") {
+export function checkResponse(response, errorMessage = "") {
   if (response.ok) {
     return response;
   }

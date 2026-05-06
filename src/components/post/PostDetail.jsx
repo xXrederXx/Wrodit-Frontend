@@ -8,7 +8,6 @@ import PostFooter from "./PostFooter.jsx";
 import styles from "./PostDetail.module.css";
 
 export default function PostDetail({ post }) {
-  console.log(post);
 
   return (
     <article className={styles.article}>

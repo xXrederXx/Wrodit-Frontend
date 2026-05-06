@@ -12,7 +12,6 @@ async function clientLoader() {
 export default function WroditHomeRoute() {
   const data = useLoaderData();
   const posts = data.content;
-  console.log(posts);
 
   return posts.map(post => <PostBox key={post.id} post={post} />);
 }

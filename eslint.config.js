@@ -34,7 +34,7 @@ export default defineConfig([
 
     rules: {
       "no-unused-vars": ["error", { varsIgnorePattern: "^[A-Z_]" }], // Ignore constants like CONFIG_VALUES
-      "no-console": "warn", // Warn so you don't accidentally leave logs in production
+      "no-console": ["warn", { allow: ["warn", "error"] }], // Warn so you don't accidentally leave logs in production
       "no-debugger": "error", // Never allow debugger statements
       "no-unreachable": "error", // Code after return, throw, etc.
       "no-duplicate-imports": "error",

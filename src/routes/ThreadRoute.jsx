@@ -15,7 +15,6 @@ async function clientLoader({ params }) {
 
 export default function ThreadRoute() {
   const { thread, posts } = useLoaderData();
-  console.log(posts);
 
   return (
     <>

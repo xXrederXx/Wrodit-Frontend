@@ -12,8 +12,7 @@ export default function CommentEditButton({ isValid, commentId }) {
     }
   };
   return (
-    <>
-      {isValid && (
+      isValid && (
         <>
           <Link className={style.linkButton} to={`/wrodit/edit/comment/${commentId}`}>
             Bearbeiten
@@ -22,7 +21,6 @@ export default function CommentEditButton({ isValid, commentId }) {
             Kommentar Löschen
           </Link>
         </>
-      )}
-    </>
+      )
   );
 }

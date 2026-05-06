@@ -77,7 +77,7 @@ export function useSession() {
       window.removeEventListener("storage", handleStorageChange);
       window.removeEventListener(SESSION_EVENT, handleCustomSessionChange);
     };
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return session;
 }

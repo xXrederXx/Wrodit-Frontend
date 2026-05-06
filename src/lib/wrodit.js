@@ -114,10 +114,10 @@ export async function likePost(id, vote = 1) {
 }
 
 export async function RemoveLikePost(id, vote = 0) {
-  return likePost(id, vote);
+  return await likePost(id, vote);
 }
 export async function DislikeLikePost(id, vote = -1) {
-  return likePost(id, vote);
+  return await likePost(id, vote);
 }
 
 export async function fetchSelfLikesPost(id, force = false) {
@@ -169,10 +169,10 @@ export async function likeComment(id, vote = 1) {
 }
 
 export async function RemoveLikeComment(id, vote = 0) {
-  return likeComment(id, vote);
+  return await likeComment(id, vote);
 }
 export async function DislikeLikeComment(id, vote = -1) {
-  return likeComment(id, vote);
+  return await likeComment(id, vote);
 }
 
 export async function fetchSelfLikesComment(id, force = false) {

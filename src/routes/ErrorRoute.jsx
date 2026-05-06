@@ -4,7 +4,7 @@ import { useSession } from "../lib/session";
 
 export default function ErrorRoute() {
   const error = useRouteError();
-  console.log(error);
+  console.error(error);
 
   if (!useSession()) {
     window.location.href = "/wrodit/login"; // eslint-disable-line
