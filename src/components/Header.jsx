@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import logo from "../assets/logo.svg";
 
 import styles from "./Header.module.css";
-import Dropdown from "./Dropdown";
+import Dropdown from "./Dropdown.jsx";
 
 export default function Header() {
   return (

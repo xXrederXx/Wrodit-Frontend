@@ -4,7 +4,7 @@ import react from "eslint-plugin-react"; // React linting
 import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
 import importPlugin from "eslint-plugin-import"; // Import/order checks
-import { defineConfig, globalIgnores } from "eslint/config";
+import { defineConfig, globalIgnores } from "eslint/config"; // eslint-disable-line import/no-unresolved
 
 export default defineConfig([
   globalIgnores(["dist"]), // Ignore build output
@@ -56,6 +56,7 @@ export default defineConfig([
       "import/no-unresolved": "error", // Detect broken imports
       "import/no-duplicates": "error",
       "react/react-in-jsx-scope": "off", // unneded React 17+
+      "react/prop-types":"warn",
       "import/order": [
         "warn",
         {
