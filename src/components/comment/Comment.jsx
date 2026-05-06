@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
-import styles from "./Comment.module.css";
+import { Link } from "react-router-dom";
+
 import PostInformation from "../post/PostInformation.jsx";
 import { fetchAllUserData, fetchCommentByParent, fetchUser } from "../../lib/wrodit.js";
-import { Link } from "react-router-dom";
+
+import styles from "./Comment.module.css";
 import CommentEditButton from "./CommentEditButton.jsx";
 import CommentFooter from "./CommentFooter.jsx";
 
@@ -43,7 +45,7 @@ export default function Comment({ username, postId, data, lvl, canEdit, commentI
   return (
     <>
       <div style={{ display: "flex" }}>
-        <div style={{ flex: lvl }}></div>
+        <div style={{ flex: lvl }} />
 
         <div className={styles.comment} style={{ flex: 10, minWidth: "20rem" }}>
           <PostInformation post={{user:{username},thread:{}, createdAt:data.createdAt}} />

@@ -1,9 +1,10 @@
+import { Link } from "react-router-dom";
+
 import PostText from "./PostText.jsx";
 import PostTitle from "./PostTitle.jsx";
 import PostHeader from "./PostInformation.jsx";
 import styles from "./PostBox.module.css";
 import PostFooter from "./PostFooter.jsx";
-import { Link } from "react-router-dom";
 
 export default function PostBox({ post }) {
   return (

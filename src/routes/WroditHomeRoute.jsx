@@ -1,6 +1,7 @@
+import { useLoaderData } from "react-router-dom";
+
 import PostBox from "../components/post/PostBox.jsx";
 import { fetchPosts, fillPostUserAndThread } from "../lib/wrodit";
-import { useLoaderData } from "react-router-dom";
 
 async function clientLoader() {
   const postsPage = await fetchPosts(true);

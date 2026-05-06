@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { useCurrentUser } from "../lib/session";
 import { useLocation, useNavigate } from "react-router-dom";
+
+import { useCurrentUser } from "../lib/session";
 
 export default function ProtectedRoute({ children }) {
   const user = useCurrentUser();

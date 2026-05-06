@@ -1,8 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import styles from "./Dropdown.module.css";
 import { CgProfile } from "react-icons/cg";
+
 import { removeSession, useSession } from "../lib/session";
+
+import styles from "./Dropdown.module.css";
 
 export default function Dropdown() {
   const [open, setOpen] = useState(false);

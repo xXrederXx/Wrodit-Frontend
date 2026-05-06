@@ -1,4 +1,5 @@
 import { useLoaderData } from "react-router-dom";
+
 import { fetchPostsByThread, fetchThread, fillPostUserAndThread } from "../lib/wrodit";
 import PostBox from "../components/post/PostBox.jsx";
 import ThreadInformation from "../components/thread/ThreadInformation.jsx";

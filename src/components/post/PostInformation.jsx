@@ -1,6 +1,8 @@
-import styles from "./PostInformation.module.css";
 import { Link } from "react-router-dom";
+
 import { timeAgo } from "../../lib/util.js";
+
+import styles from "./PostInformation.module.css";
 
 export default function PostHeader({ post }) {
   if(!post){

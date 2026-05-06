@@ -1,5 +1,6 @@
-import LogInForm from "../components/user/LogInForm.jsx";
 import { Link, redirect, useActionData, useNavigate } from "react-router";
+
+import LogInForm from "../components/user/LogInForm.jsx";
 import { signIn } from "../lib/auth";
 import { saveSession } from "../lib/session";
 import { validateLoginIn } from "../lib/validate";
@@ -9,7 +10,7 @@ async function clientAction({ request }) {
   const data = Object.fromEntries(formData);
 
   const { isValid, errors } = validateLoginIn(data);
-  if (!isValid) return { errors };
+  if (!isValid) {return { errors };}
 
   try {
     const res = await signIn(data);

@@ -1,5 +1,6 @@
-import { fetchCommentById, PatchComment } from "../lib/wrodit";
 import { redirect, useActionData, useNavigate, useLoaderData } from "react-router-dom";
+
+import { fetchCommentById, PatchComment } from "../lib/wrodit";
 import EditCommentForm from "../components/comment/EditCommentForm.jsx";
 
 async function clientLoader({ params }) {

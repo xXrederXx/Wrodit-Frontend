@@ -1,6 +1,7 @@
 import { CgProfile } from "react-icons/cg";
-import styles from "./UserDetails.module.css";
 import { Link } from "react-router-dom";
+
+import styles from "./UserDetails.module.css";
 
 export default function UserDetail({ username, email, userId }) {
   return (

@@ -1,8 +1,9 @@
 import { Form } from "react-router";
+import { useState, useEffect } from "react";
+
 import Button from "../ui/Button.jsx";
 import Text from "../ui/Text.jsx";
 import styles from "../user/SignUpForm.module.css";
-import { useState, useEffect } from "react";
 
 export default function EditCommentForm({ onCancel, errors = {}, content }) {
   const [postContent, setContent] = useState("");

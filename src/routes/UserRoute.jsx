@@ -1,3 +1,5 @@
+import { useLoaderData, Link } from "react-router-dom";
+
 import PostBox from "../components/post/PostBox.jsx";
 import UserDetail from "../components/user/UserDetails.jsx";
 import {
@@ -8,9 +10,10 @@ import {
   fetchUserThreads,
   fillPostUserAndThread,
 } from "../lib/wrodit";
-import { useLoaderData, Link } from "react-router-dom";
-import style from "./UserRoute.module.css";
 import { removeSession } from "../lib/session.js";
+
+import style from "./UserRoute.module.css";
+
 
 async function clientLoader({ params }) {
   const userId = params.id;

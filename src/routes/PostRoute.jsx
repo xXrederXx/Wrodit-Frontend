@@ -1,7 +1,7 @@
-import style from "./PostRoute.module.css";
+import { useLoaderData } from "react-router-dom";
+
 import Comment from "../components/comment/Comment.jsx";
 import PostDetail from "../components/post/PostDetail.jsx";
-
 import {
   fetchPostById,
   fetchUser,
@@ -9,7 +9,9 @@ import {
   fetchCommentByPost,
   fetchAllUserData,
 } from "../lib/wrodit";
-import { useLoaderData } from "react-router-dom";
+
+import style from "./PostRoute.module.css";
+
 
 async function clientLoader({ params }) {
   const postId = params.id;

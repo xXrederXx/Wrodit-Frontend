@@ -1,5 +1,5 @@
-import { useRouteError } from "react-router";
-import { Link } from "react-router";
+import { useRouteError , Link } from "react-router";
+
 import { useSession } from "../lib/session";
 
 export default function ErrorRoute() {

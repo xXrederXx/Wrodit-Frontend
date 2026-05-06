@@ -1,9 +1,10 @@
 import { Form } from "react-router";
+import { useState } from "react";
+
 import Button from "../ui/Button.jsx";
 import Input from "../ui/Input.jsx";
 import Text from "../ui/Text.jsx";
 import styles from "../user/SignUpForm.module.css";
-import { useState } from "react";
 
 export default function EditPostForm({ onCancel, errors = {}, title, content }) {
   const [postTitle, setPostTitle] = useState(title);
