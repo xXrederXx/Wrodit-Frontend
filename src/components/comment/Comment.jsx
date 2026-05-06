@@ -46,7 +46,7 @@ export default function Comment({ username, postId, data, lvl, canEdit, commentI
         <div style={{ flex: lvl }}></div>
 
         <div className={styles.comment} style={{ flex: 10, minWidth: "20rem" }}>
-          <PostInformation username={username} createdAt={data.createdAt} />
+          <PostInformation post={{user:{username},thread:{}, createdAt:data.createdAt}} />
 
           <p>{data.content}</p>
           <CommentFooter vote={data.votes} commentId={data.id} />

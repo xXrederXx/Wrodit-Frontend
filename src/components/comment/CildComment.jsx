@@ -5,7 +5,7 @@ import PostInformation from "../post/PostInformation.jsx";
 export default function ChildComment({ content, votes, createdAt, name }) {
   return (
     <div className={styles.comment}>
-      <PostInformation name={name} createdAt={createdAt} />
+      <PostInformation post={{user:{username:name},thread:{}, createdAt}} />
       <p>{content}</p>
       <CommentFooter vote={votes} />
     </div>

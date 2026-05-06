@@ -28,7 +28,7 @@ async function clientLoader({ params }) {
 
 export default function PostRoute() {
   const { post, comments, currentUser } = useLoaderData();
-
+  
   return (
     <>
       <PostDetail post={post} />

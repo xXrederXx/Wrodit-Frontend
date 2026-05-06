@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import { timeAgo } from "../../lib/util.js";
 
 export default function PostHeader({ post }) {
+  if(!post){
+    return (<p>Loading</p>)
+  }
   return (
     <header className={styles.header}>
       <p>{post.user.username}</p>
