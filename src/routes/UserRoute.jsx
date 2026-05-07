@@ -20,7 +20,7 @@ async function clientLoader({ params }) {
   const user = await fetchAllUserData();
 
   const userPostsPage = await fetchPostsByUser(userId, 0, 10, true);
-  const posts = await fillPostUserAndThread(userPostsPage);
+  const posts = await fillPostUserAndThread(userPostsPage, undefined, user);
 
   const threads = await fetchUserThreads();
 

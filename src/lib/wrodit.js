@@ -6,7 +6,7 @@ const BASE_URL =
     "http://xcwkwswkso04gs40k8g48k8w.207.180.221.9.sslip.io"
   : "http://vcg00wk8ws8o0gcc4c8ckkgw.207.180.221.9.sslip.io";
 
-export async function fillPostUserAndThread(postsPage) {
+export async function fillPostUserAndThread(postsPage, thread = undefined, user = undefined) {
   const posts = await Promise.all(
     postsPage.content.map(async post => {
       return {
@@ -14,8 +14,8 @@ export async function fillPostUserAndThread(postsPage) {
         title: post.title,
         createdAt: post.createdAt,
         id: post.id,
-        thread: await fetchThread(post.threadId),
-        user: await fetchUser(post.userId),
+        thread: thread ?? await fetchThread(post.threadId),
+        user: user ?? await fetchUser(post.userId),
         vote: post.vote,
       };
     }),

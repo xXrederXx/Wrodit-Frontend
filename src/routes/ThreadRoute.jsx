@@ -9,7 +9,7 @@ async function clientLoader({ params }) {
   const thread = await fetchThread(threadId);
   const postsPage = await fetchPostsByThread(threadId);
 
-  const posts = await fillPostUserAndThread(postsPage);
+  const posts = await fillPostUserAndThread(postsPage, thread);
   return { thread, posts };
 }
 
