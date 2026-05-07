@@ -52,7 +52,9 @@ export function getCache(url) {
   const now = Date.now();
   const cachedItem = cache.get(url);
 
-  if (!cachedItem) {return null;}
+  if (!cachedItem) {
+    return null;
+  }
 
   if (cachedItem.exp < now) {
     // Expired, remove from cache
@@ -66,6 +68,8 @@ export function getCache(url) {
 export function cleanCache() {
   const now = Date.now();
   for (const [key, item] of cache) {
-    if (item.exp < now) {cache.delete(key);}
+    if (item.exp < now) {
+      cache.delete(key);
+    }
   }
 }

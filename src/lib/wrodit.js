@@ -14,8 +14,8 @@ export async function fillPostUserAndThread(postsPage, thread = undefined, user 
         title: post.title,
         createdAt: post.createdAt,
         id: post.id,
-        thread: thread ?? await fetchThread(post.threadId),
-        user: user ?? await fetchUser(post.userId),
+        thread: thread ?? (await fetchThread(post.threadId)),
+        user: user ?? (await fetchUser(post.userId)),
         vote: post.vote,
       };
     }),
@@ -75,7 +75,9 @@ export async function createPost(data) {
 }
 
 export async function fetchPostsByThread(threadId, page = 0, size = 20, force = false) {
-  if (!threadId) {throw new Error("threadId wird benötigt");}
+  if (!threadId) {
+    throw new Error("threadId wird benötigt");
+  }
   return await cachedRequest(
     `${BASE_URL}/posts/?thread=${threadId}&page=${page}&size=${size}&sort=createdAt,desc`,
     "GET",
@@ -85,7 +87,9 @@ export async function fetchPostsByThread(threadId, page = 0, size = 20, force = 
   );
 }
 export async function fetchPostsByUser(UserId, page = 0, size = 20, force = false) {
-  if (!UserId) {throw new Error("UserId wird benötigt");}
+  if (!UserId) {
+    throw new Error("UserId wird benötigt");
+  }
   return await cachedRequest(
     `${BASE_URL}/posts/?user=${UserId}&page=${page}&size=${size}&sort=createdAt,desc`,
     "GET",

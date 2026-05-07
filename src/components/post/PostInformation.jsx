@@ -5,8 +5,8 @@ import { timeAgo } from "../../lib/util.js";
 import styles from "./PostInformation.module.css";
 
 export default function PostHeader({ post }) {
-  if(!post){
-    return (<p>Loading</p>)
+  if (!post) {
+    return <p>Loading</p>;
   }
   return (
     <header className={styles.header}>

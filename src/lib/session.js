@@ -19,7 +19,9 @@ export function getAuthorizationHeader() {
 export function getSession() {
   const session = localStorage.getItem(STORAGE_KEY);
 
-  if (!session) {return null;}
+  if (!session) {
+    return null;
+  }
 
   try {
     return JSON.parse(session);

@@ -12,7 +12,6 @@ import {
 
 import style from "./PostRoute.module.css";
 
-
 async function clientLoader({ params }) {
   const postId = params.id;
   const postData = await fetchPostById(postId);
@@ -30,7 +29,7 @@ async function clientLoader({ params }) {
 
 export default function PostRoute() {
   const { post, comments, currentUser } = useLoaderData();
-  
+
   return (
     <>
       <PostDetail post={post} />

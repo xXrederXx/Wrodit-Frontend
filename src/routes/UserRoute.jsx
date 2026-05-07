@@ -14,7 +14,6 @@ import { removeSession } from "../lib/session.js";
 
 import style from "./UserRoute.module.css";
 
-
 async function clientLoader({ params }) {
   const userId = params.id;
   const user = await fetchAllUserData();

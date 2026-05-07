@@ -56,7 +56,7 @@ export default defineConfig([
       "import/no-unresolved": "error", // Detect broken imports
       "import/no-duplicates": "error",
       "react/react-in-jsx-scope": "off", // unneded React 17+
-      "react/prop-types":"warn",
+      "react/prop-types": "warn",
       "import/order": [
         "warn",
         {

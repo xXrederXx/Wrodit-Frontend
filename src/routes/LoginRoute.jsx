@@ -10,7 +10,9 @@ async function clientAction({ request }) {
   const data = Object.fromEntries(formData);
 
   const { isValid, errors } = validateLoginIn(data);
-  if (!isValid) {return { errors };}
+  if (!isValid) {
+    return { errors };
+  }
 
   try {
     const res = await signIn(data);

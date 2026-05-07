@@ -8,7 +8,6 @@ import PostFooter from "./PostFooter.jsx";
 import styles from "./PostDetail.module.css";
 
 export default function PostDetail({ post }) {
-
   return (
     <article className={styles.article}>
       <PostInformation post={post} />
