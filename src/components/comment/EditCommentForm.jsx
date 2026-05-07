@@ -6,10 +6,10 @@ import Text from "../ui/Text.jsx";
 import styles from "../user/SignUpForm.module.css";
 
 export default function EditCommentForm({ onCancel, errors = {}, content }) {
-  const [postContent, setContent] = useState("");
+  const [postContent, setPostContent] = useState("");
 
   useEffect(() => {
-    setContent(content);
+    setPostContent(content);
   }, [content]);
 
   return (
@@ -24,7 +24,7 @@ export default function EditCommentForm({ onCancel, errors = {}, content }) {
         name="content"
         placeholder="Komentiere *"
         value={postContent}
-        onChange={e => setContent(e.target.value)}
+        onChange={e => setPostContent(e.target.value)}
       />
 
       {errors?.general && <p className="error">{errors.general}</p>}
