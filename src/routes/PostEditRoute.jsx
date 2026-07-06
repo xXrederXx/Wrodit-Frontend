@@ -1,5 +1,6 @@
-import { fetchPostById, patchPost } from "../lib/wrodit";
 import { redirect, useActionData, useNavigate, useLoaderData } from "react-router-dom";
+
+import { fetchPostById, patchPost } from "../lib/wrodit";
 import { validatePost } from "../lib/validate";
 import EditPostForm from "../components/post/EditPostForm.jsx";
 

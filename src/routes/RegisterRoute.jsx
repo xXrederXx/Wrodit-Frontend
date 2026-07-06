@@ -1,6 +1,6 @@
-import SignUpForm from "../components/user/SignUpForm.jsx";
-
 import { Link, redirect, useActionData, useNavigate } from "react-router";
+
+import SignUpForm from "../components/user/SignUpForm.jsx";
 import { signUp } from "../lib/auth";
 import { validateSignIn } from "../lib/validate";
 

@@ -1,18 +1,14 @@
 import { Form } from "react-router";
+import { useState } from "react";
+
 import Button from "../ui/Button.jsx";
 import Input from "../ui/Input.jsx";
 import Text from "../ui/Text.jsx";
 import styles from "../user/SignUpForm.module.css";
-import { useEffect, useState } from "react";
 
 export default function EditPostForm({ onCancel, errors = {}, title, content }) {
-  const [postTitle, setTitle] = useState("");
-  const [postContent, setContent] = useState("");
-
-  useEffect(() => {
-    setTitle(title); // eslint-disable-line
-    setContent(content);
-  }, [title, content]);
+  const [postTitle, setPostTitle] = useState(title);
+  const [postContent, setPostContent] = useState(content);
 
   return (
     <Form className={styles.form} method="post">
@@ -25,7 +21,7 @@ export default function EditPostForm({ onCancel, errors = {}, title, content }) 
         name="title"
         placeholder="Dein Post *"
         value={postTitle}
-        onChange={e => setTitle(e.target.value)}
+        onChange={e => setPostTitle(e.target.value)}
       />
       <Text
         {...(errors.content && { error: errors.content })}
@@ -33,7 +29,7 @@ export default function EditPostForm({ onCancel, errors = {}, title, content }) 
         name="content"
         placeholder="Beschreibung *"
         value={postContent}
-        onChange={e => setContent(e.target.value)}
+        onChange={e => setPostContent(e.target.value)}
       />
 
       {errors?.general && <p className="error">{errors.general}</p>}

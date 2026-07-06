@@ -8,7 +8,7 @@ const sessionAtom = atom(getSession());
 export function getJWTToken() {
   const session = getSession();
 
-  return session;
+  return session.accessToken;
 }
 
 export function getAuthorizationHeader() {
@@ -19,7 +19,9 @@ export function getAuthorizationHeader() {
 export function getSession() {
   const session = localStorage.getItem(STORAGE_KEY);
 
-  if (!session) return null;
+  if (!session) {
+    return null;
+  }
 
   try {
     return JSON.parse(session);
@@ -77,7 +79,7 @@ export function useSession() {
       window.removeEventListener("storage", handleStorageChange);
       window.removeEventListener(SESSION_EVENT, handleCustomSessionChange);
     };
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return session;
 }

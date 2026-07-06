@@ -25,7 +25,9 @@ export function isValidNumber(value) {
  * Checks if value is a valid email.
  */
 export function isValidEmail(email) {
-  if (isBlankOrNull(email)) return false;
+  if (isBlankOrNull(email)) {
+    return false;
+  }
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
@@ -51,8 +53,14 @@ export function timeAgo(createdAt) {
   const diffHours = Math.floor(diffMin / 60);
   const diffDays = Math.floor(diffHours / 24);
 
-  if (diffSec < 60) return `${diffSec} Sekunden`;
-  if (diffMin < 60) return `${diffMin} Minuten`;
-  if (diffHours < 24) return `${diffHours} Stunden`;
+  if (diffSec < 60) {
+    return `${diffSec} Sekunden`;
+  }
+  if (diffMin < 60) {
+    return `${diffMin} Minuten`;
+  }
+  if (diffHours < 24) {
+    return `${diffHours} Stunden`;
+  }
   return `${diffDays} Tagen`;
 }

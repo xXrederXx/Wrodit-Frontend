@@ -1,6 +1,7 @@
+import { redirect, useActionData, useNavigate } from "react-router";
+
 import ThradForm from "../components/thread/ThreadForm.jsx";
 import { createThread } from "../lib/wrodit";
-import { redirect, useActionData, useNavigate } from "react-router";
 import { validateThread } from "../lib/validate";
 
 async function clientAction({ request }) {

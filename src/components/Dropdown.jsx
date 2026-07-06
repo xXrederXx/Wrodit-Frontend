@@ -1,11 +1,14 @@
 import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import styles from "./Dropdown.module.css";
 import { CgProfile } from "react-icons/cg";
-import { removeSession } from "../lib/session";
 
-export default function Dropdown({ userId }) {
+import { removeSession, useSession } from "../lib/session";
+
+import styles from "./Dropdown.module.css";
+
+export default function Dropdown() {
   const [open, setOpen] = useState(false);
+  const session = useSession();
   const dropdownRef = useRef(null);
 
   const toggleDropdown = () => setOpen(!open);
@@ -21,7 +24,7 @@ export default function Dropdown({ userId }) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleLogout = async () => {
+  const handleLogout = () => {
     try {
       removeSession();
     } catch (err) {
@@ -35,7 +38,7 @@ export default function Dropdown({ userId }) {
         <CgProfile />
       </button>
       <div className={`${styles.dropdownContent} ${open ? styles.show : ""}`}>
-        <Link to={`/wrodit/user/${userId}`}>Mein Konto</Link>
+        <Link to={`/wrodit/user/${session.userId}`}>Mein Konto</Link>
         <Link to="/wrodit/register">Registrieren</Link>
         <Link to="/wrodit/login">Anmelden</Link>
         <Link onClick={handleLogout}>Abmelden</Link>

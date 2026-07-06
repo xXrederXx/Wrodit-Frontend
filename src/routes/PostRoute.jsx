@@ -1,7 +1,7 @@
-import style from "./PostRoute.module.css";
+import { useLoaderData } from "react-router-dom";
+
 import Comment from "../components/comment/Comment.jsx";
 import PostDetail from "../components/post/PostDetail.jsx";
-
 import {
   fetchPostById,
   fetchUser,
@@ -9,38 +9,30 @@ import {
   fetchCommentByPost,
   fetchAllUserData,
 } from "../lib/wrodit";
-import { useLoaderData } from "react-router-dom";
+
+import style from "./PostRoute.module.css";
 
 async function clientLoader({ params }) {
   const postId = params.id;
-  const post = await fetchPostById(postId);
+  const postData = await fetchPostById(postId);
 
-  const user = await fetchUser(post.userId);
-  const thread = await fetchThread(post.threadId);
+  const user = await fetchUser(postData.userId);
+  const thread = await fetchThread(postData.threadId);
 
   const currentUser = await fetchAllUserData();
 
   const commentData = await fetchCommentByPost(postId);
   const comments = commentData.content.filter(comment => comment.parentId === null);
 
-  return { post, user, thread, comments, currentUser };
+  return { post: { ...postData, user, thread }, comments, currentUser };
 }
 
 export default function PostRoute() {
-  const { post, user, thread, comments, currentUser } = useLoaderData();
+  const { post, comments, currentUser } = useLoaderData();
 
   return (
     <>
-      <PostDetail
-        createdAt={post.createdAt}
-        title={post.title}
-        text={post.content}
-        vote={post.vote}
-        username={user.username}
-        threadId={thread.id}
-        threadName={thread.name}
-        postId={post.id}
-      />
+      <PostDetail post={post} />
       <div className={style.commentContainer}>
         {comments.map(comment => {
           const canUserEdit = currentUser.id === comment.userId;
