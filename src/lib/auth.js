@@ -36,7 +36,3 @@ export async function signIn(credentials) {
 
   return { ...payload, status: res.status };
 }
-
-export async function fetchhome() {
-  return await fetch(`${URL}/home/`);
-}
