@@ -1,0 +1,45 @@
+name: Frontend
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - production
+jobs:
+  lint:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+  build:
+    if: github.event_name == 'pull_request'
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+  deploy-staging:
+    if: false # github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          curl -X GET "${{ secrets.COOLIFY_STAGING_URL }}" \
+            -H "Authorization: Bearer ${{ secrets.COOLIFY_TOK }}"
+  deploy-production:
+    if: false # github.ref == 'refs/heads/production'
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          curl -X GET "${{ secrets.COOLIFY_PRODUCTION_URL }}" \
+            -H "Authorization: Bearer ${{ secrets.COOLIFY_TOK }}"
