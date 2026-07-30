@@ -3,12 +3,12 @@ import { betterFetch } from "./fetchUtil";
 
 const BASE_URL = "http://localhost:8080";
 
-async function getCacheOrFetch(url) {
+async function getCacheOrFetch(url, method = "GET", body = undefined) {
   const cached = getCache(url);
   if (cached) {
     return cached;
   }
-  const res = await betterFetch(url);
+  const res = await betterFetch(url, method, undefined, body);
   return await setCache(url, res);
 }
 
@@ -41,13 +41,13 @@ export async function fetchAllUserData(force = false) {
 }
 
 export async function deleteUser(force = false) {
-  return await betterFetch(`${BASE_URL}/users/`, "DELETE", undefined, force);
+  return await getCacheOrFetch(`${BASE_URL}/users/`, "DELETE");
 }
 
 //threads
 
 export async function createThread(data) {
-  return await betterFetch(`${BASE_URL}/threads/`, "POST", undefined, data, true);
+  return await getCacheOrFetch(`${BASE_URL}/threads/`, "POST", data);
 }
 
 export async function fetchThread(id, force = false) {
@@ -65,7 +65,7 @@ export async function fetchPosts(force = false) {
 }
 
 export async function createPost(data) {
-  return await betterFetch(`${BASE_URL}/posts/`, "POST", undefined, data, true);
+  return await getCacheOrFetch(`${BASE_URL}/posts/`, "POST", data);
 }
 
 export async function fetchPostsByThread(threadId, page = 0, size = 20, force = false) {
@@ -90,17 +90,17 @@ export async function fetchPostById(id, force = false) {
 }
 
 export async function patchPost(data, id) {
-  return await betterFetch(`${BASE_URL}/posts/${id}`, "PATCH", undefined, data, true);
+  return await getCacheOrFetch(`${BASE_URL}/posts/${id}`, "PATCH", data);
 }
 
 export async function deletePost(id, force = false) {
-  return await betterFetch(`${BASE_URL}/posts/${id}`, "DELETE", undefined, force);
+  return await getCacheOrFetch(`${BASE_URL}/posts/${id}`, "DELETE");
 }
 
 //post like
 
 export async function likePost(id, vote = 1) {
-  return await betterFetch(`${BASE_URL}/posts/${id}/vote`, "PUT", undefined, { vote }, true);
+  return await getCacheOrFetch(`${BASE_URL}/posts/${id}/vote`, "PUT", { vote });
 }
 
 export async function RemoveLikePost(id, vote = 0) {
@@ -127,7 +127,7 @@ export async function fetchCommentByParent(parentId, page = 0, size = 20, force 
 }
 
 export async function createComment(data) {
-  return await betterFetch(`${BASE_URL}/comments/`, "POST", undefined, data, true);
+  return await getCacheOrFetch(`${BASE_URL}/comments/`, "POST", data);
 }
 
 export async function fetchCommentById(id, force = false) {
@@ -135,17 +135,17 @@ export async function fetchCommentById(id, force = false) {
 }
 
 export async function PatchComment(data, id) {
-  return await betterFetch(`${BASE_URL}/comments/${id}`, "PATCH", undefined, data, true);
+  return await getCacheOrFetch(`${BASE_URL}/comments/${id}`, "PATCH", data);
 }
 
 export async function deleteComment(id, force = false) {
-  return await betterFetch(`${BASE_URL}/comments/${id}`, "DELETE", undefined, force);
+  return await getCacheOrFetch(`${BASE_URL}/comments/${id}`, "DELETE");
 }
 
 //comment like
 
 export async function likeComment(id, vote = 1) {
-  return await betterFetch(`${BASE_URL}/comments/${id}/vote`, "PUT", undefined, { vote }, true);
+  return await getCacheOrFetch(`${BASE_URL}/comments/${id}/vote`, "PUT", { vote });
 }
 
 export async function RemoveLikeComment(id, vote = 0) {
