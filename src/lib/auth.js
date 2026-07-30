@@ -1,4 +1,9 @@
-const URL = "http://localhost:8080";
+const URL = import.meta.env.VITE_BACKEND_URL;
+
+if(!URL)
+{
+  console.error("NO URL FOUND!!! Have you set the env variable??");
+}
 
 export async function signUp(data) {
   const res = await fetch(`${URL}/auth/signup`, {

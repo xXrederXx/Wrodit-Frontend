@@ -23,6 +23,8 @@ npm run dev
 
 Für die Lokale Bearbeitung dieses Projekt muss [Node Js](https://nodejs.org/en/download) mit npm installiert sein
 
+Ausserdem muss die Env-Variable `VITE_BACKEND_URL="http://localhost:8080"` gesetzt werden.
+
 ### Dokumenration
 
 Die Dokumentation befindet sich im Backendrepository unter [docs](https://git.bbcag.ch/inf-bl/be/2025/team-h/bbrawn/fullstack/wrodit-backend/-/tree/main/docs?ref_type=heads)

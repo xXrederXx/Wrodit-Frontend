@@ -1,7 +1,12 @@
 import { getCache, setCache } from "./apiCache";
 import { betterFetch } from "./fetchUtil";
 
-const BASE_URL = "http://localhost:8080";
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
+if(!BASE_URL)
+{
+  console.error("NO URL FOUND!!! Have you set the env variable??");
+}
 
 const currentFetches = new Map();
 async function getCacheOrFetch(url, method = "GET", body = undefined) {
