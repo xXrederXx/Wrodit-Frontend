@@ -1,4 +1,5 @@
 import { filterContent } from "./filterUtil";
+import { getAuthorizationHeader } from "./session.js";
 
 /**
  * Throws if the response is not OK
@@ -28,7 +29,7 @@ export async function toFilteredJson(response) {
 
 /**
  * A better fetch method. Automaticaly applys a content type json header if a body is provided
- * body is also automaticaly convertet to json.
+ * body is also automaticaly convertet to json. It also adds the jwt and checks the response
  * @param {*} url
  * @param {*} method
  * @param {*} headers
@@ -37,7 +38,6 @@ export async function toFilteredJson(response) {
  */
 export async function betterFetch(url, method = "GET", headers = {}, body = undefined) {
   const payload = { method, headers };
-
   if (body) {
     payload.body = JSON.stringify(body);
     payload.headers = {
@@ -46,7 +46,10 @@ export async function betterFetch(url, method = "GET", headers = {}, body = unde
     };
   }
 
-  return await fetch(url, payload);
+  payload.headers = { ...payload.headers, ...getAuthorizationHeader() };
+  const response = await fetch(url, payload);
+  checkResponse(response);
+  return response;
 }
 
 async function throwFetchResponseError(response, msg = "") {

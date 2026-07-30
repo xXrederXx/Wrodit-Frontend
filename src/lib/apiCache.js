@@ -1,51 +1,36 @@
-import { betterFetch, checkResponse, toFilteredJson } from "./fetchUtil";
-import { getAuthorizationHeader } from "./session";
-
 const cache = new Map();
 
-/**
- * This makes a fetch (betterFetch is used) request which gets cached for 1 second.
- * It automaticaly adds the baerer token to the headers.
- * @param {*} url
- * @param {*} method GET, POST, PUT etc.
- * @param {*} headers
- * @param {*} body
- * @param {*} force Disable cached values
- * @returns filtered json object
+/*
+ * Takes the response, adds it to cache and returns the json
  */
-export async function cachedRequest(url, method, headers = {}, body = undefined, force = false) {
-  const cached = getCache(url);
-  if (cached && !force) {
-    return cached;
+export async function setCache(url, response) {
+  if (typeof response !== "object" || !response || response.status === 204) {
+    return response;
   }
 
-  const requestPromise = await (async () => {
-    try {
-      const res = await betterFetch(url, method, { ...headers, ...getAuthorizationHeader() }, body);
+  const data = await response.json();
 
-      checkResponse(res);
-      const jsonResponse = await toFilteredJson(res);
+  const cacheControl = response.headers.get("Cache-Control");
+  if (!cacheControl) {
+    console.warn("No Cache-Control headers found", response);
+    return data;
+  }
 
-      // Replace promise with resolved value
-      setCache(url, jsonResponse, 1);
+  if (/\bno-store\b/i.test(cacheControl)) {
+    return data;
+  }
 
-      return jsonResponse;
-    } catch (err) {
-      // Remove failed request from cache so it can retry
-      cache.delete(url);
-      throw err;
-    }
-  })();
+  const matchMaxAge = cacheControl.match(/max-age=(\d+)/i);
+  if (!matchMaxAge) {
+    console.warn("No max-age found, but no-store was not set", response);
+    return data;
+  }
 
-  setCache(url, requestPromise);
+  const expirationMS = Number(matchMaxAge[1]) * 1000;
 
-  return requestPromise;
-}
-
-export function setCache(url, data, expirationSeconds = 300) {
-  const expTime = Date.now() + expirationSeconds * 1000;
-
-  cache.set(url, { value: data, exp: expTime });
+  cache.set(url, { value: data, exp: Date.now() + expirationMS });
+  console.log(`add ${url} to cache for ${expirationMS} ms`);
+  return data;
 }
 
 export function getCache(url) {

@@ -1,7 +1,8 @@
-const URL =
-  import.meta.env.MODE === "development" || import.meta.env.MODE === "staging" ?
-    "http://xcwkwswkso04gs40k8g48k8w.207.180.221.9.sslip.io"
-  : "http://vcg00wk8ws8o0gcc4c8ckkgw.207.180.221.9.sslip.io";
+const URL = import.meta.env.VITE_BACKEND_URL;
+
+if (!URL) {
+  console.error("NO URL FOUND!!! Have you set the env variable??");
+}
 
 export async function signUp(data) {
   const res = await fetch(`${URL}/auth/signup`, {
@@ -38,8 +39,4 @@ export async function signIn(credentials) {
   }
 
   return { ...payload, status: res.status };
-}
-
-export async function fetchhome() {
-  return await fetch(`${URL}/home/`);
 }

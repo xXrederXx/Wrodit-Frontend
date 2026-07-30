@@ -1,10 +1,37 @@
-import { getAuthorizationHeader } from "./session";
-import { cachedRequest } from "./apiCache";
+import { getCache, setCache } from "./apiCache";
+import { betterFetch } from "./fetchUtil";
 
-const BASE_URL =
-  import.meta.env.MODE === "development" || import.meta.env.MODE === "staging" ?
-    "http://xcwkwswkso04gs40k8g48k8w.207.180.221.9.sslip.io"
-  : "http://vcg00wk8ws8o0gcc4c8ckkgw.207.180.221.9.sslip.io";
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
+if (!BASE_URL) {
+  console.error("NO URL FOUND!!! Have you set the env variable??");
+}
+
+const currentFetches = new Map();
+async function getCacheOrFetch(url, method = "GET", body = undefined) {
+  const cached = getCache(url);
+  if (cached) {
+    return cached;
+  }
+
+  const current = currentFetches.get(url);
+  if (current) {
+    return current;
+  }
+
+  const fetchPromise = (async () => {
+    try {
+      const res = await betterFetch(url, method, undefined, body);
+      return await setCache(url, res);
+    } finally {
+      currentFetches.delete(url);
+    }
+  })();
+
+  currentFetches.set(url, fetchPromise);
+
+  return fetchPromise;
+}
 
 export async function fillPostUserAndThread(postsPage, thread = undefined, user = undefined) {
   const posts = await Promise.all(
@@ -26,159 +53,115 @@ export async function fillPostUserAndThread(postsPage, thread = undefined, user 
 
 //user
 
-export async function fetchUser(id, force = false) {
-  return await cachedRequest(
-    `${BASE_URL}/users/${id}`,
-    "GET",
-    getAuthorizationHeader(),
-    undefined,
-    force,
-  );
+export async function fetchUser(id) {
+  return await getCacheOrFetch(`${BASE_URL}/users/${id}`);
 }
 
-export async function fetchAllUserData(force = false) {
-  return await cachedRequest(`${BASE_URL}/users/self`, "GET", undefined, undefined, force);
+export async function fetchAllUserData() {
+  return await getCacheOrFetch(`${BASE_URL}/users/self`);
 }
 
-export async function deleteUser(force = false) {
-  return await cachedRequest(`${BASE_URL}/users/`, "DELETE", undefined, force);
+export async function deleteUser() {
+  return await getCacheOrFetch(`${BASE_URL}/users/`, "DELETE");
 }
 
 //threads
 
 export async function createThread(data) {
-  return await cachedRequest(`${BASE_URL}/threads/`, "POST", undefined, data, true);
+  return await getCacheOrFetch(`${BASE_URL}/threads/`, "POST", data);
 }
 
-export async function fetchThread(id, force = false) {
-  return await cachedRequest(`${BASE_URL}/threads/${id}`, "GET", undefined, undefined, force);
+export async function fetchThread(id) {
+  return await getCacheOrFetch(`${BASE_URL}/threads/${id}`);
 }
 
-export async function fetchUserThreads(force = false) {
-  return await cachedRequest(`${BASE_URL}/threads/userfeed`, "GET", undefined, undefined, force);
+export async function fetchUserThreads() {
+  return await getCacheOrFetch(`${BASE_URL}/threads/userfeed`);
 }
 
 //posts
 
-export async function fetchPosts(force = false) {
-  return await cachedRequest(
-    `${BASE_URL}/posts/?sort=createdAt,desc`,
-    "GET",
-    undefined,
-    undefined,
-    force,
-  );
+export async function fetchPosts() {
+  return await getCacheOrFetch(`${BASE_URL}/posts/?sort=createdAt,desc`);
 }
 
 export async function createPost(data) {
-  return await cachedRequest(`${BASE_URL}/posts/`, "POST", undefined, data, true);
+  return await getCacheOrFetch(`${BASE_URL}/posts/`, "POST", data);
 }
 
-export async function fetchPostsByThread(threadId, page = 0, size = 20, force = false) {
+export async function fetchPostsByThread(threadId, page = 0, size = 20) {
   if (!threadId) {
     throw new Error("threadId wird benötigt");
   }
-  return await cachedRequest(
+  return await getCacheOrFetch(
     `${BASE_URL}/posts/?thread=${threadId}&page=${page}&size=${size}&sort=createdAt,desc`,
-    "GET",
-    undefined,
-    undefined,
-    force,
   );
 }
-export async function fetchPostsByUser(UserId, page = 0, size = 20, force = false) {
+export async function fetchPostsByUser(UserId, page = 0, size = 20) {
   if (!UserId) {
     throw new Error("UserId wird benötigt");
   }
-  return await cachedRequest(
+  return await getCacheOrFetch(
     `${BASE_URL}/posts/?user=${UserId}&page=${page}&size=${size}&sort=createdAt,desc`,
-    "GET",
-    undefined,
-    undefined,
-    force,
   );
 }
 
-export async function fetchPostById(id, force = false) {
-  return await cachedRequest(`${BASE_URL}/posts/${id}`, "GET", undefined, undefined, force);
+export async function fetchPostById(id) {
+  return await getCacheOrFetch(`${BASE_URL}/posts/${id}`);
 }
 
 export async function patchPost(data, id) {
-  return await cachedRequest(`${BASE_URL}/posts/${id}`, "PATCH", undefined, data, true);
+  return await getCacheOrFetch(`${BASE_URL}/posts/${id}`, "PATCH", data);
 }
 
-export async function deletePost(id, force = false) {
-  return await cachedRequest(`${BASE_URL}/posts/${id}`, "DELETE", undefined, force);
+export async function deletePost(id) {
+  return await getCacheOrFetch(`${BASE_URL}/posts/${id}`, "DELETE");
 }
 
 //post like
 
 export async function likePost(id, vote = 1) {
-  return await cachedRequest(`${BASE_URL}/posts/${id}/vote`, "PUT", undefined, { vote }, true);
+  return await getCacheOrFetch(`${BASE_URL}/posts/${id}/vote`, "PUT", { vote });
 }
 
-export async function RemoveLikePost(id, vote = 0) {
-  return await likePost(id, vote);
-}
-export async function DislikeLikePost(id, vote = -1) {
-  return await likePost(id, vote);
-}
-
-export async function fetchSelfLikesPost(id, force = false) {
-  return await cachedRequest(`${BASE_URL}/posts/${id}/vote`, "GET", undefined, undefined, force);
+export async function fetchSelfLikesPost(id) {
+  return await getCacheOrFetch(`${BASE_URL}/posts/${id}/vote`);
 }
 
 // Comments
 
-export async function fetchCommentByPost(postId, page = 0, size = 20, force = false) {
-  return await cachedRequest(
-    `${BASE_URL}/comments/?post=${postId}&page=${page}&size=${size}`,
-    "GET",
-    undefined,
-    undefined,
-    force,
-  );
+export async function fetchCommentByPost(postId, page = 0, size = 20) {
+  return await getCacheOrFetch(`${BASE_URL}/comments/?post=${postId}&page=${page}&size=${size}`);
 }
 
-export async function fetchCommentByParent(parentId, page = 0, size = 20, force = false) {
-  return await cachedRequest(
+export async function fetchCommentByParent(parentId, page = 0, size = 20) {
+  return await getCacheOrFetch(
     `${BASE_URL}/comments/?parent=${parentId}&page=${page}&size=${size}`,
-    "GET",
-    undefined,
-    undefined,
-    force,
   );
 }
 
 export async function createComment(data) {
-  return await cachedRequest(`${BASE_URL}/comments/`, "POST", undefined, data, true);
+  return await getCacheOrFetch(`${BASE_URL}/comments/`, "POST", data);
 }
 
-export async function fetchCommentById(id, force = false) {
-  return await cachedRequest(`${BASE_URL}/comments/${id}`, "GET", undefined, undefined, force);
+export async function fetchCommentById(id) {
+  return await getCacheOrFetch(`${BASE_URL}/comments/${id}`);
 }
 
 export async function PatchComment(data, id) {
-  return await cachedRequest(`${BASE_URL}/comments/${id}`, "PATCH", undefined, data, true);
+  return await getCacheOrFetch(`${BASE_URL}/comments/${id}`, "PATCH", data);
 }
 
-export async function deleteComment(id, force = false) {
-  return await cachedRequest(`${BASE_URL}/comments/${id}`, "DELETE", undefined, force);
+export async function deleteComment(id) {
+  return await getCacheOrFetch(`${BASE_URL}/comments/${id}`, "DELETE");
 }
 
 //comment like
 
 export async function likeComment(id, vote = 1) {
-  return await cachedRequest(`${BASE_URL}/comments/${id}/vote`, "PUT", undefined, { vote }, true);
+  return await getCacheOrFetch(`${BASE_URL}/comments/${id}/vote`, "PUT", { vote });
 }
 
-export async function RemoveLikeComment(id, vote = 0) {
-  return await likeComment(id, vote);
-}
-export async function DislikeLikeComment(id, vote = -1) {
-  return await likeComment(id, vote);
-}
-
-export async function fetchSelfLikesComment(id, force = false) {
-  return await cachedRequest(`${BASE_URL}/comments/${id}/vote`, "GET", undefined, undefined, force);
+export async function fetchSelfLikesComment(id) {
+  return await getCacheOrFetch(`${BASE_URL}/comments/${id}/vote`);
 }
