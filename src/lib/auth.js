@@ -1,7 +1,6 @@
 const URL = import.meta.env.VITE_BACKEND_URL;
 
-if(!URL)
-{
+if (!URL) {
   console.error("NO URL FOUND!!! Have you set the env variable??");
 }
 

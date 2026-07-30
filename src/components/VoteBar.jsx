@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { FcLike } from "react-icons/fc";
 import { AiOutlineHeart, AiOutlineDislike, AiFillDislike } from "react-icons/ai";
-import styles from "./VoteBar.module.css"
+
+import styles from "./VoteBar.module.css"; // eslint-disable-line no-unused-vars
 
 // WORKING vote bar with client prediction
 // I have no idea why delta is here but it makes it work properly
@@ -9,10 +10,10 @@ import styles from "./VoteBar.module.css"
 export default function VoteBar({ id, totalVotes, getOwnVote, postOwnVote }) {
   const [ownVote, setOwnVote] = useState(0);
   const [ownIncluded, setOwnIncluded] = useState(true);
-  const [delta, setDelta] = useState(0)
+  const [delta, setDelta] = useState(0);
 
   useEffect(() => {
-    setOwnIncluded(true);
+    setOwnIncluded(true); // eslint-disable-line react-hooks/set-state-in-effect
   }, [totalVotes]);
 
   useEffect(() => {
@@ -21,7 +22,7 @@ export default function VoteBar({ id, totalVotes, getOwnVote, postOwnVote }) {
         const own = await getOwnVote(id);
         setOwnVote(own?.vote);
       } catch (error) {
-        setOwnVote(0)
+        setOwnVote(0);
         console.error(error);
       }
       setOwnIncluded(true);
@@ -30,16 +31,13 @@ export default function VoteBar({ id, totalVotes, getOwnVote, postOwnVote }) {
   }, [id]);
 
   const handleLike = async value => {
-    if(ownIncluded)
-    {
-        if(ownVote <= value)
-        {
-            setDelta(1)
-        }
-        if(ownVote >= value)
-        {
-            setDelta(-1)
-        }
+    if (ownIncluded) {
+      if (ownVote <= value) {
+        setDelta(1);
+      }
+      if (ownVote >= value) {
+        setDelta(-1);
+      }
     }
     setOwnVote(value);
     setOwnIncluded(false);

@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+
 import { cleanCache } from "../lib/apiCache";
 
 const BackgroundCacheCleaner = () => {

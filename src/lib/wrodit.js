@@ -3,8 +3,7 @@ import { betterFetch } from "./fetchUtil";
 
 const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
-if(!BASE_URL)
-{
+if (!BASE_URL) {
   console.error("NO URL FOUND!!! Have you set the env variable??");
 }
 
@@ -54,15 +53,15 @@ export async function fillPostUserAndThread(postsPage, thread = undefined, user 
 
 //user
 
-export async function fetchUser(id, force = false) {
+export async function fetchUser(id) {
   return await getCacheOrFetch(`${BASE_URL}/users/${id}`);
 }
 
-export async function fetchAllUserData(force = false) {
+export async function fetchAllUserData() {
   return await getCacheOrFetch(`${BASE_URL}/users/self`);
 }
 
-export async function deleteUser(force = false) {
+export async function deleteUser() {
   return await getCacheOrFetch(`${BASE_URL}/users/`, "DELETE");
 }
 
@@ -72,17 +71,17 @@ export async function createThread(data) {
   return await getCacheOrFetch(`${BASE_URL}/threads/`, "POST", data);
 }
 
-export async function fetchThread(id, force = false) {
+export async function fetchThread(id) {
   return await getCacheOrFetch(`${BASE_URL}/threads/${id}`);
 }
 
-export async function fetchUserThreads(force = false) {
+export async function fetchUserThreads() {
   return await getCacheOrFetch(`${BASE_URL}/threads/userfeed`);
 }
 
 //posts
 
-export async function fetchPosts(force = false) {
+export async function fetchPosts() {
   return await getCacheOrFetch(`${BASE_URL}/posts/?sort=createdAt,desc`);
 }
 
@@ -90,7 +89,7 @@ export async function createPost(data) {
   return await getCacheOrFetch(`${BASE_URL}/posts/`, "POST", data);
 }
 
-export async function fetchPostsByThread(threadId, page = 0, size = 20, force = false) {
+export async function fetchPostsByThread(threadId, page = 0, size = 20) {
   if (!threadId) {
     throw new Error("threadId wird benötigt");
   }
@@ -98,7 +97,7 @@ export async function fetchPostsByThread(threadId, page = 0, size = 20, force = 
     `${BASE_URL}/posts/?thread=${threadId}&page=${page}&size=${size}&sort=createdAt,desc`,
   );
 }
-export async function fetchPostsByUser(UserId, page = 0, size = 20, force = false) {
+export async function fetchPostsByUser(UserId, page = 0, size = 20) {
   if (!UserId) {
     throw new Error("UserId wird benötigt");
   }
@@ -107,7 +106,7 @@ export async function fetchPostsByUser(UserId, page = 0, size = 20, force = fals
   );
 }
 
-export async function fetchPostById(id, force = false) {
+export async function fetchPostById(id) {
   return await getCacheOrFetch(`${BASE_URL}/posts/${id}`);
 }
 
@@ -115,7 +114,7 @@ export async function patchPost(data, id) {
   return await getCacheOrFetch(`${BASE_URL}/posts/${id}`, "PATCH", data);
 }
 
-export async function deletePost(id, force = false) {
+export async function deletePost(id) {
   return await getCacheOrFetch(`${BASE_URL}/posts/${id}`, "DELETE");
 }
 
@@ -125,17 +124,17 @@ export async function likePost(id, vote = 1) {
   return await getCacheOrFetch(`${BASE_URL}/posts/${id}/vote`, "PUT", { vote });
 }
 
-export async function fetchSelfLikesPost(id, force = false) {
+export async function fetchSelfLikesPost(id) {
   return await getCacheOrFetch(`${BASE_URL}/posts/${id}/vote`);
 }
 
 // Comments
 
-export async function fetchCommentByPost(postId, page = 0, size = 20, force = false) {
+export async function fetchCommentByPost(postId, page = 0, size = 20) {
   return await getCacheOrFetch(`${BASE_URL}/comments/?post=${postId}&page=${page}&size=${size}`);
 }
 
-export async function fetchCommentByParent(parentId, page = 0, size = 20, force = false) {
+export async function fetchCommentByParent(parentId, page = 0, size = 20) {
   return await getCacheOrFetch(
     `${BASE_URL}/comments/?parent=${parentId}&page=${page}&size=${size}`,
   );
@@ -145,7 +144,7 @@ export async function createComment(data) {
   return await getCacheOrFetch(`${BASE_URL}/comments/`, "POST", data);
 }
 
-export async function fetchCommentById(id, force = false) {
+export async function fetchCommentById(id) {
   return await getCacheOrFetch(`${BASE_URL}/comments/${id}`);
 }
 
@@ -153,7 +152,7 @@ export async function PatchComment(data, id) {
   return await getCacheOrFetch(`${BASE_URL}/comments/${id}`, "PATCH", data);
 }
 
-export async function deleteComment(id, force = false) {
+export async function deleteComment(id) {
   return await getCacheOrFetch(`${BASE_URL}/comments/${id}`, "DELETE");
 }
 
@@ -163,6 +162,6 @@ export async function likeComment(id, vote = 1) {
   return await getCacheOrFetch(`${BASE_URL}/comments/${id}/vote`, "PUT", { vote });
 }
 
-export async function fetchSelfLikesComment(id, force = false) {
+export async function fetchSelfLikesComment(id) {
   return await getCacheOrFetch(`${BASE_URL}/comments/${id}/vote`);
 }

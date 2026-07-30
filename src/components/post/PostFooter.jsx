@@ -1,5 +1,4 @@
 import { fetchSelfLikesPost, likePost } from "../../lib/wrodit.js";
-
 import VoteBar from "../VoteBar.jsx";
 
 export default function PostFooter({ vote, postId }) {
