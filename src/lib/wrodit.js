@@ -3,13 +3,30 @@ import { betterFetch } from "./fetchUtil";
 
 const BASE_URL = "http://localhost:8080";
 
+const currentFetches = new Map();
 async function getCacheOrFetch(url, method = "GET", body = undefined) {
   const cached = getCache(url);
   if (cached) {
     return cached;
   }
-  const res = await betterFetch(url, method, undefined, body);
-  return await setCache(url, res);
+
+  const current = currentFetches.get(url);
+  if (current) {
+    return current;
+  }
+
+  const fetchPromise = (async () => {
+    try {
+      const res = await betterFetch(url, method, undefined, body);
+      return await setCache(url, res);
+    } finally {
+      currentFetches.delete(url);
+    }
+  })();
+
+  currentFetches.set(url, fetchPromise);
+
+  return fetchPromise;
 }
 
 export async function fillPostUserAndThread(postsPage, thread = undefined, user = undefined) {
