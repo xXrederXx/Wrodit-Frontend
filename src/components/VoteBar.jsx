@@ -31,7 +31,7 @@ export default function VoteBar({ id, totalVotes, getOwnVote, postOwnVote }) {
   }, [id]);
 
   const handleLike = async value => {
-    if (ownIncluded) {
+    if (ownIncluded && ownVote !== 0) {
       if (ownVote <= value) {
         setDelta(1);
       }
