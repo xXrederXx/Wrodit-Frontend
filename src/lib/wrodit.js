@@ -125,13 +125,6 @@ export async function likePost(id, vote = 1) {
   return await getCacheOrFetch(`${BASE_URL}/posts/${id}/vote`, "PUT", { vote });
 }
 
-export async function RemoveLikePost(id, vote = 0) {
-  return await likePost(id, vote);
-}
-export async function DislikeLikePost(id, vote = -1) {
-  return await likePost(id, vote);
-}
-
 export async function fetchSelfLikesPost(id, force = false) {
   return await getCacheOrFetch(`${BASE_URL}/posts/${id}/vote`);
 }
@@ -168,13 +161,6 @@ export async function deleteComment(id, force = false) {
 
 export async function likeComment(id, vote = 1) {
   return await getCacheOrFetch(`${BASE_URL}/comments/${id}/vote`, "PUT", { vote });
-}
-
-export async function RemoveLikeComment(id, vote = 0) {
-  return await likeComment(id, vote);
-}
-export async function DislikeLikeComment(id, vote = -1) {
-  return await likeComment(id, vote);
 }
 
 export async function fetchSelfLikesComment(id, force = false) {
