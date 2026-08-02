@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
 
-import { timeAgo } from "../../lib/util.js";
+import RelativeTime from "../ui/RelativeTime.jsx";
 
 import styles from "./PostInformation.module.css";
-import RelativeTime from "../ui/RelativeTime.jsx";
 
 export default function PostHeader({ post }) {
   if (!post) {

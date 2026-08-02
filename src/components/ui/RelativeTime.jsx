@@ -8,11 +8,7 @@ export default function RelativeTime({ dateTime, className }) {
   }
 
   return (
-    <time
-      dateTime={date.toISOString()}
-      title={date.toLocaleString()}
-      className={className}
-    >
+    <time dateTime={date.toISOString()} title={date.toLocaleString()} className={className}>
       Vor {timeAgo(dateTime)}
     </time>
   );

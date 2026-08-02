@@ -1,5 +1,6 @@
 import React from "react";
-import RelativeTime from "../ui/RelativeTime.jsx"
+
+import RelativeTime from "../ui/RelativeTime.jsx";
 
 import styles from "./CommentHeader.module.css";
 

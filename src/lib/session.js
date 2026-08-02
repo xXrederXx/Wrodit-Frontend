@@ -11,9 +11,8 @@ export function getJWTToken() {
   return session.accessToken;
 }
 
-export function getLoggedInUserId()
-{
-    const session = getSession();
+export function getLoggedInUserId() {
+  const session = getSession();
 
   return session.userId;
 }

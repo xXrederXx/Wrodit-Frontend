@@ -2,13 +2,7 @@ import { useLoaderData } from "react-router-dom";
 
 import Comment from "../components/comment/Comment.jsx";
 import PostDetail from "../components/post/PostDetail.jsx";
-import {
-  fetchPostById,
-  fetchUser,
-  fetchThread,
-  fetchCommentByPost,
-  fetchAllUserData,
-} from "../lib/wrodit";
+import { fetchPostById, fetchThread, fetchCommentByPost } from "../lib/wrodit";
 
 import style from "./PostRoute.module.css";
 

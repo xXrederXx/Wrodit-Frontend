@@ -28,7 +28,8 @@ export default function VoteBar({ id, totalVotes, getOwnVote, postOwnVote }) {
       setOwnIncluded(true);
     };
     load();
-  }, [id]);
+  }, [id]); // eslint-disable-line react-hooks/exhaustive-deps
+  // The lint warning would make it so it infinitloops
 
   const handleLike = async value => {
     if (ownIncluded) {

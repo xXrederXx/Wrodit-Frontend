@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-import PostInformation from "../post/PostInformation.jsx";
-import { fetchAllUserData, fetchCommentByParent, fetchUser } from "../../lib/wrodit.js";
+import { fetchCommentByParent } from "../../lib/wrodit.js";
+import { getLoggedInUserId } from "../../lib/session.js";
 
 import styles from "./Comment.module.css";
 import CommentEditButton from "./CommentEditButton.jsx";
 import CommentFooter from "./CommentFooter.jsx";
-import { getLoggedInUserId } from "../../lib/session.js";
 import CommentHeader from "./CommentHeader.jsx";
 
 export default function Comment({ postId, data, lvl }) {
@@ -45,21 +44,12 @@ export default function Comment({ postId, data, lvl }) {
               className={styles.linkButton}>
               Komentieren
             </Link>
-            {data.user.id === getLoggedInUserId() && (
-              <CommentEditButton commentId={data.id} />
-            )}{" "}
+            {data.user.id === getLoggedInUserId() && <CommentEditButton commentId={data.id} />}{" "}
           </div>
         </div>
       </div>
       {children.map(child => {
-        return (
-          <Comment
-            key={child.id}
-            postId={postId}
-            data={child}
-            lvl={lvl + 1}
-          />
-        );
+        return <Comment key={child.id} postId={postId} data={child} lvl={lvl + 1} />;
       })}
     </>
   );
