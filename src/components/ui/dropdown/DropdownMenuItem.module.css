@@ -1,26 +1,26 @@
 .button {
-    display: flex;
-    align-items: center;
-    width: 100%;
+  display: flex;
+  align-items: center;
+  width: 100%;
 
-    border: none;
-    background: transparent;
+  border: none;
+  background: transparent;
 
-    padding:0.5rem;
+  padding: 0.5rem;
 
-    font-size: 0.875rem;
-    font-weight: 500;
-    text-align: left;
-    cursor: pointer;
-    color: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
 
-    transition: background-color 150ms;
+  transition: background-color 150ms;
 }
 
 .button:hover {
-    background-color: rgba(244, 244, 245, 0.5); 
+  background-color: rgba(244, 244, 245, 0.5);
 }
 
 .buttonActive {
-    background-color: rgba(244, 244, 245); 
+  background-color: rgba(244, 244, 245);
 }

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, cloneElement, Children } from "react";
+
 import styles from "./DropdownMenu.module.css";
 
 export default function DropdownMenu({ children, trigger }) {

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 
 import { fetchCommentByParent } from "../../lib/wrodit.js";
+
 import Comment from "./Comment.jsx";
-import styles from "./CommentsContainer.module.css"
+import styles from "./CommentsContainer.module.css";
 
 export default function CommentsContainer({ postId, data, lvl }) {
   const [children, setChildren] = useState([]);

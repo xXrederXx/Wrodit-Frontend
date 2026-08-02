@@ -1,14 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { FaShare } from "react-icons/fa";
+import { MdOutlineEdit, MdOutlineDelete } from "react-icons/md";
+
 import { deleteComment, fetchSelfLikesComment, likeComment } from "../../lib/wrodit.js";
 import VoteBar from "../VoteBar.jsx";
 import { getLoggedInUserId } from "../../lib/session.js";
-import styles from "./CommentFooter.module.css";
 import DropdownMenu from "../ui/dropdown/DropdownMenu.jsx";
 import DropdownMenuItem from "../ui/dropdown/DropdownMenuItem.jsx";
-import DropdownMenuSeparator from "../ui/dropdown/DropdownMenuSeperator.jsx";
-import { FaShare } from "react-icons/fa";
-import { MdOutlineEdit, MdOutlineDelete } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
+
+import styles from "./CommentFooter.module.css";
 
 export default function CommentFooter({ postId, data }) {
   const navigate = useNavigate();
@@ -28,7 +28,7 @@ export default function CommentFooter({ postId, data }) {
         {getDropdownOptions(data.user.id === getLoggedInUserId(), data.id, navigate).map(
           ({ Icon, text, action }) => (
             <DropdownMenuItem onClick={action} key={text}>
-              <Icon size={16} className={styles.dropdownIcon}></Icon>
+              <Icon size={16} className={styles.dropdownIcon} />
               <span className={styles.dropdownText}>{text}</span>
             </DropdownMenuItem>
           ),

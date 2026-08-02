@@ -2,9 +2,9 @@ import { useLoaderData } from "react-router-dom";
 
 import PostDetail from "../components/post/PostDetail.jsx";
 import { fetchPostById, fetchThread, fetchCommentByPost } from "../lib/wrodit";
+import CommentsContainer from "../components/comment/CommentsContainer.jsx";
 
 import style from "./PostRoute.module.css";
-import CommentsContainer from "../components/comment/CommentsContainer.jsx";
 
 async function clientLoader({ params }) {
   const postId = params.id;
