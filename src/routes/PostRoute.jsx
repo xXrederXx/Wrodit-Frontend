@@ -16,13 +16,12 @@ async function clientLoader({ params }) {
   const postId = params.id;
   const postData = await fetchPostById(postId);
 
-  const user = await fetchUser(postData.userId);
   const thread = await fetchThread(postData.threadId);
 
   const commentData = await fetchCommentByPost(postId);
   const comments = commentData.content.filter(comment => comment.parentId === null);
 
-  return { post: { ...postData, user, thread }, comments };
+  return { post: { ...postData, thread }, comments };
 }
 
 export default function PostRoute() {
