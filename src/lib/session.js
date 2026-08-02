@@ -11,6 +11,13 @@ export function getJWTToken() {
   return session.accessToken;
 }
 
+export function getLoggedInUserId()
+{
+    const session = getSession();
+
+  return session.userId;
+}
+
 export function getAuthorizationHeader() {
   const session = getJWTToken();
   return session ? { Authorization: `Bearer ${session}` } : {};

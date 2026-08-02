@@ -19,35 +19,21 @@ async function clientLoader({ params }) {
   const user = await fetchUser(postData.userId);
   const thread = await fetchThread(postData.threadId);
 
-  const currentUser = await fetchAllUserData();
-
   const commentData = await fetchCommentByPost(postId);
   const comments = commentData.content.filter(comment => comment.parentId === null);
 
-  return { post: { ...postData, user, thread }, comments, currentUser };
+  return { post: { ...postData, user, thread }, comments };
 }
 
 export default function PostRoute() {
-  const { post, comments, currentUser } = useLoaderData();
+  const { post, comments } = useLoaderData();
 
   return (
     <>
       <PostDetail post={post} />
       <div className={style.commentContainer}>
         {comments.map(comment => {
-          const canUserEdit = currentUser.id === comment.userId;
-
-          return (
-            <Comment
-              key={comment.id}
-              username={comment.username}
-              postId={post.id}
-              data={comment}
-              lvl={0}
-              canEdit={canUserEdit}
-              commentId={comment.id}
-            />
-          );
+          return <Comment key={comment.id} postId={post.id} data={comment} lvl={0} />;
         })}
       </div>
     </>
