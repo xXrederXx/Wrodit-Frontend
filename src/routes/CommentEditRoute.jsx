@@ -1,8 +1,8 @@
-import { redirect, useActionData, useNavigate, useLoaderData } from "react-router-dom";
+import { useActionData, useNavigate, useLoaderData } from "react-router-dom";
+import { useEffect } from "react";
 
 import { fetchCommentById, PatchComment } from "../lib/wrodit";
 import EditCommentForm from "../components/comment/EditCommentForm.jsx";
-import { useEffect } from "react";
 
 async function clientLoader({ params }) {
   const commentId = params.id;
@@ -16,7 +16,7 @@ async function clientAction({ request, params }) {
 
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
-  
+
   try {
     await PatchComment(data, commentId);
     return { success: true };
@@ -46,7 +46,11 @@ export default function CommentEditRoute() {
   return (
     <div className="createPost">
       <h1>Bearbeite deinen komentar</h1>
-      <EditCommentForm errors={actionData ?? {}} onCancel={onCancel} content={data.commentData.content} />
+      <EditCommentForm
+        errors={actionData ?? {}}
+        onCancel={onCancel}
+        content={data.commentData.content}
+      />
     </div>
   );
 }

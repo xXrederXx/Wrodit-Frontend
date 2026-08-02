@@ -10,8 +10,7 @@ if (!BASE_URL) {
 const currentFetches = new Map();
 
 async function getCacheOrFetch(url, method = "GET", body = undefined) {
-  // eslint-disable-line require-await
-  const key = `${method} ${url} ${JSON.stringify(body)}`
+  const key = `${method} ${url} ${JSON.stringify(body)}`;
   const cached = getCache(key);
   if (cached) {
     return cached;
