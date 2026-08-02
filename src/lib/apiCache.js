@@ -29,7 +29,6 @@ export async function setCache(url, response) {
   const expirationMS = Number(matchMaxAge[1]) * 1000;
 
   cache.set(url, { value: data, exp: Date.now() + expirationMS });
-  console.log(`add ${url} to cache for ${expirationMS} ms`);
   return data;
 }
 

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import { timeAgo } from "../../lib/util.js";
+import RelativeTime from "../ui/RelativeTime.jsx";
 
 import styles from "./PostInformation.module.css";
 
@@ -15,7 +15,7 @@ export default function PostHeader({ post }) {
         {" "}
         <p>{post.thread.name}</p>
       </Link>
-      <p>Vor {timeAgo(post.createdAt)}</p>
+      <RelativeTime dateTime={post.createdAt} />
     </header>
   );
 }

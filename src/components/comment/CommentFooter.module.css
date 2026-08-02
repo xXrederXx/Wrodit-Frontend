@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  gap: 1rem;
+  justify-items: center;
+}
+
+.linkButton {
+  text-decoration: none;
+  background-color: var(--clr-primary);
+  color: white;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+}
+
+.dropdownIcon {
+  margin: 0.25rem;
+}
+.dropdownText {
+  margin-left: 0.5rem;
+}
