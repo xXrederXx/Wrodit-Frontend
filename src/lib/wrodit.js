@@ -11,12 +11,13 @@ const currentFetches = new Map();
 
 async function getCacheOrFetch(url, method = "GET", body = undefined) {
   // eslint-disable-line require-await
-  const cached = getCache(url);
+  const key = `${method} ${url} ${JSON.stringify(body)}`
+  const cached = getCache(key);
   if (cached) {
     return cached;
   }
 
-  const current = currentFetches.get(url);
+  const current = currentFetches.get(key);
   if (current) {
     return current;
   }
@@ -24,13 +25,13 @@ async function getCacheOrFetch(url, method = "GET", body = undefined) {
   const fetchPromise = (async () => {
     try {
       const res = await betterFetch(url, method, undefined, body);
-      return await setCache(url, res);
+      return await setCache(key, res);
     } finally {
-      currentFetches.delete(url);
+      currentFetches.delete(key);
     }
   })();
 
-  currentFetches.set(url, fetchPromise);
+  currentFetches.set(key, fetchPromise);
 
   return fetchPromise;
 }
