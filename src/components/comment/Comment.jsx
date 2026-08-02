@@ -8,6 +8,7 @@ import styles from "./Comment.module.css";
 import CommentEditButton from "./CommentEditButton.jsx";
 import CommentFooter from "./CommentFooter.jsx";
 import { getLoggedInUserId } from "../../lib/session.js";
+import CommentHeader from "./CommentHeader.jsx";
 
 export default function Comment({ postId, data, lvl }) {
   const [children, setChildren] = useState([]);
@@ -34,9 +35,7 @@ export default function Comment({ postId, data, lvl }) {
         <div style={{ flex: lvl }} />
 
         <div className={styles.comment} style={{ flex: 10, minWidth: "20rem" }}>
-          <PostInformation
-            post={{ user: { username: data.user.username }, thread: {}, createdAt: data.createdAt }}
-          />
+          <CommentHeader data={data} />
 
           <p>{data.content}</p>
           <CommentFooter vote={data.votes} commentId={data.id} />
