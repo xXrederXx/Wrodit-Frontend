@@ -12,3 +12,10 @@
   border-radius: 1rem;
   font-size: 0.75rem;
 }
+
+.dropdownIcon {
+  margin: 0.25rem;
+}
+.dropdownText {
+  margin-left: 0.5rem;
+}
