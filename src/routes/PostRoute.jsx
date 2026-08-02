@@ -1,10 +1,10 @@
 import { useLoaderData } from "react-router-dom";
 
-import Comment from "../components/comment/Comment.jsx";
 import PostDetail from "../components/post/PostDetail.jsx";
 import { fetchPostById, fetchThread, fetchCommentByPost } from "../lib/wrodit";
 
 import style from "./PostRoute.module.css";
+import CommentsContainer from "../components/comment/CommentsContainer.jsx";
 
 async function clientLoader({ params }) {
   const postId = params.id;
@@ -26,7 +26,7 @@ export default function PostRoute() {
       <PostDetail post={post} />
       <div className={style.commentContainer}>
         {comments.map(comment => {
-          return <Comment key={comment.id} postId={post.id} data={comment} lvl={0} />;
+          return <CommentsContainer key={comment.id} postId={post.id} data={comment} lvl={0} />;
         })}
       </div>
     </>
