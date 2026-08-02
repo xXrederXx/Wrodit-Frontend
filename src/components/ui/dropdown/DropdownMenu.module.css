@@ -1,0 +1,30 @@
+.dropdown {
+    position: relative;
+    display: inline-block;
+    text-align: left;
+}
+
+.dropdownTrigger {
+    cursor: pointer;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    color: inherit;
+}
+
+.dropdownMenu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 50;
+
+    width: 14rem;
+    margin-top: 0.5rem;
+
+    border-radius: 0.25rem;
+    background: #272e33;
+
+    transform-origin: top right;
+}
