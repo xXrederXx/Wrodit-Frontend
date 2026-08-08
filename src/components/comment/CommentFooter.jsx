@@ -9,6 +9,7 @@ import DropdownMenu from "../ui/dropdown/DropdownMenu.jsx";
 import DropdownMenuItem from "../ui/dropdown/DropdownMenuItem.jsx";
 
 import styles from "./CommentFooter.module.css";
+import CommentButton from "../ui/CommentButton.jsx";
 
 export default function CommentFooter({ postId, data }) {
   const navigate = useNavigate();
@@ -21,9 +22,8 @@ export default function CommentFooter({ postId, data }) {
         getOwnVote={fetchSelfLikesComment}
         postOwnVote={likeComment}
       />
-      <Link to={`/wrodit/create/comment/parent/${postId}/${data.id}`} className={styles.linkButton}>
-        Komentieren
-      </Link>
+      <CommentButton postId={postId} commentId={data.id} />
+
       <DropdownMenu trigger={<span>...</span>}>
         {getDropdownOptions(data.user.id === getLoggedInUserId(), data.id, navigate).map(
           ({ Icon, text, action }) => (
@@ -34,6 +34,7 @@ export default function CommentFooter({ postId, data }) {
           ),
         )}
       </DropdownMenu>
+      
     </div>
   );
 }

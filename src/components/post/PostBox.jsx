@@ -14,7 +14,7 @@ export default function PostBox({ post }) {
         <PostTitle title={post.title} />
         <PostText text={post.content} />{" "}
       </Link>
-      <PostFooter vote={post.vote} postId={post.id} />
+      <PostFooter post={post} />
     </article>
   );
 }
