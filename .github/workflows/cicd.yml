@@ -29,17 +29,3 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
-  deploy-staging:
-    if: false # github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    steps:
-      - run: |
-          curl -X GET "${{ secrets.COOLIFY_STAGING_URL }}" \
-            -H "Authorization: Bearer ${{ secrets.COOLIFY_TOK }}"
-  deploy-production:
-    if: false # github.ref == 'refs/heads/production'
-    runs-on: ubuntu-latest
-    steps:
-      - run: |
-          curl -X GET "${{ secrets.COOLIFY_PRODUCTION_URL }}" \
-            -H "Authorization: Bearer ${{ secrets.COOLIFY_TOK }}"
