@@ -1,6 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import { FaShare } from "react-icons/fa";
-import { MdOutlineDelete, MdOutlineEdit } from "react-icons/md";
 
 import { deletePost, fetchSelfLikesPost, likePost } from "../../lib/wrodit.js";
 import CommentButton from "../ui/CommentButton.jsx";
@@ -10,6 +8,9 @@ import { getLoggedInUserId } from "../../lib/session.js";
 import DropdownMenuItem from "../ui/dropdown/DropdownMenuItem.jsx";
 
 import styles from "./PostFooter.module.css";
+import ShareIcon from "../icons/ShareIcon.jsx";
+import EditIcon from "../icons/EditIcon.jsx";
+import DeleteIcon from "../icons/DeleteIcon.jsx";
 export default function PostFooter({ post }) {
   const navigate = useNavigate();
 
@@ -41,7 +42,7 @@ export default function PostFooter({ post }) {
 function getDropdownOptions(isEditable, id, navigate) {
   const options = [
     {
-      Icon: FaShare,
+      Icon: ShareIcon,
       text: "Teilen",
       action: () => navigator.clipboard.writeText(window.location.href),
     },
@@ -50,12 +51,12 @@ function getDropdownOptions(isEditable, id, navigate) {
   if (isEditable) {
     options.push(
       {
-        Icon: MdOutlineEdit,
+        Icon: EditIcon,
         text: "Bearbeiten",
         action: () => navigate(`/wrodit/edit/post/${id}`),
       },
       {
-        Icon: MdOutlineDelete,
+        Icon: DeleteIcon,
         text: "Löschen",
         action: () => handlePostDelete(id),
       },

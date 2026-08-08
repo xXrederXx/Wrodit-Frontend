@@ -1,6 +1,4 @@
 import { Link, useNavigate } from "react-router-dom";
-import { FaShare } from "react-icons/fa";
-import { MdOutlineEdit, MdOutlineDelete } from "react-icons/md";
 
 import { deleteComment, fetchSelfLikesComment, likeComment } from "../../lib/wrodit.js";
 import VoteBar from "../VoteBar.jsx";
@@ -10,6 +8,9 @@ import DropdownMenuItem from "../ui/dropdown/DropdownMenuItem.jsx";
 import CommentButton from "../ui/CommentButton.jsx";
 
 import styles from "./CommentFooter.module.css";
+import ShareIcon from "../icons/ShareIcon.jsx";
+import EditIcon from "../icons/EditIcon.jsx";
+import DeleteIcon from "../icons/DeleteIcon.jsx";
 
 export default function CommentFooter({ postId, data }) {
   const navigate = useNavigate();
@@ -41,7 +42,7 @@ export default function CommentFooter({ postId, data }) {
 function getDropdownOptions(isEditable, id, navigate) {
   const options = [
     {
-      Icon: FaShare,
+      Icon: ShareIcon,
       text: "Teilen",
       action: () => navigator.clipboard.writeText(window.location.href),
     },
@@ -50,12 +51,12 @@ function getDropdownOptions(isEditable, id, navigate) {
   if (isEditable) {
     options.push(
       {
-        Icon: MdOutlineEdit,
+        Icon: EditIcon,
         text: "Bearbeiten",
         action: () => navigate(`/wrodit/edit/comment/${id}`),
       },
       {
-        Icon: MdOutlineDelete,
+        Icon: DeleteIcon,
         text: "Löschen",
         action: () => handleCommentDelete(id),
       },

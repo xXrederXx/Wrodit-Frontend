@@ -4,9 +4,10 @@ import logo from "../assets/logo.svg";
 
 import styles from "./Header.module.css";
 import DropdownMenu from "./ui/dropdown/DropdownMenu.jsx";
-import { CgLogOut, CgProfile } from "react-icons/cg";
 import DropdownMenuItem from "./ui/dropdown/DropdownMenuItem.jsx";
 import { removeSession, useSession } from "../lib/session.js";
+import ProfileIcon from "./icons/ProfileIcon.jsx";
+import LogoutIcon from "./icons/LogoutIcon.jsx";
 
 export default function Header() {
   const navigate = useNavigate();
@@ -26,10 +27,10 @@ export default function Header() {
       <Link to="/" className={styles.logoIcon}>
         <img src={logo} alt="Mein Logo" />{" "}
       </Link>
-      <DropdownMenu trigger={<CgProfile className={styles.dropdownTriggerIcon}/>}>
+      <DropdownMenu trigger={<ProfileIcon className={styles.dropdownTriggerIcon}/>}>
         <DropdownMenuItem onClick={() => navigate(`/wrodit/user/${session.userId}`)}>
           <div className={styles.dropdownItemContainer}>
-            <CgProfile className={styles.profileAvatar} />
+            <ProfileIcon className={styles.profileAvatar} />
             <div className={styles.profileTextContainer}>
               <span>Profil Anzeigen</span>
               <span className={styles.username}>u/{session.username}</span>
@@ -38,7 +39,7 @@ export default function Header() {
         </DropdownMenuItem>
         <DropdownMenuItem onClick={handleLogout}>
           <div className={styles.dropdownItemContainer}>
-            <CgLogOut className={styles.logoutIcon} />
+            <LogoutIcon className={styles.logoutIcon} />
             <span className={styles.logoutText}>Abmelden</span>
           </div>
         </DropdownMenuItem>

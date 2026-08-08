@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./PostPreviewFooter.module.css";
 import { fetchSelfLikesPost, likePost } from "../../../lib/wrodit";
-import { FaShare } from "react-icons/fa";
 import VoteBar from "../../VoteBar.jsx";
+import ShareIcon from "../../icons/ShareIcon.jsx";
 
 export default function PostPreviewFooter({ post }) {
   return (
@@ -18,7 +18,7 @@ export default function PostPreviewFooter({ post }) {
         type="button"
         className={styles.button}
         onClick={() => navigator.clipboard.writeText(`${window.location.origin}/post/${post.id}`)}>
-        <FaShare />
+        <ShareIcon />
         <span>Teilen</span>
       </button>
     </div>
