@@ -23,10 +23,10 @@ export default function Header() {
   return (
     <header className={styles.header}>
       {" "}
-      <Link to="/">
-        <img src={logo} alt="Mein Logo" style={{ width: "5rem", height: "5rem" }} />{" "}
+      <Link to="/" className={styles.logoIcon}>
+        <img src={logo} alt="Mein Logo" />{" "}
       </Link>
-      <DropdownMenu trigger={<CgProfile />}>
+      <DropdownMenu trigger={<CgProfile className={styles.dropdownTriggerIcon}/>}>
         <DropdownMenuItem onClick={() => navigate(`/wrodit/user/${session.userId}`)}>
           <div className={styles.dropdownItemContainer}>
             <CgProfile className={styles.profileAvatar} />

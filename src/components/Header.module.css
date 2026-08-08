@@ -3,13 +3,21 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  font-size: 3rem;
   background-color: black;
   margin-bottom: 2rem;
-  padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+  padding: 0.5rem 0.75rem;
   width: 100%;
 }
-
+.logoIcon {
+  width: 2rem;
+  height: 2rem;
+  min-width: 0;
+  min-height: 0;
+}
+.dropdownTriggerIcon {
+  width: 2rem;
+  height: 2rem;
+}
 .dropdownItemContainer {
   display: flex;
   flex-direction: row;
