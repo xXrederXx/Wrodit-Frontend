@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 
 import PostHeader from "../PostHeader.jsx";
 import styles from "./PostPreview.module.css";
-import PostFooter from "../PostFooter.jsx";
 import MarkdownContainer from "../../ui/MarkdownContainer.jsx";
+import PostPreviewFooter from "./PostPreviewFooter.jsx";
 
 export default function PostPreview({ post }) {
   return (
@@ -13,7 +13,7 @@ export default function PostPreview({ post }) {
         <h3>{post.title}</h3>
         <MarkdownContainer text={post.content} />{" "}
       </Link>
-      <PostFooter post={post} />
+      <PostPreviewFooter post={post} />
     </article>
   );
 }
