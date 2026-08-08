@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import styles from "./VoteBar.module.css"; // eslint-disable-line no-unused-vars
+import styles from "./VoteBar.module.css";
 import LikeIcon from "./icons/LikeIcon";
 import DislikeIcon from "./icons/DislikeIcon";
 
@@ -47,7 +47,7 @@ export default function VoteBar({ id, totalVotes, getOwnVote, postOwnVote }) {
 
   const shownVotes = (ownIncluded ? totalVotes : totalVotes + ownVote) + delta;
   return (
-    <footer>
+    <footer className={styles.footer}>
       <span>{shownVotes}</span>
       {ownVote === 1 ?
         <LikeIcon onClick={() => handleLike(0)} active />
