@@ -1,8 +1,20 @@
 .header {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
   height: 1rem;
   font-size: 0.9rem;
+}
+
+.header > * {
+  width: 9999rem;
+  text-align: center;
+  
+}
+
+.right {
+  text-align: right;
+}
+.left {
+  text-align: left;
 }
