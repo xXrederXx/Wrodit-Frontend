@@ -14,3 +14,14 @@ img {
   max-width: 100%;
   height: auto;
 }
+.content {
+  max-height: 10rem;
+  overflow-y: hidden;
+  mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 88%,
+    rgba(0, 0, 0, 0.7) 94%,
+    transparent 100%
+  );
+}

@@ -11,7 +11,7 @@ export default function PostPreview({ post }) {
       <PostHeader post={post} />{" "}
       <Link className={styles.link} to={`/wrodit/post/${post.id}`}>
         <h3>{post.title}</h3>
-        <MarkdownContainer text={post.content} />{" "}
+        <MarkdownContainer text={post.content} className={styles.content} />{" "}
       </Link>
       <PostPreviewFooter post={post} />
     </article>
