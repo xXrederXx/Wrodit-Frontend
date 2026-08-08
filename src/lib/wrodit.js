@@ -35,7 +35,7 @@ async function getCacheOrFetch(url, method = "GET", body = undefined) {
   return fetchPromise;
 }
 
-export async function fillPostUserAndThread(postsPage, thread = undefined, user = undefined) {
+export async function fillPostUserAndThread(postsPage, thread = undefined) {
   const posts = await Promise.all(
     postsPage.content.map(async post => {
       return {

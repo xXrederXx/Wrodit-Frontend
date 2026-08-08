@@ -1,15 +1,16 @@
 import { useNavigate } from "react-router-dom";
+import { FaShare } from "react-icons/fa";
+import { MdOutlineDelete, MdOutlineEdit } from "react-icons/md";
+
 import { deletePost, fetchSelfLikesPost, likePost } from "../../lib/wrodit.js";
 import CommentButton from "../ui/CommentButton.jsx";
 import VoteBar from "../VoteBar.jsx";
 import DropdownMenu from "../ui/dropdown/DropdownMenu.jsx";
 import { getLoggedInUserId } from "../../lib/session.js";
-import { FaShare } from "react-icons/fa";
-import { MdOutlineDelete, MdOutlineEdit } from "react-icons/md";
 import DropdownMenuItem from "../ui/dropdown/DropdownMenuItem.jsx";
-import styles from "./PostFooter.module.css"
+
+import styles from "./PostFooter.module.css";
 export default function PostFooter({ post }) {
-  console.log(post);
   const navigate = useNavigate();
 
   return (

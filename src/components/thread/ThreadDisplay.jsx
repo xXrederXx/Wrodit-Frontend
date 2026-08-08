@@ -1,6 +1,7 @@
 import React from "react";
-import styles from "./ThreadDisplay.module.css"
 import { Link } from "react-router-dom";
+
+import styles from "./ThreadDisplay.module.css";
 
 export default function ThreadDisplay({ thread }) {
   return (

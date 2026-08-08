@@ -7,9 +7,9 @@ import VoteBar from "../VoteBar.jsx";
 import { getLoggedInUserId } from "../../lib/session.js";
 import DropdownMenu from "../ui/dropdown/DropdownMenu.jsx";
 import DropdownMenuItem from "../ui/dropdown/DropdownMenuItem.jsx";
+import CommentButton from "../ui/CommentButton.jsx";
 
 import styles from "./CommentFooter.module.css";
-import CommentButton from "../ui/CommentButton.jsx";
 
 export default function CommentFooter({ postId, data }) {
   const navigate = useNavigate();
@@ -34,7 +34,6 @@ export default function CommentFooter({ postId, data }) {
           ),
         )}
       </DropdownMenu>
-      
     </div>
   );
 }
