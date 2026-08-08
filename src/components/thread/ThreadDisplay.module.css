@@ -1,0 +1,6 @@
+.link {
+  color: var(--clr-link);
+}
+.link:visited {
+  color: var(--clr-link-visited);
+}

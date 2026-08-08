@@ -13,6 +13,7 @@ import {
 import { removeSession } from "../lib/session.js";
 
 import style from "./UserRoute.module.css";
+import ThreadDisplay from "../components/thread/ThreadDisplay.jsx";
 
 async function clientLoader({ params }) {
   const userId = params.id;
@@ -67,9 +68,7 @@ export default function UserRoute() {
       <h3>Meine Threads</h3>
       {threads.content.map(thread => {
         return (
-          <Link key={thread.id} className="threadDescription" to={`/wrodit/thread/${thread.id}`}>
-            <h1>w/{thread.name}</h1>
-          </Link>
+          <ThreadDisplay key={thread.id} thread={thread} />
         );
       })}
     </>

@@ -6,9 +6,3 @@
   height: 1rem;
   font-size: 0.9rem;
 }
-.link {
-  color: var(--clr-link);
-}
-.link:visited {
-  color: var(--clr-link-visited);
-}
