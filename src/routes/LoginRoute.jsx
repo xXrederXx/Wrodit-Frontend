@@ -4,6 +4,7 @@ import LogInForm from "../components/user/LogInForm.jsx";
 import { signIn } from "../lib/auth";
 import { saveSession } from "../lib/session";
 import { validateLoginIn } from "../lib/validate";
+import MetaTags from "../components/MetaTags.jsx";
 
 async function clientAction({ request }) {
   const formData = await request.formData();
@@ -37,15 +38,17 @@ export default function LoginRoute() {
   };
 
   return (
+    <>
+      <MetaTags title={"Login - Wrodit"} description={"Login to your Wrodit account here"} url={window.location.href} />
+    
     <div className="signup">
       <h1>Anmelden!!!</h1>
-
       <LogInForm errors={errors} onCancel={onCancel} />
 
       <p>
         Noch kein Konto <Link to="/wrodit/register">Registrieren</Link>
       </p>
-    </div>
+    </div></>
   );
 }
 LoginRoute.action = clientAction;

@@ -5,6 +5,7 @@ import { fetchPostById, fetchThread, fetchCommentByPost } from "../lib/wrodit";
 import CommentsContainer from "../components/comment/CommentsContainer.jsx";
 
 import style from "./PostRoute.module.css";
+import MetaTags from "../components/MetaTags.jsx";
 
 async function clientLoader({ params }) {
   const postId = params.id;
@@ -23,6 +24,7 @@ export default function PostRoute() {
 
   return (
     <>
+      <MetaTags title={`${post.title} - Wrodit`} description={`A post created by a user named "${post.user.username}"`} url={window.location.href} author={post.user.username} />
       <PostDetail post={post} />
       <div className={style.commentContainer}>
         {comments.map(comment => {
