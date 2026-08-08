@@ -1,8 +1,8 @@
 import { useLoaderData } from "react-router-dom";
 
 import { fetchPostsByThread, fetchThread, fillPostUserAndThread } from "../lib/wrodit";
-import PostBox from "../components/post/PostBox.jsx";
 import ThreadInformation from "../components/thread/ThreadInformation.jsx";
+import PostPreview from "../components/post/preview/PostPreview.jsx";
 
 async function clientLoader({ params }) {
   const threadId = params.id;
@@ -25,7 +25,7 @@ export default function ThreadRoute() {
       />
 
       {posts.content.map(post => (
-        <PostBox key={post.id} post={post} />
+        <PostPreview key={post.id} post={post} />
       ))}
     </>
   );

@@ -1,7 +1,7 @@
 import RelativeTime from "../ui/RelativeTime.jsx";
 import ThreadDisplay from "../thread/ThreadDisplay.jsx";
 
-import styles from "./PostInformation.module.css";
+import styles from "./PostHeader.module.css";
 
 export default function PostHeader({ post }) {
   if (!post) {
