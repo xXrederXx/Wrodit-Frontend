@@ -11,7 +11,7 @@ export default function PostHeader({ post }) {
     <header className={styles.header}>
       <p className={styles.left}>{post.user.username}</p>
       <ThreadDisplay thread={post.thread} className={styles.right} />
-      <RelativeTime dateTime={post.createdAt} className={styles.right}/>
+      <RelativeTime dateTime={post.createdAt} className={styles.right} />
     </header>
   );
 }

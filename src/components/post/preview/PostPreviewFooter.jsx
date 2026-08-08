@@ -1,8 +1,10 @@
 import React from "react";
-import styles from "./PostPreviewFooter.module.css";
+
 import { fetchSelfLikesPost, likePost } from "../../../lib/wrodit";
 import VoteBar from "../../VoteBar.jsx";
 import ShareIcon from "../../icons/ShareIcon.jsx";
+
+import styles from "./PostPreviewFooter.module.css";
 
 export default function PostPreviewFooter({ post }) {
   return (

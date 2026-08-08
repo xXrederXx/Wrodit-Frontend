@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 
 import PostHeader from "../PostHeader.jsx";
-import styles from "./PostPreview.module.css";
 import MarkdownContainer from "../../ui/MarkdownContainer.jsx";
+
+import styles from "./PostPreview.module.css";
 import PostPreviewFooter from "./PostPreviewFooter.jsx";
 
 export default function PostPreview({ post }) {

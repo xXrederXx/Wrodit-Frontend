@@ -37,15 +37,19 @@ export default function RegisterRoute() {
 
   return (
     <>
-    <MetaTags title={"Regristration - Wrodit"} description={"Regrister a new account for Wrodit here"} url={window.location.href} />
-    <div className="signup">
-      <h1>Registrieren</h1>
-      <SignUpForm errors={errors} onCancel={onCancel} />
+      <MetaTags
+        title={"Regristration - Wrodit"}
+        description={"Regrister a new account for Wrodit here"}
+        url={window.location.href}
+      />
+      <div className="signup">
+        <h1>Registrieren</h1>
+        <SignUpForm errors={errors} onCancel={onCancel} />
 
-      <p>
-        Schon Wroditor*in? <Link to="/wrodit/login">Anmelden</Link>
-      </p>
-    </div>
+        <p>
+          Schon Wroditor*in? <Link to="/wrodit/login">Anmelden</Link>
+        </p>
+      </div>
     </>
   );
 }

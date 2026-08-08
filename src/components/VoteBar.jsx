@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 
 import styles from "./VoteBar.module.css";
-import LikeIcon from "./icons/LikeIcon";
-import DislikeIcon from "./icons/DislikeIcon";
+import LikeIcon from "./icons/LikeIcon.jsx";
+import DislikeIcon from "./icons/DislikeIcon.jsx";
 
 // WORKING vote bar with client prediction
 // I have no idea why delta is here but it makes it work properly

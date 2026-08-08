@@ -1,7 +1,7 @@
 import { useLoaderData } from "react-router-dom";
 
 import { fetchPosts, fillPostUserAndThread } from "../lib/wrodit";
-import PostPreview from "../components/post/preview/PostPreview";
+import PostPreview from "../components/post/preview/PostPreview.jsx";
 
 async function clientLoader() {
   const postsPage = await fetchPosts(true);

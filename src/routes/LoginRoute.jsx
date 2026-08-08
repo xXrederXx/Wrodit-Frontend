@@ -39,16 +39,21 @@ export default function LoginRoute() {
 
   return (
     <>
-      <MetaTags title={"Login - Wrodit"} description={"Login to your Wrodit account here"} url={window.location.href} />
-    
-    <div className="signup">
-      <h1>Anmelden!!!</h1>
-      <LogInForm errors={errors} onCancel={onCancel} />
+      <MetaTags
+        title={"Login - Wrodit"}
+        description={"Login to your Wrodit account here"}
+        url={window.location.href}
+      />
 
-      <p>
-        Noch kein Konto <Link to="/wrodit/register">Registrieren</Link>
-      </p>
-    </div></>
+      <div className="signup">
+        <h1>Anmelden!!!</h1>
+        <LogInForm errors={errors} onCancel={onCancel} />
+
+        <p>
+          Noch kein Konto <Link to="/wrodit/register">Registrieren</Link>
+        </p>
+      </div>
+    </>
   );
 }
 LoginRoute.action = clientAction;

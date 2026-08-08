@@ -11,9 +11,9 @@ import {
 } from "../lib/wrodit";
 import { removeSession } from "../lib/session.js";
 import ThreadDisplay from "../components/thread/ThreadDisplay.jsx";
+import PostPreview from "../components/post/preview/PostPreview.jsx";
 
 import style from "./UserRoute.module.css";
-import PostPreview from "../components/post/preview/PostPreview.jsx";
 
 async function clientLoader({ params }) {
   const userId = params.id;

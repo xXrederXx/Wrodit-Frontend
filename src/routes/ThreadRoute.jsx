@@ -19,7 +19,11 @@ export default function ThreadRoute() {
 
   return (
     <>
-    <MetaTags title={`${thread.name} - Wrodit`} description={`A Thread on Wrodit named "${thread.name}"`} url={window.location.href} />
+      <MetaTags
+        title={`${thread.name} - Wrodit`}
+        description={`A Thread on Wrodit named "${thread.name}"`}
+        url={window.location.href}
+      />
       <ThreadInformation
         name={thread.name}
         description={thread.description}

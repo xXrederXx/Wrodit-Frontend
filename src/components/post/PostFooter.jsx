@@ -6,11 +6,11 @@ import VoteBar from "../VoteBar.jsx";
 import DropdownMenu from "../ui/dropdown/DropdownMenu.jsx";
 import { getLoggedInUserId } from "../../lib/session.js";
 import DropdownMenuItem from "../ui/dropdown/DropdownMenuItem.jsx";
-
-import styles from "./PostFooter.module.css";
 import ShareIcon from "../icons/ShareIcon.jsx";
 import EditIcon from "../icons/EditIcon.jsx";
 import DeleteIcon from "../icons/DeleteIcon.jsx";
+
+import styles from "./PostFooter.module.css";
 export default function PostFooter({ post }) {
   const navigate = useNavigate();
 

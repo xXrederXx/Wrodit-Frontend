@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 
+import ProfileIcon from "../icons/ProfileIcon.jsx";
+
 import styles from "./UserDetails.module.css";
-import ProfileIcon from "../icons/ProfileIcon";
 
 export default function UserDetail({ username, email, userId }) {
   return (

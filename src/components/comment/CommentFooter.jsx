@@ -6,11 +6,11 @@ import { getLoggedInUserId } from "../../lib/session.js";
 import DropdownMenu from "../ui/dropdown/DropdownMenu.jsx";
 import DropdownMenuItem from "../ui/dropdown/DropdownMenuItem.jsx";
 import CommentButton from "../ui/CommentButton.jsx";
-
-import styles from "./CommentFooter.module.css";
 import ShareIcon from "../icons/ShareIcon.jsx";
 import EditIcon from "../icons/EditIcon.jsx";
 import DeleteIcon from "../icons/DeleteIcon.jsx";
+
+import styles from "./CommentFooter.module.css";
 
 export default function CommentFooter({ postId, data }) {
   const navigate = useNavigate();

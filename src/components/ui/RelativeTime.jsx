@@ -12,7 +12,7 @@ export default function RelativeTime({ dateTime, className }) {
     <time dateTime={date.toISOString()} title={date.toLocaleString()} className={className}>
       {formatDistanceToNow(date, {
         addSuffix: true,
-        locale: de
+        locale: de,
       })}
     </time>
   );
