@@ -44,7 +44,7 @@ export async function fillPostUserAndThread(postsPage, thread = undefined, user 
         createdAt: post.createdAt,
         id: post.id,
         thread: thread ?? (await fetchThread(post.threadId)),
-        user: user ?? (await fetchUser(post.userId)),
+        user: post.user,
         vote: post.vote,
       };
     }),

@@ -5,6 +5,8 @@ import RelativeTime from "../ui/RelativeTime.jsx";
 import styles from "./PostInformation.module.css";
 
 export default function PostHeader({ post }) {
+  console.log(post);
+  
   if (!post) {
     return <p>Loading</p>;
   }
