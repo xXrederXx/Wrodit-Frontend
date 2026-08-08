@@ -3,6 +3,7 @@ import { useLoaderData } from "react-router-dom";
 import PostDetail from "../components/post/PostDetail.jsx";
 import { fetchPostById, fetchThread, fetchCommentByPost } from "../lib/wrodit";
 import CommentsContainer from "../components/comment/CommentsContainer.jsx";
+import MetaTags from "../components/MetaTags.jsx";
 
 import style from "./PostRoute.module.css";
 
@@ -23,6 +24,12 @@ export default function PostRoute() {
 
   return (
     <>
+      <MetaTags
+        title={`${post.title} - Wrodit`}
+        description={`A post created by a user named "${post.user.username}"`}
+        url={window.location.href}
+        author={post.user.username}
+      />
       <PostDetail post={post} />
       <div className={style.commentContainer}>
         {comments.map(comment => {

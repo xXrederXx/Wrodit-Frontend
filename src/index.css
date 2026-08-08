@@ -34,12 +34,5 @@ body {
   --clr-link: #3498db;
   --clr-link-visited: #808080;
   --clr-bg: #181c1f;
-}
-
-.threadDescription {
-  text-decoration: none;
-  color: white;
-  padding: 0.5rem;
-  border-radius: 1rem;
-  padding: 1rem;
+  --clr-text-muted: #888888;
 }

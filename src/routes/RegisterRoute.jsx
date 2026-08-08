@@ -3,6 +3,7 @@ import { Link, redirect, useActionData, useNavigate } from "react-router";
 import SignUpForm from "../components/user/SignUpForm.jsx";
 import { signUp } from "../lib/auth";
 import { validateSignIn } from "../lib/validate";
+import MetaTags from "../components/MetaTags.jsx";
 
 async function clientAction({ request }) {
   const formData = await request.formData();
@@ -35,14 +36,21 @@ export default function RegisterRoute() {
   };
 
   return (
-    <div className="signup">
-      <h1>Registrieren</h1>
-      <SignUpForm errors={errors} onCancel={onCancel} />
+    <>
+      <MetaTags
+        title={"Regristration - Wrodit"}
+        description={"Regrister a new account for Wrodit here"}
+        url={window.location.href}
+      />
+      <div className="signup">
+        <h1>Registrieren</h1>
+        <SignUpForm errors={errors} onCancel={onCancel} />
 
-      <p>
-        Schon Wroditor*in? <Link to="/wrodit/login">Anmelden</Link>
-      </p>
-    </div>
+        <p>
+          Schon Wroditor*in? <Link to="/wrodit/login">Anmelden</Link>
+        </p>
+      </div>
+    </>
   );
 }
 RegisterRoute.action = clientAction;
