@@ -1,14 +1,16 @@
+import { toFilteredJson } from "./fetchUtil";
+
 const cache = new Map();
 
 /*
- * Takes the response, adds it to cache and returns the json
+ * Takes the response, filters it, adds it to cache and returns the json
  */
 export async function setCache(url, response) {
   if (typeof response !== "object" || !response || response.status === 204) {
     return response;
   }
 
-  const data = await response.json();
+  const data = await toFilteredJson(response);
 
   const cacheControl = response.headers.get("Cache-Control");
   if (!cacheControl) {
