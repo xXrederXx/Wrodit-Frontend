@@ -1,14 +1,16 @@
+import { toFilteredJson } from "./fetchUtil";
+
 const cache = new Map();
 
 /*
- * Takes the response, adds it to cache and returns the json
+ * Takes the response, filters it, adds it to cache and returns the json
  */
 export async function setCache(url, response) {
   if (typeof response !== "object" || !response || response.status === 204) {
     return response;
   }
 
-  const data = await response.json();
+  const data = await toFilteredJson(response);
 
   const cacheControl = response.headers.get("Cache-Control");
   if (!cacheControl) {
@@ -29,7 +31,6 @@ export async function setCache(url, response) {
   const expirationMS = Number(matchMaxAge[1]) * 1000;
 
   cache.set(url, { value: data, exp: Date.now() + expirationMS });
-  console.log(`add ${url} to cache for ${expirationMS} ms`);
   return data;
 }
 

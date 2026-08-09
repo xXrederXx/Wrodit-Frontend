@@ -1,0 +1,6 @@
+.divider {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  height: 1px;
+  background-color: rgb(228, 228, 231); /* zinc-200 */
+}

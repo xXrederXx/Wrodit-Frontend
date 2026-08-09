@@ -8,13 +8,15 @@ if (!BASE_URL) {
 }
 
 const currentFetches = new Map();
+
 async function getCacheOrFetch(url, method = "GET", body = undefined) {
-  const cached = getCache(url);
+  const key = `${method} ${url} ${JSON.stringify(body)}`;
+  const cached = getCache(key);
   if (cached) {
     return cached;
   }
 
-  const current = currentFetches.get(url);
+  const current = currentFetches.get(key);
   if (current) {
     return current;
   }
@@ -22,18 +24,18 @@ async function getCacheOrFetch(url, method = "GET", body = undefined) {
   const fetchPromise = (async () => {
     try {
       const res = await betterFetch(url, method, undefined, body);
-      return await setCache(url, res);
+      return await setCache(key, res);
     } finally {
-      currentFetches.delete(url);
+      currentFetches.delete(key);
     }
   })();
 
-  currentFetches.set(url, fetchPromise);
+  currentFetches.set(key, fetchPromise);
 
   return fetchPromise;
 }
 
-export async function fillPostUserAndThread(postsPage, thread = undefined, user = undefined) {
+export async function fillPostUserAndThread(postsPage, thread = undefined) {
   const posts = await Promise.all(
     postsPage.content.map(async post => {
       return {
@@ -42,7 +44,7 @@ export async function fillPostUserAndThread(postsPage, thread = undefined, user 
         createdAt: post.createdAt,
         id: post.id,
         thread: thread ?? (await fetchThread(post.threadId)),
-        user: user ?? (await fetchUser(post.userId)),
+        user: post.user,
         vote: post.vote,
       };
     }),

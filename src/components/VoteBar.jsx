@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { FcLike } from "react-icons/fc";
-import { AiOutlineHeart, AiOutlineDislike, AiFillDislike } from "react-icons/ai";
 
-import styles from "./VoteBar.module.css"; // eslint-disable-line no-unused-vars
+import styles from "./VoteBar.module.css";
+import LikeIcon from "./icons/LikeIcon.jsx";
+import DislikeIcon from "./icons/DislikeIcon.jsx";
 
 // WORKING vote bar with client prediction
 // I have no idea why delta is here but it makes it work properly
@@ -28,10 +28,11 @@ export default function VoteBar({ id, totalVotes, getOwnVote, postOwnVote }) {
       setOwnIncluded(true);
     };
     load();
-  }, [id]);
+  }, [id]); // eslint-disable-line react-hooks/exhaustive-deps
+  // The lint warning would make it so it infinitloops
 
   const handleLike = async value => {
-    if (ownIncluded) {
+    if (ownIncluded && ownVote !== 0) {
       if (ownVote <= value) {
         setDelta(1);
       }
@@ -46,14 +47,14 @@ export default function VoteBar({ id, totalVotes, getOwnVote, postOwnVote }) {
 
   const shownVotes = (ownIncluded ? totalVotes : totalVotes + ownVote) + delta;
   return (
-    <footer>
+    <footer className={styles.footer}>
       <span>{shownVotes}</span>
       {ownVote === 1 ?
-        <FcLike onClick={() => handleLike(0)} />
-      : <AiOutlineHeart onClick={() => handleLike(1)} />}
+        <LikeIcon onClick={() => handleLike(0)} active />
+      : <LikeIcon onClick={() => handleLike(1)} />}
       {ownVote === -1 ?
-        <AiFillDislike onClick={() => handleLike(0)} />
-      : <AiOutlineDislike onClick={() => handleLike(-1)} />}
+        <DislikeIcon onClick={() => handleLike(0)} active />
+      : <DislikeIcon onClick={() => handleLike(-1)} />}
     </footer>
   );
 }

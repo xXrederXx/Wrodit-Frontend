@@ -1,4 +1,5 @@
-import { redirect, useActionData, useNavigate, useLoaderData } from "react-router-dom";
+import { useActionData, useNavigate, useLoaderData } from "react-router-dom";
+import { useEffect } from "react";
 
 import { fetchCommentById, PatchComment } from "../lib/wrodit";
 import EditCommentForm from "../components/comment/EditCommentForm.jsx";
@@ -18,17 +19,25 @@ async function clientAction({ request, params }) {
 
   try {
     await PatchComment(data, commentId);
-    return redirect(`/wrodit/post/1`);
+    return { success: true };
   } catch (error) {
-    console.error("Create post error:", error);
-    return error?.message || { general: "Etwas ist schiefgelaufen" };
+    console.error("Patch comment error:", error);
+    return {
+      success: false,
+      general: error?.message || "Etwas ist schiefgelaufen",
+    };
   }
 }
 export default function CommentEditRoute() {
   const data = useLoaderData();
-
+  const actionData = useActionData();
   const navigate = useNavigate();
-  const errors = useActionData() ?? {};
+
+  useEffect(() => {
+    if (actionData?.success) {
+      navigate(-1);
+    }
+  }, [actionData, navigate]);
 
   const onCancel = () => {
     return navigate(-1);
@@ -37,7 +46,11 @@ export default function CommentEditRoute() {
   return (
     <div className="createPost">
       <h1>Bearbeite deinen komentar</h1>
-      <EditCommentForm errors={errors} onCancel={onCancel} content={data.commentData.content} />
+      <EditCommentForm
+        errors={actionData ?? {}}
+        onCancel={onCancel}
+        content={data.commentData.content}
+      />
     </div>
   );
 }

@@ -1,0 +1,11 @@
+.container {
+  display: flex;
+  gap: 1rem;
+  justify-items: center;
+}
+.dropdownIcon {
+  margin: 0.25rem;
+}
+.dropdownText {
+  margin-left: 0.5rem;
+}

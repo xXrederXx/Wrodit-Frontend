@@ -1,6 +1,5 @@
 import { useLoaderData, Link } from "react-router-dom";
 
-import PostBox from "../components/post/PostBox.jsx";
 import UserDetail from "../components/user/UserDetails.jsx";
 import {
   fetchPostsByUser,
@@ -11,6 +10,8 @@ import {
   fillPostUserAndThread,
 } from "../lib/wrodit";
 import { removeSession } from "../lib/session.js";
+import ThreadDisplay from "../components/thread/ThreadDisplay.jsx";
+import PostPreview from "../components/post/preview/PostPreview.jsx";
 
 import style from "./UserRoute.module.css";
 
@@ -61,16 +62,12 @@ export default function UserRoute() {
           <Link to={`/wrodit/edit/post/${post.id}`} className={style.linkButton}>
             Bearbeiten
           </Link>
-          <PostBox key={post.id} post={post} />
+          <PostPreview key={post.id} post={post} />
         </>
       ))}
       <h3>Meine Threads</h3>
       {threads.content.map(thread => {
-        return (
-          <Link key={thread.id} className="threadDescription" to={`/wrodit/thread/${thread.id}`}>
-            <h1>w/{thread.name}</h1>
-          </Link>
-        );
+        return <ThreadDisplay key={thread.id} thread={thread} />;
       })}
     </>
   );

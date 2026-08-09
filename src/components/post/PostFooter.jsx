@@ -1,8 +1,74 @@
-import { fetchSelfLikesPost, likePost } from "../../lib/wrodit.js";
-import VoteBar from "../VoteBar.jsx";
+import { useNavigate } from "react-router-dom";
 
-export default function PostFooter({ vote, postId }) {
+import { deletePost, fetchSelfLikesPost, likePost } from "../../lib/wrodit.js";
+import CommentButton from "../ui/CommentButton.jsx";
+import VoteBar from "../VoteBar.jsx";
+import DropdownMenu from "../ui/dropdown/DropdownMenu.jsx";
+import { getLoggedInUserId } from "../../lib/session.js";
+import DropdownMenuItem from "../ui/dropdown/DropdownMenuItem.jsx";
+import ShareIcon from "../icons/ShareIcon.jsx";
+import EditIcon from "../icons/EditIcon.jsx";
+import DeleteIcon from "../icons/DeleteIcon.jsx";
+
+import styles from "./PostFooter.module.css";
+export default function PostFooter({ post }) {
+  const navigate = useNavigate();
+
   return (
-    <VoteBar id={postId} totalVotes={vote} getOwnVote={fetchSelfLikesPost} postOwnVote={likePost} />
+    <div className={styles.container}>
+      <VoteBar
+        id={post.id}
+        totalVotes={post.vote}
+        getOwnVote={fetchSelfLikesPost}
+        postOwnVote={likePost}
+      />
+
+      <CommentButton postId={post.id} />
+
+      <DropdownMenu trigger={<span>...</span>}>
+        {getDropdownOptions(post.user.id === getLoggedInUserId(), post.id, navigate).map(
+          ({ Icon, text, action }) => (
+            <DropdownMenuItem onClick={action} key={text}>
+              <Icon size={16} className={styles.dropdownIcon} />
+              <span className={styles.dropdownText}>{text}</span>
+            </DropdownMenuItem>
+          ),
+        )}
+      </DropdownMenu>
+    </div>
   );
+}
+
+function getDropdownOptions(isEditable, id, navigate) {
+  const options = [
+    {
+      Icon: ShareIcon,
+      text: "Teilen",
+      action: () => navigator.clipboard.writeText(window.location.href),
+    },
+  ];
+
+  if (isEditable) {
+    options.push(
+      {
+        Icon: EditIcon,
+        text: "Bearbeiten",
+        action: () => navigate(`/wrodit/edit/post/${id}`),
+      },
+      {
+        Icon: DeleteIcon,
+        text: "Löschen",
+        action: () => handlePostDelete(id),
+      },
+    );
+  }
+  return options;
+}
+
+async function handlePostDelete(id) {
+  try {
+    await deletePost(id);
+  } catch (err) {
+    console.error(err);
+  }
 }
