@@ -18,6 +18,9 @@ import ChildCommentRoute from "./routes/ChildCommentRoute.jsx";
 import PostEditRoute from "./routes/PostEditRoute.jsx";
 import CommentEditRoute from "./routes/CommentEditRoute.jsx";
 import ErrorRoute from "./routes/ErrorRoute.jsx";
+import LegalNotice from "./routes/legal/LegalNotice.jsx";
+import PrivacyPolicy from "./routes/legal/PrivacyPolicy.jsx";
+import TermsOfUse from "./routes/legal/TermsOfUse.jsx";
 
 const router = createBrowserRouter([
   {
@@ -107,6 +110,18 @@ const router = createBrowserRouter([
     path: "wrodit/register",
     element: <RegisterRoute />,
     action: RegisterRoute.action,
+  },
+  {
+    path: "wrodit/impressum",
+    element: <LegalNotice />,
+  },
+  {
+    path: "wrodit/datenschutz",
+    element: <PrivacyPolicy />,
+  },
+  {
+    path: "wrodit/nutzungsbedingungen",
+    element: <TermsOfUse />,
   },
 ]);
 
