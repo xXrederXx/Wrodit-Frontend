@@ -8,6 +8,10 @@ import DropdownMenu from "./ui/dropdown/DropdownMenu.jsx";
 import DropdownMenuItem from "./ui/dropdown/DropdownMenuItem.jsx";
 import ProfileIcon from "./icons/ProfileIcon.jsx";
 import LogoutIcon from "./icons/LogoutIcon.jsx";
+import DropdownMenuSeparator from "./ui/dropdown/DropdownMenuSeperator.jsx";
+import LegalNoticeIcon from "./icons/LegalNoticeIcon.jsx";
+import PrivacyPolicyIcon from "./icons/PrivacyPolicyIcon.jsx";
+import TermsOfUseIcon from "./icons/TermsOfUseIcon.jsx";
 
 export default function Header() {
   const navigate = useNavigate();
@@ -37,13 +41,36 @@ export default function Header() {
             </div>
           </div>
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={handleLogout}>
-          <div className={styles.dropdownItemContainer}>
-            <LogoutIcon className={styles.logoutIcon} />
-            <span className={styles.logoutText}>Abmelden</span>
-          </div>
-        </DropdownMenuItem>
+        <DropdownItem onClick={handleLogout} icon={LogoutIcon} text={"Abmelden"} />
+        <DropdownMenuSeparator />
+        <DropdownItem
+          onClick={() => navigate("/wrodit/impressum")}
+          icon={LegalNoticeIcon}
+          text={"Impressum"}
+        />
+        <DropdownMenuSeparator />
+        <DropdownItem
+          onClick={() => navigate("/wrodit/datenschutz")}
+          icon={PrivacyPolicyIcon}
+          text={"Datenschutzerklärung"}
+        />
+        <DropdownItem
+          onClick={() => navigate("/wrodit/nutzungsbedingungen")}
+          icon={TermsOfUseIcon}
+          text={"Nutzungsbedingungen"}
+        />
       </DropdownMenu>
     </header>
+  );
+}
+
+function DropdownItem({ onClick, icon: Icon, text }) {
+  return (
+    <DropdownMenuItem onClick={onClick}>
+      <div className={styles.dropdownItemContainer}>
+        <Icon className={styles.logoutIcon} />
+        <span className={styles.logoutText}>{text}</span>
+      </div>
+    </DropdownMenuItem>
   );
 }
