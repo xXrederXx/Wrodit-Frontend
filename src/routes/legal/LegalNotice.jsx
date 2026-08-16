@@ -17,7 +17,7 @@ export default function LegalNotice() {
       />
       <div className={styles.container}>
         <div className={styles.limiter}>
-          <h1>Imperssum</h1>
+          <h1>Imperessum</h1>
           <h2>Betreiber</h2>
           <OperatorInformation />
           <h2>Kontakt</h2>
@@ -43,7 +43,7 @@ export default function LegalNotice() {
           <h2>Datenschutz</h2>
           <p>
             Informationen zur Bearbeitung von Personendaten finden Sie in unserer
-            <Link to={"/wrodit/datenschutz"}>Zur Datenschutzerklärung </Link>
+            <Link to={"/wrodit/datenschutz"}>Datenschutzerklärung </Link>
           </p>
           <p> Stand: {lastChanged} </p>
         </div>
