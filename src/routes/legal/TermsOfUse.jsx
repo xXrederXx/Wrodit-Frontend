@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import OperatorInformation from "./OperatorInformation";
 
 export default function TermsOfUse() {
-  const lastUpdated = "14.08.2026"
+  const lastUpdated = "14.08.2026";
   return (
     <>
       <MetaTags
@@ -22,7 +22,7 @@ export default function TermsOfUse() {
           </p>
           <h2>1. Geltungsbereich</h2>
           <p>
-            Diese Nutzungsbedingungen regeln die Nutzung der Online-Plattform
+            Diese Nutzungsbedingungen regeln die Nutzung der Online-Plattform{" "}
             <strong>Wrodit</strong> durch Besucherinnen und Besucher sowie registrierte Nutzerinnen
             und Nutzer.
           </p>
@@ -188,7 +188,7 @@ export default function TermsOfUse() {
           <h2>16. Datenschutz</h2>
           <p> Die Bearbeitung von Personendaten erfolgt gemäss unserer Datenschutzerklärung. </p>
           <p>
-           <Link to={"/wrodit/datenschutz"} >Zur Datenschutzerklärung </Link>
+            <Link to={"/wrodit/datenschutz"}>Zur Datenschutzerklärung </Link>
           </p>
           <h2>17. Anwendbares Recht</h2>
           <p>
@@ -197,8 +197,7 @@ export default function TermsOfUse() {
           </p>
           <h2>18. Gerichtsstand</h2>
           <p>
-            Soweit gesetzlich zulässig, ist der Gerichtsstand{" "}
-            <strong>[ORT / KANTON, SCHWEIZ]</strong>.
+            Soweit gesetzlich zulässig, ist der Gerichtsstand <strong>Bern, Schweiz</strong>.
           </p>
           <p> Zwingende gesetzliche Gerichtsstände bleiben vorbehalten. </p> <h2>19. Kontakt</h2>
           <p> Bei Fragen zu diesen Nutzungsbedingungen können Sie uns kontaktieren: </p>

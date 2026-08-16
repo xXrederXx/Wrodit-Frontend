@@ -5,7 +5,7 @@ import MetaTags from "../../components/MetaTags";
 import OperatorInformation from "./OperatorInformation";
 import OperatorMail from "./OperatorMail";
 export default function PrivacyPolicy() {
-  const lastChanged = "14.08.2026"
+  const lastChanged = "14.08.2026";
   return (
     <>
       <MetaTags
@@ -22,7 +22,9 @@ export default function PrivacyPolicy() {
           <h2>1. Verantwortliche Stelle</h2>
           <p> Verantwortlich für die Bearbeitung von Personendaten auf Wrodit ist: </p>
           <OperatorInformation />
-          <p>E-Mail: <OperatorMail/></p>
+          <p>
+            E-Mail: <OperatorMail />
+          </p>
           <h2>2. Welche Daten wir bearbeiten</h2>
           <p>
             Je nach Nutzung unserer Plattform können insbesondere folgende Personendaten bearbeitet
@@ -87,7 +89,7 @@ export default function PrivacyPolicy() {
             <li>Speicher- und Backup-Anbieter</li>
             <li>Sicherheits- und Spam-Schutz-Dienstleister</li>
           </ul>
-          <h2>8. Bekanntgabe ins Ausland</h2> <p> [WÄHLE EINE VARIANTE] </p>
+          <h2>8. Bekanntgabe ins Ausland</h2>
           <p>Personendaten können innerhalb der Europäischen Union bearbeitet werden.</p>
           <p>
             Soweit Personendaten ins Ausland bekanntgegeben werden, informieren wir über das
@@ -127,7 +129,7 @@ export default function PrivacyPolicy() {
           <h2>12. Löschung des Benutzerkontos</h2>
           <p> Nutzerinnen und Nutzer können ihr Benutzerkonto grundsätzlich löschen lassen. </p>
           <p>
-            Anfragen zur Löschung können an <OperatorMail/> gesendet werden.
+            Anfragen zur Löschung können an <OperatorMail /> gesendet werden.
           </p>
           <p>Bereits öffentlich veröffentlichte Inhalte werden gelöscht.</p>
           <h2>13. Rechte betroffener Personen</h2>
@@ -137,7 +139,9 @@ export default function PrivacyPolicy() {
             geltend machen.
           </p>
           <p> Anfragen können an folgende Adresse gerichtet werden: </p>
-          <p><OperatorMail/></p>
+          <p>
+            <OperatorMail />
+          </p>
           <h2>14. Änderungen dieser Datenschutzerklärung</h2>
           <p>
             Wir können diese Datenschutzerklärung jederzeit anpassen, wenn sich unsere
