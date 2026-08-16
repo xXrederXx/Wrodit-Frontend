@@ -99,6 +99,18 @@ const router = createBrowserRouter([
         action: CommentEditRoute.action,
         loader: CommentEditRoute.loader,
       },
+      {
+        path: "wrodit/impressum",
+        element: <LegalNotice />,
+      },
+      {
+        path: "wrodit/datenschutz",
+        element: <PrivacyPolicy />,
+      },
+      {
+        path: "wrodit/nutzungsbedingungen",
+        element: <TermsOfUse />,
+      },
     ],
   },
   {
@@ -110,18 +122,6 @@ const router = createBrowserRouter([
     path: "wrodit/register",
     element: <RegisterRoute />,
     action: RegisterRoute.action,
-  },
-  {
-    path: "wrodit/impressum",
-    element: <LegalNotice />,
-  },
-  {
-    path: "wrodit/datenschutz",
-    element: <PrivacyPolicy />,
-  },
-  {
-    path: "wrodit/nutzungsbedingungen",
-    element: <TermsOfUse />,
   },
 ]);
 
