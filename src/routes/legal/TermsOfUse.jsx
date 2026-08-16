@@ -3,8 +3,10 @@ import React from "react";
 import styles from "./legal.module.css";
 import MetaTags from "../../components/MetaTags";
 import { Link } from "react-router-dom";
+import OperatorInformation from "./OperatorInformation";
 
 export default function TermsOfUse() {
+  const lastUpdated = "14.08.2026"
   return (
     <>
       <MetaTags
@@ -16,7 +18,7 @@ export default function TermsOfUse() {
         <div className={styles.limiter}>
           <h1>Nutzungsbedingungen</h1>
           <p>
-            <strong>Stand: 14.08.2026</strong>
+            <strong>Stand: {lastUpdated}</strong>
           </p>
           <h2>1. Geltungsbereich</h2>
           <p>
@@ -25,12 +27,7 @@ export default function TermsOfUse() {
             und Nutzer.
           </p>
           <p> Betreiber der Plattform ist: </p>
-          <p>
-            <strong>Thierry Morgenthaler</strong>
-            <br /> Berkenstrasse 6
-            <br /> 3373 Heimenhausen
-            <br /> Schweiz
-          </p>
+          <OperatorInformation />
           <h2>2. Nutzung der Plattform</h2>
           <p>
             Wrodit bietet eine Plattform, auf der Nutzerinnen und Nutzer Beiträge, Kommentare und
@@ -205,14 +202,9 @@ export default function TermsOfUse() {
           </p>
           <p> Zwingende gesetzliche Gerichtsstände bleiben vorbehalten. </p> <h2>19. Kontakt</h2>
           <p> Bei Fragen zu diesen Nutzungsbedingungen können Sie uns kontaktieren: </p>
-          <p>
-            <strong>Thierry Morgenthaler</strong>
-            <br /> Berkenstrasse 6
-            <br /> 3373 Heimenhausen
-            <br /> Schweiz
-          </p>
+          <OperatorInformation />
           <p>E-Mail: morgenthalerthierry+wrodit@gmail.ch</p>
-          <p> Stand: 14.08.2026 </p>
+          <p> Stand: {lastUpdated} </p>
         </div>
       </div>
     </>

@@ -2,7 +2,10 @@ import React from "react";
 
 import styles from "./legal.module.css";
 import MetaTags from "../../components/MetaTags";
+import OperatorInformation from "./OperatorInformation";
+import OperatorMail from "./OperatorMail";
 export default function PrivacyPolicy() {
+  const lastChanged = "14.08.2026"
   return (
     <>
       <MetaTags
@@ -14,17 +17,12 @@ export default function PrivacyPolicy() {
         <div className={styles.limiter}>
           <h1>Datenschutzerklärung</h1>
           <p>
-            <strong>Stand: 14.08.2026</strong>
+            <strong>Stand: {lastChanged}</strong>
           </p>
           <h2>1. Verantwortliche Stelle</h2>
           <p> Verantwortlich für die Bearbeitung von Personendaten auf Wrodit ist: </p>
-          <p>
-            <strong>Thierry Morgenthaler</strong>
-            <br /> Berkenstrasse 6
-            <br /> 3373 Heimenhausen
-            <br /> Schweiz
-          </p>
-          <p>E-Mail: morgenthalerthierry+wrodit@gmail.com</p>
+          <OperatorInformation />
+          <p>E-Mail: <OperatorMail/></p>
           <h2>2. Welche Daten wir bearbeiten</h2>
           <p>
             Je nach Nutzung unserer Plattform können insbesondere folgende Personendaten bearbeitet
@@ -129,7 +127,7 @@ export default function PrivacyPolicy() {
           <h2>12. Löschung des Benutzerkontos</h2>
           <p> Nutzerinnen und Nutzer können ihr Benutzerkonto grundsätzlich löschen lassen. </p>
           <p>
-            Anfragen zur Löschung können an morgenthalerthierry+wrodit@gmail.com gesendet werden.
+            Anfragen zur Löschung können an <OperatorMail/> gesendet werden.
           </p>
           <p>Bereits öffentlich veröffentlichte Inhalte werden gelöscht.</p>
           <h2>13. Rechte betroffener Personen</h2>
@@ -139,7 +137,7 @@ export default function PrivacyPolicy() {
             geltend machen.
           </p>
           <p> Anfragen können an folgende Adresse gerichtet werden: </p>
-          <p>morgenthalerthierry+wrodit@gmail.com</p>
+          <p><OperatorMail/></p>
           <h2>14. Änderungen dieser Datenschutzerklärung</h2>
           <p>
             Wir können diese Datenschutzerklärung jederzeit anpassen, wenn sich unsere
@@ -151,7 +149,7 @@ export default function PrivacyPolicy() {
             Diese Datenschutzerklärung richtet sich nach dem anwendbaren Schweizer Datenschutzrecht,
             insbesondere dem Bundesgesetz über den Datenschutz (DSG).
           </p>
-          <p> Stand: 14.08.2026 </p>
+          <p> Stand: {lastChanged} </p>
         </div>
       </div>
     </>
