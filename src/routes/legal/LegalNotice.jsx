@@ -1,13 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
+import MetaTags from "../../components/MetaTags.jsx";
 
 import styles from "./legal.module.css";
-import MetaTags from "../../components/MetaTags";
-import { Link } from "react-router-dom";
-import OperatorInformation from "./OperatorInformation";
-import OperatorMail from "./OperatorMail";
+import OperatorInformation from "./OperatorInformation.jsx";
+import OperatorMail from "./OperatorMail.jsx";
 
 export default function LegalNotice() {
-  const lastChanged = "14.08.2026"
+  const lastChanged = "14.08.2026";
   return (
     <>
       <MetaTags
@@ -21,7 +22,9 @@ export default function LegalNotice() {
           <h2>Betreiber</h2>
           <OperatorInformation />
           <h2>Kontakt</h2>
-          <p>E-Mail: <OperatorMail/></p>
+          <p>
+            E-Mail: <OperatorMail />
+          </p>
 
           <h2>Verantwortlich für den Inhalt</h2>
           <OperatorInformation />

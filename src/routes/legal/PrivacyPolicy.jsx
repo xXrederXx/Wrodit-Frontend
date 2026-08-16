@@ -1,9 +1,10 @@
 import React from "react";
 
+import MetaTags from "../../components/MetaTags.jsx";
+
 import styles from "./legal.module.css";
-import MetaTags from "../../components/MetaTags";
-import OperatorInformation from "./OperatorInformation";
-import OperatorMail from "./OperatorMail";
+import OperatorInformation from "./OperatorInformation.jsx";
+import OperatorMail from "./OperatorMail.jsx";
 export default function PrivacyPolicy() {
   const lastChanged = "14.08.2026";
   return (

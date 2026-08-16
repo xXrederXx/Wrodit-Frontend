@@ -1,7 +1,5 @@
-import React from 'react'
+import React from "react";
 
 export default function OperatorMail() {
-  return (
-    <span>morgenthalerthierry+wrodit@gmail.com</span>
-  )
+  return <span>morgenthalerthierry+wrodit@gmail.com</span>;
 }

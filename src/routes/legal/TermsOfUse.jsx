@@ -1,10 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
+import MetaTags from "../../components/MetaTags.jsx";
 
 import styles from "./legal.module.css";
-import MetaTags from "../../components/MetaTags";
-import { Link } from "react-router-dom";
-import OperatorInformation from "./OperatorInformation";
-import OperatorMail from "./OperatorMail";
+import OperatorInformation from "./OperatorInformation.jsx";
+import OperatorMail from "./OperatorMail.jsx";
 
 export default function TermsOfUse() {
   const lastUpdated = "14.08.2026";
@@ -113,7 +114,9 @@ export default function TermsOfUse() {
             Meldefunktionen oder per E-Mail melden.
           </p>
           <p> Meldungen können an folgende Adresse gesendet werden: </p>
-          <p><OperatorMail/></p>
+          <p>
+            <OperatorMail />
+          </p>
           <h2>9. Geistiges Eigentum</h2>
           <p>
             Die Rechte an den von Nutzerinnen und Nutzern veröffentlichten Inhalten verbleiben
@@ -203,7 +206,9 @@ export default function TermsOfUse() {
           <p> Zwingende gesetzliche Gerichtsstände bleiben vorbehalten. </p> <h2>19. Kontakt</h2>
           <p> Bei Fragen zu diesen Nutzungsbedingungen können Sie uns kontaktieren: </p>
           <OperatorInformation />
-          <p>E-Mail: <OperatorMail/></p>
+          <p>
+            E-Mail: <OperatorMail />
+          </p>
           <p> Stand: {lastUpdated} </p>
         </div>
       </div>
