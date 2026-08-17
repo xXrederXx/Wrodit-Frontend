@@ -15,7 +15,7 @@ async function clientAction({ request, params }) {
 
   try {
     await createComment(extendedData);
-    return redirect(`/wrodit/post/${postId}`);
+    return redirect(`/post/${postId}`);
   } catch (error) {
     console.error("Create post error:", error);
     return error?.message || { general: "Etwas ist schiefgelaufen" };

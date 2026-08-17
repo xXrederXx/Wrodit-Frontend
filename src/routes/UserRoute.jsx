@@ -59,7 +59,7 @@ export default function UserRoute() {
           <Link onClick={() => handlePostDelete(post.id)} className={style.deleteButton}>
             Post Löschen
           </Link>
-          <Link to={`/wrodit/edit/post/${post.id}`} className={style.linkButton}>
+          <Link to={`/edit/post/${post.id}`} className={style.linkButton}>
             Bearbeiten
           </Link>
           <PostPreview key={post.id} post={post} />

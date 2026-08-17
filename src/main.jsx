@@ -40,17 +40,17 @@ const router = createBrowserRouter([
         loader: WroditHomeRoute.loader,
       },
       {
-        path: "wrodit/post/:id",
+        path: "post/:id",
         element: <PostRoute />,
         loader: PostRoute.loader,
       },
       {
-        path: "wrodit/thread/:id",
+        path: "thread/:id",
         element: <ThreadRoute />,
         loader: ThreadRoute.loader,
       },
       {
-        path: "wrodit/user/:id",
+        path: "user/:id",
         element: (
           <ProtectedRoute>
             <UserRoute />
@@ -59,7 +59,7 @@ const router = createBrowserRouter([
         loader: UserRoute.loader,
       },
       {
-        path: "wrodit/create/post/:id",
+        path: "create/post/:id",
         element: (
           <ProtectedRoute>
             <CreatePostRoute />
@@ -68,58 +68,58 @@ const router = createBrowserRouter([
         action: CreatePostRoute.action,
       },
       {
-        path: "wrodit/create/thread/:id",
+        path: "create/thread/:id",
         element: <CreateThreadRoute />,
         action: CreateThreadRoute.action,
       },
       {
-        path: "wrodit/create/comment/:id",
+        path: "create/comment/:id",
         element: <CommentRoute />,
         action: CommentRoute.action,
       },
       {
-        path: "wrodit/create/comment/parent/:postId/:id",
+        path: "create/comment/parent/:postId/:id",
         element: <ChildCommentRoute />,
         action: ChildCommentRoute.action,
       },
       {
-        path: "wrodit/create/comment/parent/:postId/:id",
+        path: "create/comment/parent/:postId/:id",
         element: <ChildCommentRoute />,
         action: ChildCommentRoute.action,
       },
       {
-        path: "wrodit/edit/post/:id",
+        path: "edit/post/:id",
         element: <PostEditRoute />,
         action: PostEditRoute.action,
         loader: PostEditRoute.loader,
       },
       {
-        path: "/wrodit/edit/comment/:id",
+        path: "edit/comment/:id",
         element: <CommentEditRoute />,
         action: CommentEditRoute.action,
         loader: CommentEditRoute.loader,
       },
       {
-        path: "wrodit/impressum",
+        path: "impressum",
         element: <LegalNotice />,
       },
       {
-        path: "wrodit/datenschutz",
+        path: "datenschutz",
         element: <PrivacyPolicy />,
       },
       {
-        path: "wrodit/nutzungsbedingungen",
+        path: "nutzungsbedingungen",
         element: <TermsOfUse />,
       },
     ],
   },
   {
-    path: "wrodit/login",
+    path: "login",
     element: <LoginRoute />,
     action: LoginRoute.action,
   },
   {
-    path: "wrodit/register",
+    path: "register",
     element: <RegisterRoute />,
     action: RegisterRoute.action,
   },

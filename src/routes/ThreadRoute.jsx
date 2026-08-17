@@ -27,7 +27,7 @@ export default function ThreadRoute() {
       <ThreadInformation
         name={thread.name}
         description={thread.description}
-        to={`/wrodit/create/post/${thread.id}`}
+        to={`/create/post/${thread.id}`}
       />
 
       {posts.content.map(post => (

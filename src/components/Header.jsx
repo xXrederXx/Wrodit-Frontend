@@ -20,7 +20,7 @@ export default function Header() {
   const handleLogout = () => {
     try {
       removeSession();
-      navigate(`/wrodit/login`);
+      navigate(`/login`);
     } catch (err) {
       console.error(err);
     }
@@ -32,7 +32,7 @@ export default function Header() {
         <img src={logo} alt="Mein Logo" />{" "}
       </Link>
       <DropdownMenu trigger={<ProfileIcon className={styles.dropdownTriggerIcon} />}>
-        <DropdownMenuItem onClick={() => navigate(`/wrodit/user/${session.userId}`)}>
+        <DropdownMenuItem onClick={() => navigate(`/user/${session.userId}`)}>
           <div className={styles.dropdownItemContainer}>
             <ProfileIcon className={styles.profileAvatar} />
             <div className={styles.profileTextContainer}>
@@ -44,18 +44,18 @@ export default function Header() {
         <DropdownItem onClick={handleLogout} icon={LogoutIcon} text={"Abmelden"} />
         <DropdownMenuSeparator />
         <DropdownItem
-          onClick={() => navigate("/wrodit/impressum")}
+          onClick={() => navigate("/impressum")}
           icon={LegalNoticeIcon}
           text={"Impressum"}
         />
         <DropdownMenuSeparator />
         <DropdownItem
-          onClick={() => navigate("/wrodit/datenschutz")}
+          onClick={() => navigate("/datenschutz")}
           icon={PrivacyPolicyIcon}
           text={"Datenschutzerklärung"}
         />
         <DropdownItem
-          onClick={() => navigate("/wrodit/nutzungsbedingungen")}
+          onClick={() => navigate("/nutzungsbedingungen")}
           icon={TermsOfUseIcon}
           text={"Nutzungsbedingungen"}
         />

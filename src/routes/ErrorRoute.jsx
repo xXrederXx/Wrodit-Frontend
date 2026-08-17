@@ -7,7 +7,7 @@ export default function ErrorRoute() {
   console.error(error);
 
   if (!useSession()) {
-    window.location.href = "/wrodit/login"; // eslint-disable-line
+    window.location.href = "/login"; // eslint-disable-line
     return;
   }
 
@@ -15,7 +15,7 @@ export default function ErrorRoute() {
     <div>
       <h1>Hoppla, da ist etwas schiefgelaufen!</h1>
       <p>Wir bitten um Entschuldigung.</p>
-      <Link to={"wrodit/login"}>Melde dich an</Link>
+      <Link to={"/login"}>Melde dich an</Link>
     </div>
   );
 }
