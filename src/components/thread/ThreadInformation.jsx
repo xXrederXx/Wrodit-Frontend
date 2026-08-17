@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 import styles from "./ThreadInformation.module.css";
 
-export default function ThreadInformation({ name, description, to }) {
+export default function ThreadInformation({ name, to }) {
   return (
     <div className={styles.ThreadInformation}>
       <div className={styles.topBar}>
@@ -11,7 +11,6 @@ export default function ThreadInformation({ name, description, to }) {
           Post erstellen
         </Link>
       </div>
-      <p>{description}</p>
     </div>
   );
 }

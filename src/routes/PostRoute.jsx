@@ -4,8 +4,9 @@ import PostDetail from "../components/post/PostDetail.jsx";
 import { fetchPostById, fetchThread, fetchCommentByPost } from "../lib/wrodit";
 import CommentsContainer from "../components/comment/CommentsContainer.jsx";
 import MetaTags from "../components/MetaTags.jsx";
+import ThreadAside from "../components/thread/ThreadAside.jsx";
 
-import style from "./PostRoute.module.css";
+import styles from "./PostRoute.module.css";
 
 async function clientLoader({ params }) {
   const postId = params.id;
@@ -30,11 +31,16 @@ export default function PostRoute() {
         url={window.location.href}
         author={post.user.username}
       />
-      <PostDetail post={post} />
-      <div className={style.commentContainer}>
-        {comments.map(comment => {
-          return <CommentsContainer key={comment.id} postId={post.id} data={comment} lvl={0} />;
-        })}
+      <div className={styles.container}>
+        <div className={styles.main}>
+          <PostDetail post={post} />
+          <div className={styles.commentContainer}>
+            {comments.map(comment => {
+              return <CommentsContainer key={comment.id} postId={post.id} data={comment} lvl={0} />;
+            })}
+          </div>
+        </div>
+        <ThreadAside thread={post.thread} />
       </div>
     </>
   );
