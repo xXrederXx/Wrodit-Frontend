@@ -46,7 +46,7 @@ export default function LegalNotice() {
           <h2>Datenschutz</h2>
           <p>
             Informationen zur Bearbeitung von Personendaten finden Sie in unserer
-            <Link to={"/wrodit/datenschutz"}>Datenschutzerklärung </Link>
+            <Link to={"/datenschutz"}>Datenschutzerklärung </Link>
           </p>
           <p> Stand: {lastChanged} </p>
         </div>

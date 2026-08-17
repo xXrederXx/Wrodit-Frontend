@@ -53,7 +53,7 @@ function getDropdownOptions(isEditable, id, navigate) {
       {
         Icon: EditIcon,
         text: "Bearbeiten",
-        action: () => navigate(`/wrodit/edit/comment/${id}`),
+        action: () => navigate(`/edit/comment/${id}`),
       },
       {
         Icon: DeleteIcon,

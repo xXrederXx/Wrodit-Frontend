@@ -50,7 +50,7 @@ export default function LoginRoute() {
         <LogInForm errors={errors} onCancel={onCancel} />
 
         <p>
-          Noch kein Konto <Link to="/wrodit/register">Registrieren</Link>
+          Noch kein Konto <Link to="/register">Registrieren</Link>
         </p>
       </div>
     </>

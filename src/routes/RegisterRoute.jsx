@@ -21,7 +21,7 @@ async function clientAction({ request }) {
       return { errors: { formError: "Benutzername oder Email Schon vergeben." } };
     }
 
-    return redirect("/wrodit/login");
+    return redirect("/login");
   } catch (error) {
     console.error("SignUp Error:", error);
     return { errors: { formError: error.message || "Unbekannter Fehler beim Signup" } };
@@ -47,7 +47,7 @@ export default function RegisterRoute() {
         <SignUpForm errors={errors} onCancel={onCancel} />
 
         <p>
-          Schon Wroditor*in? <Link to="/wrodit/login">Anmelden</Link>
+          Schon Wroditor*in? <Link to="/login">Anmelden</Link>
         </p>
       </div>
     </>

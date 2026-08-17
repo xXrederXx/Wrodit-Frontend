@@ -192,7 +192,7 @@ export default function TermsOfUse() {
           <h2>16. Datenschutz</h2>
           <p> Die Bearbeitung von Personendaten erfolgt gemäss unserer Datenschutzerklärung. </p>
           <p>
-            <Link to={"/wrodit/datenschutz"}>Zur Datenschutzerklärung </Link>
+            <Link to={"/datenschutz"}>Zur Datenschutzerklärung </Link>
           </p>
           <h2>17. Anwendbares Recht</h2>
           <p>
