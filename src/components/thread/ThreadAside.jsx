@@ -1,9 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
+import ThreadBirthIcon from "../icons/ThreadBirthIcon.jsx";
+import DateTime from "../ui/DateTime.jsx";
 
 import styles from "./ThreadAside.module.css";
-import { Link } from "react-router-dom";
-import ThreadBirthIcon from "../icons/ThreadBirthIcon";
-import DateTime from "../ui/DateTime";
 
 export default function ThreadAside({ thread }) {
   return (

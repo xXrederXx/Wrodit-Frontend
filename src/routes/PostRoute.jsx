@@ -4,9 +4,9 @@ import PostDetail from "../components/post/PostDetail.jsx";
 import { fetchPostById, fetchThread, fetchCommentByPost } from "../lib/wrodit";
 import CommentsContainer from "../components/comment/CommentsContainer.jsx";
 import MetaTags from "../components/MetaTags.jsx";
+import ThreadAside from "../components/thread/ThreadAside.jsx";
 
 import styles from "./PostRoute.module.css";
-import ThreadAside from "../components/thread/ThreadAside.jsx";
 
 async function clientLoader({ params }) {
   const postId = params.id;
