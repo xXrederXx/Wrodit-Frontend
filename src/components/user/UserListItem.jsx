@@ -1,13 +1,15 @@
-import React from 'react'
-import styles from "./UserListItem.module.css"
-import ProfileIcon from "../icons/ProfileIcon.jsx"
-import { Link } from 'react-router-dom'
+import React from "react";
+import { Link } from "react-router-dom";
 
-export default function UserListItem({id, username}) {
+import ProfileIcon from "../icons/ProfileIcon.jsx";
+
+import styles from "./UserListItem.module.css";
+
+export default function UserListItem({ id, username }) {
   return (
     <Link to={`/user/${id}`} className={styles.container}>
-        <ProfileIcon className={styles.icon}/>
-        <span className={styles.name}>u/{username}</span>
+      <ProfileIcon className={styles.icon} />
+      <span className={styles.name}>u/{username}</span>
     </Link>
-  )
+  );
 }
