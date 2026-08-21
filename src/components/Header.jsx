@@ -8,6 +8,10 @@ import DropdownMenu from "./ui/dropdown/DropdownMenu.jsx";
 import DropdownMenuItem from "./ui/dropdown/DropdownMenuItem.jsx";
 import ProfileIcon from "./icons/ProfileIcon.jsx";
 import LogoutIcon from "./icons/LogoutIcon.jsx";
+import DropdownMenuSeparator from "./ui/dropdown/DropdownMenuSeperator.jsx";
+import LegalNoticeIcon from "./icons/LegalNoticeIcon.jsx";
+import PrivacyPolicyIcon from "./icons/PrivacyPolicyIcon.jsx";
+import TermsOfUseIcon from "./icons/TermsOfUseIcon.jsx";
 
 export default function Header() {
   const navigate = useNavigate();
@@ -16,7 +20,7 @@ export default function Header() {
   const handleLogout = () => {
     try {
       removeSession();
-      navigate(`/wrodit/login`);
+      navigate(`/login`);
     } catch (err) {
       console.error(err);
     }
@@ -28,7 +32,7 @@ export default function Header() {
         <img src={logo} alt="Mein Logo" />{" "}
       </Link>
       <DropdownMenu trigger={<ProfileIcon className={styles.dropdownTriggerIcon} />}>
-        <DropdownMenuItem onClick={() => navigate(`/wrodit/user/${session.userId}`)}>
+        <DropdownMenuItem onClick={() => navigate(`/user/${session.userId}`)}>
           <div className={styles.dropdownItemContainer}>
             <ProfileIcon className={styles.profileAvatar} />
             <div className={styles.profileTextContainer}>
@@ -37,13 +41,36 @@ export default function Header() {
             </div>
           </div>
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={handleLogout}>
-          <div className={styles.dropdownItemContainer}>
-            <LogoutIcon className={styles.logoutIcon} />
-            <span className={styles.logoutText}>Abmelden</span>
-          </div>
-        </DropdownMenuItem>
+        <DropdownItem onClick={handleLogout} icon={LogoutIcon} text={"Abmelden"} />
+        <DropdownMenuSeparator />
+        <DropdownItem
+          onClick={() => navigate("/impressum")}
+          icon={LegalNoticeIcon}
+          text={"Impressum"}
+        />
+        <DropdownMenuSeparator />
+        <DropdownItem
+          onClick={() => navigate("/datenschutz")}
+          icon={PrivacyPolicyIcon}
+          text={"Datenschutzerklärung"}
+        />
+        <DropdownItem
+          onClick={() => navigate("/nutzungsbedingungen")}
+          icon={TermsOfUseIcon}
+          text={"Nutzungsbedingungen"}
+        />
       </DropdownMenu>
     </header>
+  );
+}
+
+function DropdownItem({ onClick, icon: Icon, text }) {
+  return (
+    <DropdownMenuItem onClick={onClick}>
+      <div className={styles.dropdownItemContainer}>
+        <Icon className={styles.logoutIcon} />
+        <span className={styles.logoutText}>{text}</span>
+      </div>
+    </DropdownMenuItem>
   );
 }

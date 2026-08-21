@@ -14,7 +14,7 @@ export default function ProtectedRoute({ children }) {
       setIsLoading(false); // eslint-disable-line
       if (!user) {
         console.warn("User not found, redirecting to login");
-        navigate(`/wrodit/login`);
+        navigate(`/login`);
       }
     }
   }, [user, navigate, location]);

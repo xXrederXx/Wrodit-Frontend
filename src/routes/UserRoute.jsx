@@ -5,7 +5,6 @@ import {
   fetchPostsByUser,
   fetchAllUserData,
   deleteUser,
-  deletePost,
   fetchUserThreads,
   fillPostUserAndThread,
 } from "../lib/wrodit";
@@ -13,7 +12,7 @@ import { removeSession } from "../lib/session.js";
 import ThreadDisplay from "../components/thread/ThreadDisplay.jsx";
 import PostPreview from "../components/post/preview/PostPreview.jsx";
 
-import style from "./UserRoute.module.css";
+import styles from "./UserRoute.module.css";
 
 async function clientLoader({ params }) {
   const userId = params.id;
@@ -38,32 +37,22 @@ export default function UserRoute() {
       console.error(err);
     }
   };
-  const handlePostDelete = async id => {
-    try {
-      await deletePost(id);
-    } catch (err) {
-      console.error(err);
-    }
-  };
+
 
   return (
     <>
-      <Link onClick={handleUserDelete} className={style.deleteButton}>
+      <Link onClick={handleUserDelete} className={styles.deleteButton}>
         Account Löschen
       </Link>
+      <Link to={`/create/thread/${user.id}`} className={styles.deleteButton}>
+        Thread erstellen
+      </Link>
 
-      <UserDetail username={user.username} email={user.email} userId={user.id} />
+      <UserDetail username={user.username} email={user.email} />
+      <h2>Meine Posts</h2>
 
       {posts.content.map(post => (
-        <>
-          <Link onClick={() => handlePostDelete(post.id)} className={style.deleteButton}>
-            Post Löschen
-          </Link>
-          <Link to={`/wrodit/edit/post/${post.id}`} className={style.linkButton}>
-            Bearbeiten
-          </Link>
-          <PostPreview key={post.id} post={post} />
-        </>
+        <PostPreview key={post.id} post={post} />
       ))}
       <h3>Meine Threads</h3>
       {threads.content.map(thread => {
