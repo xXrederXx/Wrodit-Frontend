@@ -76,6 +76,9 @@ export async function createThread(data) {
 export async function fetchThread(id) {
   return await getCacheOrFetch(`${BASE_URL}/threads/${id}`);
 }
+export async function fetchThreadStats(id) {
+  return await getCacheOrFetch(`${BASE_URL}/threads/${id}/stats`);
+}
 
 export async function fetchUserThreads() {
   return await getCacheOrFetch(`${BASE_URL}/threads/userfeed`);
