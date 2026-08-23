@@ -1,5 +1,6 @@
 import { getCache, setCache } from "./apiCache";
 import { betterFetch } from "./fetchUtil";
+import { getLoggedInUserId } from "./session";
 
 const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -80,8 +81,9 @@ export async function fetchThreadStats(id) {
   return await getCacheOrFetch(`${BASE_URL}/threads/${id}/stats`);
 }
 
-export async function fetchUserThreads() {
-  return await getCacheOrFetch(`${BASE_URL}/threads/userfeed`);
+export async function fetchUserThreads(id) {
+  id = !id ? getLoggedInUserId() : id;
+  return await getCacheOrFetch(`${BASE_URL}/threads/?userId=${id}`);
 }
 
 //posts
