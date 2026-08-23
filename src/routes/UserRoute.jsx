@@ -54,7 +54,13 @@ export default function UserRoute() {
         return (
           <div className={styles.threadContainer}>
             {threads.content.map(thread => {
-              return <ThreadAside key={thread.id} thread={thread} />;
+              return (
+                <ThreadAside
+                  key={thread.id}
+                  thread={thread}
+                  containerClassName={styles.threadDisplay}
+                />
+              );
             })}
           </div>
         );

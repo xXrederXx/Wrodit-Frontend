@@ -11,7 +11,7 @@ import UserListItem from "../user/UserListItem.jsx";
 
 import styles from "./ThreadAside.module.css";
 
-export default function ThreadAside({ thread }) {
+export default function ThreadAside({ thread, containerClassName }) {
   const [stats, setStats] = useState(null);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ export default function ThreadAside({ thread }) {
   }, [thread.id]);
 
   return (
-    <aside className={styles.container}>
+    <aside className={containerClassName || styles.container}>
       <div className={styles.contentContainer}>
         <Link to={`/thread/${thread.id}`} className={styles.threadName}>
           w/{thread.name}
