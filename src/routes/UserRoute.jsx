@@ -1,4 +1,5 @@
 import { useLoaderData, Link } from "react-router-dom";
+import { useState } from "react";
 
 import UserDetail from "../components/user/UserDetails.jsx";
 import {
@@ -12,6 +13,8 @@ import {
 import { getLoggedInUserId, removeSession } from "../lib/session.js";
 import ThreadDisplay from "../components/thread/ThreadDisplay.jsx";
 import PostPreview from "../components/post/preview/PostPreview.jsx";
+import Button from "../components/ui/Button.jsx";
+import ThreadAside from "../components/thread/ThreadAside.jsx";
 
 import styles from "./UserRoute.module.css";
 
@@ -19,18 +22,20 @@ async function clientLoader({ params }) {
   const userId = params.id;
   const currentUserId = getLoggedInUserId();
 
-  const user = userId == currentUserId ? await fetchAllUserData() : await fetchUser(userId);
+  const user = userId === currentUserId ? await fetchAllUserData() : await fetchUser(userId);
 
   const userPostsPage = await fetchPostsByUser(userId, 0, 10, true);
   const posts = await fillPostUserAndThread(userPostsPage, undefined, user);
 
-  const threads = await fetchUserThreads();
+  const threads = await fetchUserThreads(userId);
 
-  return { user, posts, threads, isCurrent: userId == currentUserId };
+  return { user, posts, threads, isCurrent: userId === currentUserId };
 }
 
 export default function UserRoute() {
   const { user, posts, threads, isCurrent } = useLoaderData();
+
+  const [selected, setSelected] = useState("posts");
 
   const handleUserDelete = async () => {
     try {
@@ -41,30 +46,59 @@ export default function UserRoute() {
     }
   };
 
+  const Content = () => {
+    switch (selected) {
+      case "posts":
+        return posts.content.map(post => <PostPreview key={post.id} post={post} />);
+      case "threads":
+        return (
+          <div className={styles.threadContainer}>
+            {threads.content.map(thread => {
+              return <ThreadAside key={thread.id} thread={thread} />;
+            })}
+          </div>
+        );
+
+      default:
+        throw new Error("Unknown state: " + selected);
+    }
+  };
+
   return (
-    <>
-      {isCurrent && (
-        <>
-          <Link onClick={handleUserDelete} className={styles.deleteButton}>
-            Account Löschen
-          </Link>
-          <Link to={`/create/thread/${user.id}`} className={styles.deleteButton}>
-            Thread erstellen
-          </Link>
-        </>
-      )}
+    <div className={styles.container}>
+      <div className={styles.main}>
+        <div className={styles.userContainer}>
+          <UserDetail username={user.username} />
+        </div>
+        {isCurrent && (
+          <>
+            <Link onClick={handleUserDelete} className={styles.button}>
+              Account Löschen
+            </Link>
+            <Link to={`/create/thread/${user.id}`} className={styles.button}>
+              Thread erstellen
+            </Link>
+          </>
+        )}
 
-      <UserDetail username={user.username} email={user.email} />
-      <h2>{isCurrent ? "Deine Posts" : "Seine Posts"}</h2>
+        <div className={styles.buttonsContaienr}>
+          <button
+            className={selected === "posts" ? styles.button : styles.buttonTransparent}
+            type="button"
+            onClick={() => setSelected("posts")}>
+            Posts
+          </button>
+          <button
+            className={selected === "threads" ? styles.button : styles.buttonTransparent}
+            type="button"
+            onClick={() => setSelected("threads")}>
+            Threads
+          </button>
+        </div>
 
-      {posts.content.map(post => (
-        <PostPreview key={post.id} post={post} />
-      ))}
-      <h3>{isCurrent ? "Deine Threads" : "Seine Threads"}</h3>
-      {threads.content.map(thread => {
-        return <ThreadDisplay key={thread.id} thread={thread} />;
-      })}
-    </>
+        {Content()}
+      </div>
+    </div>
   );
 }
 UserRoute.loader = clientLoader;

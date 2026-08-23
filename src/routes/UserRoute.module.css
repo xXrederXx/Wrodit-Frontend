@@ -8,7 +8,7 @@
   display: inline-block;
 }
 
-.deleteButton {
+.button {
   text-decoration: none;
   background-color: var(--clr-primary);
   color: white;
@@ -17,4 +17,39 @@
   margin: 1rem;
   display: inline-block;
   border: none;
+}
+
+.buttonTransparent {
+  text-decoration: none;
+  background-color: transparent;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  margin: 1rem;
+  display: inline-block;
+  border: none;
+}
+
+.container {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  min-width: 0;
+}
+
+.main {
+  max-width: 46rem;
+  width: 46rem;
+  padding: 0 1rem;
+  min-width: 0;
+}
+
+.threadContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1rem 0;
 }

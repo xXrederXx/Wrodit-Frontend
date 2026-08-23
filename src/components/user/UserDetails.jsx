@@ -2,12 +2,14 @@ import ProfileIcon from "../icons/ProfileIcon.jsx";
 
 import styles from "./UserDetails.module.css";
 
-export default function UserDetail({ username, email }) {
+export default function UserDetail({ username }) {
   return (
-    <div className={styles.userDetail}>
+    <div className={styles.container}>
       <ProfileIcon className={styles.profileImage} />
-      <h1>{username}</h1>
-      <p>{email}</p>
+      <div className={styles.infoContainer}>
+        <h1>{username}</h1>
+        <p>u/{username}</p>
+      </div>
     </div>
   );
 }
