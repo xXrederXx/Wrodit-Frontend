@@ -1,5 +1,7 @@
 import React from "react";
 
 export default function OperatorMail() {
-  return <span>morgenthalerthierry+wrodit@gmail.com</span>;
+  const email = "contact@morgt.ch";
+
+  return <a href={`mailto:${email}`}>{email}</a>;
 }
